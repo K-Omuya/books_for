@@ -140,3 +140,15 @@ class Book(models.Model):
 
     def __str__(self):
         return f"{self.title} by {self.author}"
+
+
+from django.db import models
+
+class Impact(models.Model):
+    students_impacted = models.PositiveIntegerField(default=0)
+    schools_reached = models.PositiveIntegerField(default=0)
+    exchanges_facilitated = models.PositiveIntegerField(default=0)
+    books_donated = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f"Impact Data: {self.students_impacted} Students, {self.schools_reached} Schools"

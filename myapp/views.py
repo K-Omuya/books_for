@@ -215,3 +215,25 @@ def book_exchange(request):
     if query:
         books = books.filter(title__icontains=query)  # Allow search by title
     return render(request, 'book_exchange.html', {'books': books})
+
+
+from django.shortcuts import render
+from .models import Impact
+
+def impact(request):
+    impact = Impact.objects.first()  # Assuming there's only one Impact entry
+    return render(request, 'impact.html', {'impact': impact})
+
+from django.shortcuts import render, redirect
+from .forms import ImpactForm
+
+def edit_impact(request):
+    impact = Impact.objects.first()
+    if request.method == 'POST':
+        form = ImpactForm(request.POST, instance=impact)
+        if form.is_valid():
+            form.save()
+            return redirect('impact_view')
+    else:
+        form = ImpactForm(instance=impact)
+    return render(request, 'edit_impact.html', {'form': form})

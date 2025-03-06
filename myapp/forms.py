@@ -105,3 +105,12 @@ class BookForm(forms.ModelForm):
             'delivery_option': forms.Select(attrs={'class': 'form-control'}),
             'cover_image': forms.FileInput(attrs={'class': 'form-control'}),
         }
+
+
+from django import forms
+from .models import Impact
+
+class ImpactForm(forms.ModelForm):
+    class Meta:
+        model = Impact
+        fields = '__all__'

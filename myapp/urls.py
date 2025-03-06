@@ -31,4 +31,6 @@ urlpatterns = [
     path('delete-testimonial/<int:pk>/', views.delete_testimonial, name='delete_testimonial'),
     path('upload-book/', views.upload_book, name='upload_book'),
     path('book-exchange/', views.book_exchange, name='book_exchange'),
+    path('edit-impact/', views.edit_impact, name='edit_impact'),
+    path('impact/', views.impact, name='impact'),
 ]

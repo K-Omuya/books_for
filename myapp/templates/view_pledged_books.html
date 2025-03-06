@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="utf-8">
     <title>Books for All</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -43,7 +44,7 @@
         <div class="container d-flex align-items-center">
             <div class="d-flex align-items-center h-100">
                 <a href="#" class="navbar-brand" style="height: 125px;">
-                    <h1 class="text-primary mb-0"><i class="fas fa-hand-rock me-2"></i> Fitness</h1>
+                    <h1 class="text-primary mb-0" style="color: #ffffff;">   <i class="fas fa-book-open me-2"></i> Books_for_All</h1>
                 </a>
             </div>
             <div class="w-100 h-100">
@@ -120,20 +121,17 @@
                                 </div>
                                 <a href="{% url 'blogs' %}" class="nav-item nav-link">Blogs</a>
                                 <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Explore</a>
                                     <div class="dropdown-menu">
                                         <a href="{% url 'features' %}" class="dropdown-item">Our Features</a>
                                         <a href="{% url 'team' %}" class="dropdown-item">Our Team</a>
-                                        <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonials</a>
-                                        <a href="{% url 'testimonial' %}" class="dropdown-item">404 Page</a>
+                                        <a href="{% url 'testimonials' %}" class="dropdown-item">Testimonials</a>
+                                        <a href="{% url 'impact' %}" class="dropdown-item">Impact</a>
                                     </div>
                                 </div>
-                                <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                                <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
                                 <div class="nav-btn ps-3">
-                                    <button class="btn-search btn btn-primary btn-md-square mt-2 mt-lg-0 mb-4 mb-lg-0 flex-shrink-0" data-bs-toggle="modal" data-bs-target="#searchModal">
-                                        <i class="fas fa-search"></i>
                                     </button>
-                                    <a href="#" class="btn btn-primary py-2 px-4 ms-0 ms-lg-3"> <span>Get Quote</span></a>
                                 </div>
                             </div>
                         </div>

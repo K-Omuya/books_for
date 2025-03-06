@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Impact</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #004080;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #ff6600;
+            color: white;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        button:hover {
+            background-color: #e65c00;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #004080;
+            font-size: 1rem;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Impact Data</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="students_impacted">Students Impacted</label>
+                <input type="number" id="students_impacted" name="students_impacted" value="{{ impact.students_impacted }}" required>
+            </div>
+            <div class="form-group">
+                <label for="schools_reached">Schools Reached</label>
+                <input type="number" id="schools_reached" name="schools_reached" value="{{ impact.schools_reached }}" required>
+            </div>
+            <div class="form-group">
+                <label for="exchanges_facilitated">Exchanges Facilitated</label>
+                <input type="number" id="exchanges_facilitated" name="exchanges_facilitated" value="{{ impact.exchanges_facilitated }}" required>
+            </div>
+            <div class="form-group">
+                <label for="books_donated">Books Donated</label>
+                <input type="number" id="books_donated" name="books_donated" value="{{ impact.books_donated }}" required>
+            </div>
+            <button type="submit">Save Changes</button>
+        </form>
+        <a href="{% url 'impact_view' %}" class="back-link">Back to Impact</a>
+    </div>
+</body>
+</html>
