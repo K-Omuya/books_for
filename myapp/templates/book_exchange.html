@@ -143,66 +143,64 @@
 
         <!-- Header Start -->
         <div class="container-fluid bg-breadcrumb">
-            <div class="container text-center py-5" style="max-width: 900px;">
-                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Our Team</h4>
-                <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                    <li class="breadcrumb-item active text-primary">Team</li>
-                </ol>    
-            </div>
-        </div>
-        <!-- Header End -->
-<!-- Team Start -->
-<div class="container-fluid team py-5" style="background-color: #F5F5F5;">
-    <div class="container py-5">
-        <!-- Section Heading -->
-        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-            <h4 style="color: #3CB371; text-transform: uppercase; font-weight: bold;">Our Leadership</h4>
-            <h1 style="color: #004080; font-size: 2.5rem; font-weight: 700;" class="display-4 mb-4">Meet Our Amazing Team</h1>
-            <p style="color: #333333; font-size: 1.1rem; margin-bottom: 0;">We are driven by passion and innovation. Meet the minds behind our vision.</p>
-        </div>
+    <div class="container text-center py-5" style="max-width: 900px;">
+        <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">
+            {{ page_title|default:"Book Exchange" }}
+        </h4>
+        <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Exchange</a></li>
+            <li class="breadcrumb-item active text-primary">Book Exchange</li>
+        </ol>
+    </div>
+</div>
+   <!-- Header End -->
 
-        <!-- Team Members -->
-        <div class="row gy-5 gx-4 justify-content-center">
-            <!-- Team Member 1 -->
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
-                <div class="team-item text-center" style="background-color: #FFFFFF; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;">
-                    <div class="team-img mb-4">
-                        <img src="{% static 'img/Founder.jpg' %}" alt="Derrick Onsaringo" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 5px solid #FF8200;">
-                    </div>
-                    <h4 style="color: #004080; font-size: 1.2rem; font-weight: bold;">Derrick Onsarigo</h4>
-                    <p style="color: #333333; font-size: 1rem;">Founder & CEO</p>
-                    <div class="team-icon mt-3">
-                        <a href="#" style="background-color: #3CB371; color: #FFFFFF; font-size: 1rem; border-radius: 50%; padding: 5px 10px; margin: 5px; display: inline-block;"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" style="background-color: #3CB371; color: #FFFFFF; font-size: 1rem; border-radius: 50%; padding: 5px 10px; margin: 5px; display: inline-block;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="background-color: #3CB371; color: #FFFFFF; font-size: 1rem; border-radius: 50%; padding: 5px 10px; margin: 5px; display: inline-block;"><i class="fab fa-instagram"></i></a>
-                        <a href="#" style="background-color: #3CB371; color: #FFFFFF; font-size: 1rem; border-radius: 50%; padding: 5px 10px; margin: 5px; display: inline-block;"><i class="fab fa-linkedin-in"></i></a>
+
+<!-- Section for Book Exchange -->
+<div style="background-image: url('{% static "img/library_quill.jpg" %}');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            padding: 30px 0;">
+
+    <div class="container py-5" style="background-color: rgba(255, 255, 255, 0.8);
+                                       border-radius: 10px;
+                                       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                                       padding: 20px;">
+        <h2 class="text-center mb-4" style="color: #004080; font-weight: bold; text-shadow: none;">Browse Books for Exchange</h2>
+
+        <!-- Search Form -->
+        <form method="get" class="mb-4">
+            <input type="text" name="q" placeholder="Search by title"
+                   class="form-control"
+                   style="border-radius: 5px; margin-bottom: 20px; padding: 10px;">
+        </form>
+
+        <!-- Books Display -->
+        <div class="row">
+            {% for book in books %}
+                <div class="col-md-4 mb-4">
+                    <div class="card" style="box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                                             border-radius: 5px; overflow: hidden;">
+                        {% if book.cover_image %}
+                            <img src="{{ book.cover_image.url }}" class="card-img-top" alt="Book Cover"
+                                 style="height: 200px; object-fit: cover;">
+                        {% endif %}
+                        <div class="card-body" style="text-align: left;">
+                            <h5 class="card-title" style="color: #004080;">{{ book.title }}</h5>
+                            <p class="card-text" style="color: #333333; font-size: 0.9rem;"><strong>Author:</strong> {{ book.author }}</p>
+                            <p class="card-text" style="color: #333333; font-size: 0.9rem;"><strong>Genre:</strong> {{ book.genre }}</p>
+                            <p class="card-text" style="color: #333333; font-size: 0.9rem;"><strong>Donor:</strong> {{ book.donor_name }}</p>
+                            <p class="card-text" style="color: #333333; font-size: 0.9rem;"><strong>Location:</strong> {{ book.location }}</p>
+                            <p class="card-text" style="color: #333333; font-size: 0.9rem;"><strong>Delivery:</strong> {{ book.delivery_option }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Team Member 2 -->
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
-                <div class="team-item text-center" style="background-color: #FFFFFF; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;">
-                    <div class="team-img mb-4">
-                        <img src="{% static 'img/co_founder.jpg' %}" alt="Cheche" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 5px solid #FF8200;">
-                    </div>
-                    <h4 style="color: #004080; font-size: 1.2rem; font-weight: bold;">Cheche</h4>
-                    <p style="color: #333333; font-size: 1rem;">Co-Founder & CTO</p>
-                    <div class="team-icon mt-3">
-                        <a href="#" style="background-color: #3CB371; color: #FFFFFF; font-size: 1rem; border-radius: 50%; padding: 5px 10px; margin: 5px; display: inline-block;"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" style="background-color: #3CB371; color: #FFFFFF; font-size: 1rem; border-radius: 50%; padding: 5px 10px; margin: 5px; display: inline-block;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="background-color: #3CB371; color: #FFFFFF; font-size: 1rem; border-radius: 50%; padding: 5px 10px; margin: 5px; display: inline-block;"><i class="fab fa-instagram"></i></a>
-                        <a href="#" style="background-color: #3CB371; color: #FFFFFF; font-size: 1rem; border-radius: 50%; padding: 5px 10px; margin: 5px; display: inline-block;"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
-<!-- Team End -->
-
 
 <!-- Footer Start -->
 <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" style="background-color: #004080; color: #FFFFFF;">

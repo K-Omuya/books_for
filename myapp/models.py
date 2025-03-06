@@ -79,35 +79,64 @@ class BookDonation(models.Model):
     def __str__(self):
         return f"{self.book_title} by {self.donor_name}"
 
+
+
+
 from django.db import models
 
-class BookExchange(models.Model):
-    GENRE_CHOICES = [
-        ('fiction', 'Fiction'),
-        ('nonfiction', 'Non-Fiction'),
-        ('fantasy', 'Fantasy'),
-        ('science', 'Science'),
-        ('history', 'History'),
-        ('romance', 'Romance'),
-        ('selfhelp', 'Self Help'),
-        ('biography', 'Biography'),
-    ]
+class Message(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
-    DELIVERY_CHOICES = [
-        ('dropoff', 'Drop off location'),
-        ('pickup', 'Personal pick up'),
+    def __str__(self):
+        return f"Message from {self.name} ({self.email})"
+
+
+
+from django.db import models
+
+class Testimonial(models.Model):
+    name = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
+    message = models.TextField()
+    photo = models.ImageField(upload_to='testimonials/photos/')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.title}"
+
+
+from django.db import models
+
+from django.db import models
+
+class Book(models.Model):
+    GENRES = [
+        ('Fiction', 'Fiction'),
+        ('Non-Fiction', 'Non-Fiction'),
+        ('Science', 'Science'),
+        ('Technology', 'Technology'),
+        ('History', 'History'),
+        ('Fantasy', 'Fantasy'),
+        ('Mystery', 'Mystery'),
+        ('Biography', 'Biography'),
+        ('Other', 'Other'),
     ]
 
     title = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
-    genre = models.CharField(max_length=50, choices=GENRE_CHOICES)
+    genre = models.CharField(max_length=50, choices=GENRES)
     donor_name = models.CharField(max_length=255)
-    contact_details = models.CharField(max_length=100)  # Email or phone number
-    location = models.CharField(max_length=100)  # City or town
-    delivery_option = models.CharField(max_length=50, choices=DELIVERY_CHOICES)
-    file = models.FileField(upload_to='book_exchange/')
-    is_paid = models.BooleanField(default=False)
-    delivery_paid = models.BooleanField(default=False)
+    contact_details = models.CharField(max_length=255)
+    location = models.CharField(max_length=255)
+    delivery_option = models.CharField(
+        max_length=50,
+        choices=[('Drop Off', 'Drop Off Location'), ('Pick Up', 'Personal Pick Up')]
+    )
+    cover_image = models.ImageField(upload_to='book_covers/', blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.title
+        return f"{self.title} by {self.author}"

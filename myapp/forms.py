@@ -2,12 +2,8 @@ from django import forms
 from .models import Book, Pledge, BookClub, BookDonation
 
 
-class BookForm(forms.ModelForm):
-    class Meta:
-        model = Book
-        fields = ['title', 'image', 'book_type', 'drop_off_location']
 
-class PledgeForm(forms.ModelForm):
+class PledgedBookForm(forms.ModelForm):
     class Meta:
         model = Pledge
         fields = ['name', 'email', 'book_count']
@@ -19,13 +15,6 @@ class BookClubForm(forms.ModelForm):
         model = BookClub
         fields = ['school_name', 'county', 'students_count', 'patron_name', 'patron_contact']
 
-from .models import PledgedBook,BookExchange
-
-class PledgedBookForm(forms.ModelForm):
-    class Meta:
-        model = PledgedBook
-        fields = ['donor_name', 'donor_email', 'book_title', 'book_type']
-
 
 class BookDonationForm(forms.ModelForm):
     class Meta:
@@ -34,10 +23,85 @@ class BookDonationForm(forms.ModelForm):
 
 
 
-from django import forms
-from .models import BookExchange
 
-class BookExchangeForm(forms.ModelForm):
+
+from django import forms
+from .models import Message
+
+class MessageForm(forms.ModelForm):
     class Meta:
-        model = BookExchange
-        fields = ['genre', 'title', 'author', 'donor_name', 'contact_details', 'location', 'delivery_option', 'file']
+        model = Message
+        fields = ['name', 'email', 'message']  # Fields from the Message model
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Your Name',
+                'style': 'border-radius: 5px; padding: 10px; font-size: 1rem;'
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Your Email',
+                'style': 'border-radius: 5px; padding: 10px; font-size: 1rem;'
+            }),
+            'message': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Your Message',
+                'rows': 5,
+                'style': 'border-radius: 5px; padding: 10px; font-size: 1rem;'
+            }),
+        }
+
+
+
+from django import forms
+from .models import Testimonial
+
+class TestimonialForm(forms.ModelForm):
+    class Meta:
+        model = Testimonial
+        fields = ['name', 'title', 'message', 'photo']  # Fields included in the form
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter Your Name',
+                'style': 'border-radius: 5px; padding: 10px; font-size: 1rem;'
+            }),
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter Your Title (e.g., Avid Reader)',
+                'style': 'border-radius: 5px; padding: 10px; font-size: 1rem;'
+            }),
+            'message': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter Your Testimonial',
+                'rows': 4,
+                'style': 'border-radius: 5px; padding: 10px; font-size: 1rem;'
+            }),
+            'photo': forms.FileInput(attrs={
+                'class': 'form-control',
+                'style': 'border-radius: 5px; padding: 10px;'
+            }),
+        }
+
+
+from django import forms
+from .models import Book
+
+class BookForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = [
+            'title', 'author', 'genre', 'donor_name',
+            'contact_details', 'location', 'delivery_option',
+            'cover_image'
+        ]
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Book Title'}),
+            'author': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Author Name'}),
+            'genre': forms.Select(attrs={'class': 'form-control'}),
+            'donor_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}),
+            'contact_details': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email or Phone Number'}),
+            'location': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'City or Town'}),
+            'delivery_option': forms.Select(attrs={'class': 'form-control'}),
+            'cover_image': forms.FileInput(attrs={'class': 'form-control'}),
+        }

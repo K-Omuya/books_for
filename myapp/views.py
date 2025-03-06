@@ -21,7 +21,7 @@ def team(request):
 def monetary_donations(request):
     return render(request, 'monetary_donations.html')
 def testimonial(request):
-    return render(request, 'testimonial.html')
+    return render(request, 'testimonials.html')
 
 def contact(request):
     return render(request, 'contact.html')
@@ -32,9 +32,6 @@ def blog_list(request):
     blogs = BlogPost.objects.all().order_by('-created_at')
     return render(request, 'index.html', {'blogs': blogs})
 
-from django.shortcuts import render, redirect
-from .models import Book, Pledge, BookClub
-from .forms import BookForm, PledgeForm, BookClubForm
 
 def donate_book(request):
     if request.method == 'POST':
@@ -54,7 +51,7 @@ def upload_book(request):
             return redirect('home')
     else:
         form = PledgeForm()
-    return render(request, 'upload_book_exchange.html', {'form': form})
+    return render(request, 'upload_book.html', {'form': form})
 
 
 from .models import BookClub
@@ -130,41 +127,91 @@ def view_donated_books(request):
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import BookExchangeForm
-from .models import BookExchange
 
 
 from django.http import HttpResponse
 
 
-def upload_book_exchange(request):
-    if request.method == "POST":
-        form = BookExchangeForm(request.POST, request.FILES)
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Message
+from .forms import MessageForm
+
+# Contact form submission
+def contact(request):
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
         if form.is_valid():
-            book = form.save(commit=False)
-            # Simulating payment confirmation for listing
-            book.is_paid = True
-            book.save()
-            messages.success(request, "Payment successful! Your book has been uploaded.")
-            return redirect('book_exchange_catalogue')
+            form.save()  # Save the message to the database
+            return redirect('view_messages')  # Redirect after saving
     else:
-        form = BookExchangeForm()
+        form = MessageForm()
+    return render(request, 'contact.html', {'form': form})
 
-    return render(request, 'upload_book_exchange.html', {'form': form})
+# View all messages
+def view_messages(request):
+    messages = Message.objects.all().order_by('-created_at')  # Latest messages first
+    return render(request, 'view_messages.html', {'messages': messages})
+
+# Read a single message
+def read_message(request, pk):
+    message = get_object_or_404(Message, pk=pk)
+    return render(request, 'read_message.html', {'message': message})
+
+# Delete a message
+def delete_message(request, pk):
+    message = get_object_or_404(Message, pk=pk)
+    if request.method == 'POST':
+        message.delete()
+        return redirect('view_messages')
+    return render(request, 'delete_message.html', {'message': message})
 
 
-def book_exchange_catalogue(request):
-    genre_filter = request.GET.get('genre', '')
-    books = BookExchange.objects.filter(is_paid=True)
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Testimonial
+from .forms import TestimonialForm
 
-    if genre_filter:
-        books = books.filter(genre=genre_filter)
 
-    return render(request, 'book_exchange_catalogue.html', {'books': books, 'genre_filter': genre_filter})
+# Display testimonials and handle form submission
+def testimonials(request):
+    testimonials = Testimonial.objects.all().order_by('-created_at')
+    form = TestimonialForm()
 
-def pay_delivery(request, book_id):
-    book = BookExchange.objects.get(id=book_id)
-    book.delivery_paid = True
-    book.save()
-    messages.success(request, "Delivery payment of Ksh. 200 completed!")
-    return redirect('book_exchange_catalogue')
+    if request.method == 'POST':
+        form = TestimonialForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('testimonials')  # Refresh page to show new testimonial
+
+    return render(request, 'testimonials.html', {'testimonials': testimonials, 'form': form})
+
+
+# Delete testimonial (admin view)
+def delete_testimonial(request, pk):
+    testimonial = get_object_or_404(Testimonial, pk=pk)
+    if request.method == 'POST':
+        testimonial.delete()
+        return redirect('testimonials')  # Redirect to testimonials page
+    return render(request, 'delete_testimonial.html', {'testimonial': testimonial})
+
+
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Book
+from .forms import BookForm
+
+def upload_book(request):
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Payment verification logic can be added here before saving the book
+            form.save()
+            return redirect('book_exchange')  # Redirect to book exchange page
+    else:
+        form = BookForm()
+    return render(request, 'upload_book.html', {'form': form})
+
+def book_exchange(request):
+    books = Book.objects.all().order_by('-created_at')
+    query = request.GET.get('q')
+    if query:
+        books = books.filter(title__icontains=query)  # Allow search by title
+    return render(request, 'book_exchange.html', {'books': books})

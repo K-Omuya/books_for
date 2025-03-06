@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Fitness - Fitness Website Template</title>
+    <title>Books for All</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -97,8 +97,8 @@
                                 <div class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Exchange</a>
                                     <div class="dropdown-menu">
-                                        <a href="{% url 'upload_book_exchange' %}" class="dropdown-item">Upload Book</a>
-                                        <a href="{% url 'book_exchange_catalogue' %}" class="dropdown-item">Book Catalogue</a>
+                                        <a href="{% url 'upload_book' %}" class="dropdown-item">Upload Book</a>
+                                        <a href="{% url 'book_exchange' %}" class="dropdown-item">Book Catalogue</a>
                                         <a href="{% url 'view_donated_books' %}" class="dropdown-item">Donated Books</a>
                                         <a href="{% url 'view_pledged_books' %}" class="dropdown-item">Pledged Books</a>
                                     </div>
@@ -121,20 +121,16 @@
                                 </div>
                                 <a href="{% url 'blogs' %}" class="nav-item nav-link">Blogs</a>
                                 <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Explore</a>
                                     <div class="dropdown-menu">
                                         <a href="{% url 'features' %}" class="dropdown-item">Our Features</a>
                                         <a href="{% url 'team' %}" class="dropdown-item">Our Team</a>
-                                        <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonials</a>
-                                        <a href="{% url 'testimonial' %}" class="dropdown-item">404 Page</a>
+                                        <a href="{% url 'testimonials' %}" class="dropdown-item">Testimonials</a>
                                     </div>
                                 </div>
-                                <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                                <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
                                 <div class="nav-btn ps-3">
-                                    <button class="btn-search btn btn-primary btn-md-square mt-2 mt-lg-0 mb-4 mb-lg-0 flex-shrink-0" data-bs-toggle="modal" data-bs-target="#searchModal">
-                                        <i class="fas fa-search"></i>
                                     </button>
-                                    <a href="#" class="btn btn-primary py-2 px-4 ms-0 ms-lg-3"> <span>Get Quote</span></a>
                                 </div>
                             </div>
                         </div>
@@ -144,30 +140,6 @@
         </div>
     </div>
     <!-- Navbar & Hero End -->
-
-
-            <!-- Modal Search Start -->
-            <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-fullscreen">
-                    <div class="modal-content rounded-0">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body d-flex align-items-center bg-primary">
-                            <div class="input-group w-75 mx-auto d-flex">
-{#                                <form action="{% url 'search' %}" method="GET" class="d-flex w-100">#}
-                                    <input type="search" name="q" class="form-control p-3" placeholder="Enter keywords..." aria-describedby="search-icon-1">
-                                    <button type="submit" id="search-icon-1" class="btn bg-light border input-group-text p-3">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal Search End -->
 
         <!-- Header Start -->
         <div class="container-fluid bg-breadcrumb">
@@ -184,210 +156,211 @@
 </div>
    <!-- Header End -->
 
-        <!-- About Start -->
-        <div class="container-fluid about pt-5">
-            <div class="container pt-5">
-                <div class="row g-5">
-                    <div class="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
-                        <div class="about-content h-100">
-                            <h4 class="text-primary">About Books for All</h4>
-                           <h1 class="display-4 text-white mb-4">Unlock Your Potential with the Power of Books</h1>
-                            <p class="mb-4">Explore a world of knowledge, imagination, and inspiration. Whether for learning or leisure, Books for All brings stories and wisdom right to your fingertips.</p>
-                             <div class="tab-class pb-4">
-                                <ul class="nav d-flex mb-2">
-                                    <li class="nav-item mb-3">
-                                        <a class="d-flex py-2 active" data-bs-toggle="pill" href="#tab-1">
-                                            <span style="width: 150px;">Our Mission</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item mb-3">
-                                        <a class="d-flex py-2 mx-3" data-bs-toggle="pill" href="#tab-2">
-                                            <span style="width: 150px;">Our Vision</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item mb-3">
-                                        <a class="d-flex py-2" data-bs-toggle="pill" href="#tab-3">
-                                            <span style="width: 150px;">Our Goal</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div id="tab-1" class="tab-pane fade show p-0 active">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="d-flex align-items-center border-top border-bottom py-4">
-                                                    <span class="fas fa-rocket text-white fa-4x me-4"></span>
-                                                    <p class="mb-0">To bridge the educational inequality by ensuring evry student has access to books through donations and exchanges, fostering a culture of learning and knoweldeg sharing. </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="tab-2" class="tab-pane fade show p-0">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="d-flex align-items-center border-top border-bottom py-4">
-                                                    <span class="fas fa-rocket text-white fa-4x me-4"></span>
-                                                    <p class="mb-0">A future where no child lacks books and education is accessible to all.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="tab-3" class="tab-pane fade show p-0">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="d-flex align-items-center border-top border-bottom py-4">
-                                                    <span class="fas fa-rocket text-white fa-4x me-4"></span>
-                                                    <p class="mb-0">Our goal is to make books accessible to everyone, fostering a culture of reading and learning. We believe in empowering minds, sparking creativity, and building a brighter future through the power of books.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+    <!-- About Start -->
+<div class="container-fluid about pt-5" style="background-color: #F5F5F5;">
+    <div class="container pt-5">
+        <div class="row g-5 align-items-center">
+            <!-- Left Content -->
+            <div class="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
+                <div class="about-content h-100">
+                    <h4 style="color: #3CB371; font-weight: bold;">About Books for All</h4>
+                    <h1 class="display-4 mb-4" style="color: #004080; font-weight: 700;">Unlock Your Potential with the Power of Books</h1>
+                    <p class="mb-4" style="color: #333333; font-size: 1.2rem;">Explore a world of knowledge, imagination, and inspiration. Whether for learning or leisure, Books for All brings stories and wisdom right to your fingertips.</p>
+                    <div class="tab-class pb-4">
+                        <ul class="nav d-flex mb-3">
+                            <!-- Tabs with background colors -->
+                            <li class="nav-item">
+                                <a class="d-flex py-2 px-3 active" data-bs-toggle="pill" href="#tab-1" style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px; font-weight: bold;">Our Mission</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="d-flex py-2 px-3" data-bs-toggle="pill" href="#tab-2" style="background-color: #004080; color: #FFFFFF; border-radius: 5px; font-weight: bold;">Our Vision</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="d-flex py-2 px-3" data-bs-toggle="pill" href="#tab-3" style="background-color: #3CB371; color: #FFFFFF; border-radius: 5px; font-weight: bold;">Our Goal</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <!-- Tab 1 Content -->
+                            <div id="tab-1" class="tab-pane fade show active p-3" style="background-color: #FFFFFF; border: 2px solid #FF8200; border-radius: 10px;">
+                                <div class="d-flex align-items-center py-3">
+                                    <span class="fas fa-rocket" style="color: #3CB371; font-size: 2.5rem; margin-right: 15px;"></span>
+                                    <p class="mb-0" style="color: #333333;">To bridge the educational inequality by ensuring every student has access to books through donations and exchanges, fostering a culture of learning and knowledge sharing.</p>
                                 </div>
                             </div>
-                            <div class="row g-4 align-items-center">
-                                <div class="col-sm-6">
-                                    <a href="#" class="btn btn-primary py-3 px-5"> <span>Make Appointment</span></a>
+                            <!-- Tab 2 Content -->
+                            <div id="tab-2" class="tab-pane fade p-3" style="background-color: #FFFFFF; border: 2px solid #004080; border-radius: 10px;">
+                                <div class="d-flex align-items-center py-3">
+                                    <span class="fas fa-rocket" style="color: #FF8200; font-size: 2.5rem; margin-right: 15px;"></span>
+                                    <p class="mb-0" style="color: #333333;">A future where no child lacks books and education is accessible to all.</p>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="d-flex flex-shrink-0 ps-4">
-                                        <a href="#" class="btn btn-light btn-lg-square position-relative wow tada" data-wow-delay=".9s">
-                                            <i class="fa fa-phone-alt fa-2x"></i>
-                                            <div class="position-absolute" style="top: 5px; right: 5px;">
-                                                <span><i class="fa fa-comment-dots text-dark"></i></span>
-                                            </div>
-                                        </a>
-                                        <div class="d-flex flex-column ms-3">
-                                            <span>Call to Our Experts</span>
-                                            <a href="tel:+ 0123 456 7890"><span class="text-white">Free: +254 743 688354</span></a>
-                                        </div>
-                                    </div>
+                            </div>
+                            <!-- Tab 3 Content -->
+                            <div id="tab-3" class="tab-pane fade p-3" style="background-color: #FFFFFF; border: 2px solid #3CB371; border-radius: 10px;">
+                                <div class="d-flex align-items-center py-3">
+                                    <span class="fas fa-rocket" style="color: #004080; font-size: 2.5rem; margin-right: 15px;"></span>
+                                    <p class="mb-0" style="color: #333333;">Our goal is to make books accessible to everyone, fostering a culture of reading and learning. We believe in empowering minds, sparking creativity, and building a brighter future through the power of books.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="about-img h-100">
-                            <div class="about-img-inner d-flex h-100">
-                                <img src="img/about-2.png" class="img-fluid w-100" style="object-fit: cover;" alt="">
+                    <!-- Action Buttons -->
+                    <div class="row g-3 align-items-center">
+                        <div class="col-sm-6">
+                            <a href="#" class="btn py-3 px-4" style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px; font-weight: bold;">Make Appointment</a>
+                        </div>
+                        <div class="col-sm-6 d-flex align-items-center">
+                            <a href="#" class="btn btn-light btn-lg-square me-3" style="border: 2px solid #3CB371;">
+                                <i class="fa fa-phone-alt" style="color: #3CB371;"></i>
+                            </a>
+                            <div class="d-flex flex-column">
+                                <span style="color: #333333;">Call to Our Experts</span>
+                                <a href="tel:+254743688354" style="color: #004080; font-weight: bold; text-decoration: none;">Free: +254 743 688354</a>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Image -->
+            <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="about-img h-100">
+                    <img src="{% static 'img/about-2.png' %}" class="img-fluid" style="border-radius: 10px; border: 5px solid #FF8200;" alt="About Books for All">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+<!-- Books for All Goal Start -->
+<div class="container-fluid goal pt-5" style="background-color: #F5F5F5;">
+    <div class="container pt-5">
+        <div class="row g-5 align-items-center">
+            <!-- Left Content -->
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
+                <div class="goal-content">
+                    <h4 style="color: #3CB371; font-weight: bold;">Our Mission</h4>
+                    <h1 class="display-4 mb-4" style="color: #004080; font-weight: 700;">Empowering Minds, One Book at a Time</h1>
+
+                    <!-- Goal Item 1 -->
+                    <div class="goal-item d-flex p-4" style="background-color: #FFFFFF; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                        <div class="d-flex me-4">
+                            <div class="d-inline p-3" style="background-color: #3CB371; border-radius: 50px; width: 80px; height: 80px; display: flex; justify-content: center; align-items: center;">
+                                <img src="img/icon-books.png" class="img-fluid" alt="Books Icon">
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="color: #004080; font-weight: bold;">Free Book Distribution</h4>
+                            <p style="color: #333333; margin: 0;">We provide free books to communities, ensuring everyone has access to knowledge.</p>
+                        </div>
+                    </div>
+
+                    <!-- Goal Item 2 -->
+                    <div class="goal-item d-flex p-4 mt-4" style="background-color: #FFFFFF; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                        <div class="d-flex me-4">
+                            <div class="d-inline p-3" style="background-color: #3CB371; border-radius: 50px; width: 80px; height: 80px; display: flex; justify-content: center; align-items: center;">
+                                <img src="img/icon-education.png" class="img-fluid" alt="Education Icon">
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="color: #004080; font-weight: bold;">Promoting Literacy</h4>
+                            <p style="color: #333333; margin: 0;">Our goal is to foster a reading culture and improve literacy rates worldwide.</p>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <div class="mt-4">
+                        <a href="#" class="btn" style="background-color: #FF8200; color: #FFFFFF; font-weight: bold; border-radius: 5px; padding: 12px 30px;">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Image -->
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
+                <div class="h-100 d-flex align-items-center justify-content-center">
+                    <img src="img/books-goal-banner.png" class="img-fluid rounded" style="border: 5px solid #FF8200; object-fit: cover;" alt="Books for All">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Books for All Goal End -->
+
+<!-- Explore Books Start -->
+<div class="container-fluid explore py-5 wow zoomIn" data-wow-delay="0.2s" style="background-color: #004080;">
+    <div class="container py-5 text-center">
+        <h1 class="display-1 mb-4" style="color: #FFFFFF; font-weight: 700;">Explore Our Book Collection</h1>
+        <a class="btn" href="books.html" style="background-color: #FF8200; color: #FFFFFF; font-weight: bold; padding: 12px 30px; border-radius: 5px;">
+            <i class="fas fa-book-open me-2"></i> View All Books
+        </a>
+    </div>
+</div>
+<!-- Explore Books End -->
+<!-- Books Start -->
+<div class="container-fluid books py-5" style="background-color: #F5F5F5;">
+    <div class="container py-5">
+        <!-- Section Heading -->
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 style="color: #3CB371; font-weight: bold;">Our Collection</h4>
+            <h1 class="display-4 mb-4" style="color: #004080; font-weight: 700;">Discover Our Featured Books</h1>
+            <p style="color: #333333; font-size: 1.1rem;">Explore a curated collection of books from various genres, carefully selected to inspire and educate.</p>
+        </div>
+
+        <!-- Book Grid -->
+        <div class="row gy-5 gy-lg-4 gx-4">
+            <!-- Book Item 1 -->
+            <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="book-item text-center" style="background-color: #FFFFFF; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                    <div class="book-img">
+                        <img src="img/book-1.jpg" class="img-fluid w-100" style="object-fit: cover;" alt="Book Image">
+                    </div>
+                    <div class="book-content py-3 px-2">
+                        <h4 style="color: #004080; font-weight: bold;">Book Title 1</h4>
+                        <p style="color: #333333; margin: 0;">Author Name</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book Item 2 -->
+            <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="book-item text-center" style="background-color: #FFFFFF; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                    <div class="book-img">
+                        <img src="img/book-2.jpg" class="img-fluid w-100" style="object-fit: cover;" alt="Book Image">
+                    </div>
+                    <div class="book-content py-3 px-2">
+                        <h4 style="color: #004080; font-weight: bold;">Book Title 2</h4>
+                        <p style="color: #333333; margin: 0;">Author Name</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book Item 3 -->
+            <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="book-item text-center" style="background-color: #FFFFFF; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                    <div class="book-img">
+                        <img src="img/book-3.jpg" class="img-fluid w-100" style="object-fit: cover;" alt="Book Image">
+                    </div>
+                    <div class="book-content py-3 px-2">
+                        <h4 style="color: #004080; font-weight: bold;">Book Title 3</h4>
+                        <p style="color: #333333; margin: 0;">Author Name</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book Item 4 -->
+            <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.8s">
+                <div class="book-item text-center" style="background-color: #FFFFFF; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                    <div class="book-img">
+                        <img src="img/book-4.jpg" class="img-fluid w-100" style="object-fit: cover;" alt="Book Image">
+                    </div>
+                    <div class="book-content py-3 px-2">
+                        <h4 style="color: #004080; font-weight: bold;">Book Title 4</h4>
+                        <p style="color: #333333; margin: 0;">Author Name</p>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- About End -->
-
-       <!-- Books for All Goal Start -->
-            <div class="container-fluid goal pt-5">
-                <div class="container pt-5">
-                    <div class="row g-5">
-                        <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
-                            <div class="goal-content">
-                                <h4 class="text-primary">Our Mission</h4>
-                                <h1 class="display-4 mb-4">Empowering Minds, One Book at a Time.</h1>
-                                <div class="goal-item d-flex p-4">
-                                    <div class="d-flex me-4">
-                                        <div class="bg-primary d-inline p-3" style="width: 80px; height: 80px;">
-                                            <img src="img/icon-books.png" class="img-fluid" alt="Books Icon">
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h4>Free Book Distribution</h4>
-                                        <p class="text-white mb-0">We provide free books to communities, ensuring everyone has access to knowledge.</p>
-                                    </div>
-                                </div>
-                                <div class="goal-item d-flex p-4 mb-4">
-                                    <div class="d-flex me-4">
-                                        <div class="bg-primary d-inline p-3" style="width: 80px; height: 80px;">
-                                            <img src="img/icon-education.png" class="img-fluid" alt="Education Icon">
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h4>Promoting Literacy</h4>
-                                        <p class="text-white mb-0">Our goal is to foster a reading culture and improve literacy rates worldwide.</p>
-                                    </div>
-                                </div>
-                                <div class="ms-1">
-                                    <a href="#" class="btn btn-primary py-3 px-5 ms-2"> <span>Read More</span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
-                            <div class="h-100">
-                                <img src="img/books-goal-banner.png" class="img-fluid h-100" style="object-fit: cover;" alt="Books for All">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Books for All Goal End -->
-
-            <!-- Explore Books Start -->
-            <div class="container-fluid explore py-5 wow zoomIn" data-wow-delay="0.2s">
-                <div class="container py-5 text-center">
-                    <h1 class="display-1 text-white mb-0"> Explore Our Book Collection</h1>
-                    <a class="btn btn-primary py-3 px-4 px-md-5 me-2" href="books.html"><i class="fas fa-book-open me-2"></i> <span>View All Books</span></a>
-                </div>
-            </div>
-            <!-- Explore Books End -->
-
-            <!-- Books Start -->
-            <div class="container-fluid books py-5">
-                <div class="container py-5">
-                    <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-                        <h4 class="text-primary">Our Collection</h4>
-                        <h1 class="display-4 mb-4">Discover Our Featured Books</h1>
-                        <p class="mb-0">Explore a curated collection of books from various genres, carefully selected to inspire and educate.</p>
-                    </div>
-                    <div class="row gy-5 gy-lg-4 gx-4">
-                        <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.2s">
-                            <div class="book-item">
-                                <div class="book-img">
-                                    <img src="img/book-1.jpg" class="img-fluid w-100" alt="Book Image">
-                                </div>
-                                <div class="book-content text-center">
-                                    <h4>Book Title 1</h4>
-                                    <p class="mb-0">Author Name</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="book-item">
-                                <div class="book-img">
-                                    <img src="img/book-2.jpg" class="img-fluid w-100" alt="Book Image">
-                                </div>
-                                <div class="book-content text-center">
-                                    <h4>Book Title 2</h4>
-                                    <p class="mb-0">Author Name</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="book-item">
-                                <div class="book-img">
-                                    <img src="img/book-3.jpg" class="img-fluid w-100" alt="Book Image">
-                                </div>
-                                <div class="book-content text-center">
-                                    <h4>Book Title 3</h4>
-                                    <p class="mb-0">Author Name</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.8s">
-                            <div class="book-item">
-                                <div class="book-img">
-                                    <img src="img/book-4.jpg" class="img-fluid w-100" alt="Book Image">
-                                </div>
-                                <div class="book-content text-center">
-                                    <h4>Book Title 4</h4>
-                                    <p class="mb-0">Author Name</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Books End -->
+    </div>
+</div>
+<!-- Books End -->
 
 <!-- Footer Start -->
 <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" style="background-color: #004080; color: #FFFFFF;">
@@ -420,7 +393,7 @@
                     <h4 class="mb-4 text-white">Quick Links</h4>
                     <a href="{% url 'blogs' %}" style="color: #FF8200;">Blogs</a>
                      <a href="{% url 'about' %}" style="color: #FF8200;">About Us</a>
-                     <a href="{% url 'book_exchange_catalogue' %}" style="color: #FF8200;">Books catalogue</a>
+                     <a href="{% url 'book_exchange' %}" style="color: #FF8200;">Books catalogue</a>
                      <a href="{% url 'features' %}" style="color: #FF8200;">Our Features</a>
                      <a href="{% url 'view_book_clubs' %}" style="color: #FF8200;">Book Clubs</a>
                      <a href="{% url 'testimonial' %}" style="color: #FF8200;"></a>

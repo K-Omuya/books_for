@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="utf-8">
     <title>Books for All</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -43,7 +44,7 @@
         <div class="container d-flex align-items-center">
             <div class="d-flex align-items-center h-100">
                 <a href="#" class="navbar-brand" style="height: 125px;">
-                    <h1 class="text-primary mb-0"><i class="fas fa-hand-rock me-2"></i> Books for All</h1>
+                    <h1 class="text-primary mb-0" style="color: #ffffff;">   <i class="fas fa-book-open me-2"></i> Books_for_All</h1>
                 </a>
             </div>
             <div class="w-100 h-100">
@@ -96,8 +97,8 @@
                                 <div class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Exchange</a>
                                     <div class="dropdown-menu">
-                                        <a href="{% url 'upload_book_exchange' %}" class="dropdown-item">Upload Book</a>
-                                        <a href="{% url 'book_exchange_catalogue' %}" class="dropdown-item">Book Catalogue</a>
+                                        <a href="{% url 'upload_book' %}" class="dropdown-item">Upload Book</a>
+                                        <a href="{% url 'book_exchange' %}" class="dropdown-item">Book Catalogue</a>
                                         <a href="{% url 'view_donated_books' %}" class="dropdown-item">Donated Books</a>
                                         <a href="{% url 'view_pledged_books' %}" class="dropdown-item">Pledged Books</a>
                                     </div>
@@ -120,20 +121,16 @@
                                 </div>
                                 <a href="{% url 'blogs' %}" class="nav-item nav-link">Blogs</a>
                                 <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Explore</a>
                                     <div class="dropdown-menu">
                                         <a href="{% url 'features' %}" class="dropdown-item">Our Features</a>
                                         <a href="{% url 'team' %}" class="dropdown-item">Our Team</a>
-                                        <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonials</a>
-                                        <a href="{% url 'testimonial' %}" class="dropdown-item">404 Page</a>
+                                        <a href="{% url 'testimonials' %}" class="dropdown-item">Testimonials</a>
                                     </div>
                                 </div>
-                                <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                                <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
                                 <div class="nav-btn ps-3">
-                                    <button class="btn-search btn btn-primary btn-md-square mt-2 mt-lg-0 mb-4 mb-lg-0 flex-shrink-0" data-bs-toggle="modal" data-bs-target="#searchModal">
-                                        <i class="fas fa-search"></i>
                                     </button>
-                                    <a href="#" class="btn btn-primary py-2 px-4 ms-0 ms-lg-3"> <span>Get Quote</span></a>
                                 </div>
                             </div>
                         </div>
@@ -143,6 +140,7 @@
         </div>
     </div>
     <!-- Navbar & Hero End -->
+
 
         <!-- Header Start -->
         <div class="container-fluid bg-breadcrumb">
@@ -156,62 +154,67 @@
             </div>
         </div>
         <!-- Header End -->
+<!-- Features Start -->
+<div class="container-fluid feature py-5" style="background-color: #F5F5F5;">
+    <div class="container py-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 style="color: #3CB371; font-weight: bold;">Why Choose Us?</h4>
+            <h1 class="display-4 mb-4" style="color: #004080; font-weight: 700;">Discover Our Key Features</h1>
+            <p style="color: #333333; font-size: 1.2rem;">Books for All is committed to promoting literacy, education, and access to books for everyone. Whether you're donating books to help others, exchanging books to discover new stories, or searching for learning resources, we make it easy and impactful.</p>
+        </div>
 
-        <!-- Features Start -->
-        <div class="container-fluid feature bg-light py-5">
-            <div class="container py-5">
-                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-                    <h4 class="text-primary">Why Choose Us?</h4>
-                    <h1 class="display-4 mb-4">Discover Our Key Features</h1>
-                    <p class="mb-0">Books for All is committed to promoting literacy, education, and access to books for everyone. Whether you're donating books to help others, exchanging books to discover new stories, or searching for learning resources, we make it easy and impactful.</p>
+        <div class="row g-4">
+            <!-- Feature 1 -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="feature-item bg-white p-4 text-center" style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                    <div class="feature-img" style="height: 200px; overflow: hidden; border-radius: 10px;">
+                        <img src="{% static 'img/donate2.jpeg' %}" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="Feature 1">
+                    </div>
+                    <h4 style="color: #004080; font-weight: bold; margin-top: 15px;">Donate Books with Ease</h4>
+                    <p style="color: #333333;">Contribute to education by donating books to those in need. Your generosity helps create a world where knowledge is accessible to all.</p>
+                    <a href="#" class="btn py-2 px-4" style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px;">Read More</a>
                 </div>
-                <div class="feature-carousel owl-carousel">
-                    <div class="feature-item wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="feature-img">
-                            <img src="img/feature-1.jpg" class="img-fluid w-100" alt="">
-                        </div>
-                        <div class="feature-content p-4">
-                            <h4 class="mb-3">Donate Books with Ease</h4>
-                            <p class="mb-4">Contribute to education by donating books to those in need. Your generosity helps create a world where knowledge is accessible to all.</p>
-                            <a href="#" class="btn btn-primary py-2 px-4"> <span>Read More</span></a>
-                        </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="feature-item bg-white p-4 text-center" style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                    <div class="feature-img" style="height: 200px; overflow: hidden; border-radius: 10px;">
+                        <img src="{% static 'img/exchange.jpeg' %}" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="Feature 2">
                     </div>
-                    <div class="feature-item wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="feature-img">
-                            <img src="img/feature-2.jpg" class="img-fluid w-100" alt="">
-                        </div>
-                        <div class="feature-content p-4">
-                            <h4 class="mb-3">Exchange Books</h4>
-                            <p class="mb-4">Find and swap books with fellow readers. Get access to new titles while giving others a chance to enjoy your pre-loved books.</p>
-                            <a href="#" class="btn btn-primary py-2 px-4"> <span>Read More</span></a>
-                        </div>
-                    </div>
-                    <div class="feature-item wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="feature-img">
-                            <img src="img/feature-3.jpg" class="img-fluid w-100" alt="">
-                        </div>
-                        <div class="feature-content p-4">
-                            <h4 class="mb-3">Access Free Learning Materials</h4>
-                            <p class="mb-4">Browse a wide selection of free educational materials, including textbooks, novels, and reference guides, for all age groups.</p>
-                            <a href="#" class="btn btn-primary py-2 px-4"> <span>Read More</span></a>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-img">
-                            <img src="img/feature-4.jpg" class="img-fluid w-100" alt="">
-                        </div>
-                        <div class="feature-content p-4">
-                            <h4 class="mb-3">Support Literacy Campaigns</h4>
-                            <p class="mb-4">Join our mission to promote literacy by participating in community book drives, reading programs, and awareness initiatives.</p>
-                            <a href="#" class="btn btn-primary py-2 px-4"> <span>Read More</span></a>
-                        </div>
-                    </div>
+                    <h4 style="color: #004080; font-weight: bold; margin-top: 15px;">Exchange Books</h4>
+                    <p style="color: #333333;">Find and swap books with fellow readers. Get access to new titles while giving others a chance to enjoy your pre-loved books.</p>
+                    <a href="#" class="btn py-2 px-4" style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px;">Read More</a>
                 </div>
-                <div class="feature-shaps"></div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="feature-item bg-white p-4 text-center" style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                    <div class="feature-img" style="height: 200px; overflow: hidden; border-radius: 10px;">
+                        <img src="{% static 'img/materials.jpeg' %}" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="Feature 3">
+                    </div>
+                    <h4 style="color: #004080; font-weight: bold; margin-top: 15px;">Access Free Learning Materials</h4>
+                    <p style="color: #333333;">Browse a wide selection of free educational materials, including textbooks, novels, and reference guides, for all age groups.</p>
+                    <a href="#" class="btn py-2 px-4" style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px;">Read More</a>
+                </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.8s">
+                <div class="feature-item bg-white p-4 text-center" style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                    <div class="feature-img" style="height: 200px; overflow: hidden; border-radius: 10px;">
+                        <img src="{% static 'img/support.jpeg' %}" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="Support Literacy Campaigns">
+                    </div>
+                    <h4 style="color: #004080; font-weight: bold; margin-top: 15px;">Support Literacy Campaigns</h4>
+                    <p style="color: #333333;">Join our mission to promote literacy by participating in community book drives, reading programs, and awareness initiatives.</p>
+                    <a href="#" class="btn py-2 px-4" style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px;">Read More</a>
+                </div>
             </div>
         </div>
-        <!-- Features End -->
-
+    </div>
+</div>
+<!-- Features End -->
 
 <!-- Footer Start -->
 <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" style="background-color: #004080; color: #FFFFFF;">
@@ -244,7 +247,7 @@
                     <h4 class="mb-4 text-white">Quick Links</h4>
                     <a href="{% url 'blogs' %}" style="color: #FF8200;">Blogs</a>
                      <a href="{% url 'about' %}" style="color: #FF8200;">About Us</a>
-                     <a href="{% url 'book_exchange_catalogue' %}" style="color: #FF8200;">Books catalogue</a>
+                     <a href="{% url 'book_exchange' %}" style="color: #FF8200;">Books catalogue</a>
                      <a href="{% url 'features' %}" style="color: #FF8200;">Our Features</a>
                      <a href="{% url 'view_book_clubs' %}" style="color: #FF8200;">Book Clubs</a>
                      <a href="{% url 'testimonial' %}" style="color: #FF8200;"></a>

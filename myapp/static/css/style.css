@@ -504,7 +504,7 @@
 
 @media (max-width: 991px) {
     .hero-bg-half-1 {
-        background-image: url(../img/header-2.jpg);
+        background-image: url(../img/back.jpg);
         clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
         filter: grayscale(0%);
         transform: scale(100% - 0%);
@@ -519,7 +519,7 @@
     }
 
     .hero-bg-half-2 {
-        background-image: url(../img/header-1.jpg);
+        background-image: url(../img/back.jpg);
         clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
         filter: grayscale(0%);
         transform: scale(100% - 0%);
@@ -628,6 +628,8 @@
         left: -400px;
         background: var(--bs-primary);
         transform: skew(28deg);
+
+
     }
 
     .about .about-content {
@@ -667,7 +669,7 @@
 .goal {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgba(255, 245, 225, 0.9), rgba(12, 24, 68, 0.9)), url(../img/goal-background-img.jpg);
+    background: linear-gradient(rgba(255, 245, 225, 0.9), rgba(12, 24, 68, 0.9)), url(../img/back2.jpeg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -835,7 +837,7 @@
 .courses {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgba(12, 24, 68, 0.7), rgba(12, 24, 68, 0.7)), url(../img/services-img.jpg);
+    background: linear-gradient(rgba(12, 24, 68, 0.7), rgba(12, 24, 68, 0.7)), url(../img/back2.jpeg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

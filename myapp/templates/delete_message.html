@@ -141,67 +141,21 @@
     </div>
     <!-- Navbar & Hero End -->
 
-        <!-- Header Start -->
-        <div class="container-fluid bg-breadcrumb">
-            <div class="container text-center py-5" style="max-width: 900px;">
-                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Our Team</h4>
-                <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                    <li class="breadcrumb-item active text-primary">Team</li>
-                </ol>    
-            </div>
-        </div>
-        <!-- Header End -->
-<!-- Team Start -->
-<div class="container-fluid team py-5" style="background-color: #F5F5F5;">
+
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <div class="container py-5">
-        <!-- Section Heading -->
-        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-            <h4 style="color: #3CB371; text-transform: uppercase; font-weight: bold;">Our Leadership</h4>
-            <h1 style="color: #004080; font-size: 2.5rem; font-weight: 700;" class="display-4 mb-4">Meet Our Amazing Team</h1>
-            <p style="color: #333333; font-size: 1.1rem; margin-bottom: 0;">We are driven by passion and innovation. Meet the minds behind our vision.</p>
-        </div>
-
-        <!-- Team Members -->
-        <div class="row gy-5 gx-4 justify-content-center">
-            <!-- Team Member 1 -->
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
-                <div class="team-item text-center" style="background-color: #FFFFFF; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;">
-                    <div class="team-img mb-4">
-                        <img src="{% static 'img/Founder.jpg' %}" alt="Derrick Onsaringo" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 5px solid #FF8200;">
-                    </div>
-                    <h4 style="color: #004080; font-size: 1.2rem; font-weight: bold;">Derrick Onsarigo</h4>
-                    <p style="color: #333333; font-size: 1rem;">Founder & CEO</p>
-                    <div class="team-icon mt-3">
-                        <a href="#" style="background-color: #3CB371; color: #FFFFFF; font-size: 1rem; border-radius: 50%; padding: 5px 10px; margin: 5px; display: inline-block;"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" style="background-color: #3CB371; color: #FFFFFF; font-size: 1rem; border-radius: 50%; padding: 5px 10px; margin: 5px; display: inline-block;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="background-color: #3CB371; color: #FFFFFF; font-size: 1rem; border-radius: 50%; padding: 5px 10px; margin: 5px; display: inline-block;"><i class="fab fa-instagram"></i></a>
-                        <a href="#" style="background-color: #3CB371; color: #FFFFFF; font-size: 1rem; border-radius: 50%; padding: 5px 10px; margin: 5px; display: inline-block;"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Team Member 2 -->
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
-                <div class="team-item text-center" style="background-color: #FFFFFF; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;">
-                    <div class="team-img mb-4">
-                        <img src="{% static 'img/co_founder.jpg' %}" alt="Cheche" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 5px solid #FF8200;">
-                    </div>
-                    <h4 style="color: #004080; font-size: 1.2rem; font-weight: bold;">Cheche</h4>
-                    <p style="color: #333333; font-size: 1rem;">Co-Founder & CTO</p>
-                    <div class="team-icon mt-3">
-                        <a href="#" style="background-color: #3CB371; color: #FFFFFF; font-size: 1rem; border-radius: 50%; padding: 5px 10px; margin: 5px; display: inline-block;"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" style="background-color: #3CB371; color: #FFFFFF; font-size: 1rem; border-radius: 50%; padding: 5px 10px; margin: 5px; display: inline-block;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="background-color: #3CB371; color: #FFFFFF; font-size: 1rem; border-radius: 50%; padding: 5px 10px; margin: 5px; display: inline-block;"><i class="fab fa-instagram"></i></a>
-                        <a href="#" style="background-color: #3CB371; color: #FFFFFF; font-size: 1rem; border-radius: 50%; padding: 5px 10px; margin: 5px; display: inline-block;"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <h1 class="mb-4 text-danger">Delete Message</h1>
+        <p>Are you sure you want to delete this message?</p>
+        <p><strong>Name:</strong> {{ message.name }}</p>
+        <p><strong>Email:</strong> {{ message.email }}</p>
+        <p><strong>Message:</strong> {{ message.message }}</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a href="{% url 'view_messages' %}" class="btn btn-secondary">Cancel</a>
+        </form>
     </div>
-</div>
-<!-- Team End -->
 
 
 <!-- Footer Start -->
