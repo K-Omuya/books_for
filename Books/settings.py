@@ -81,14 +81,15 @@ WSGI_APPLICATION = 'Books.wsgi.application'
 import dj_database_url
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL')),
-
-
-
-
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'your_database_name',
+        'USER': 'your_database_user',
+        'PASSWORD': 'your_password',
+        'HOST': 'localhost',  # Use the database host
+        'PORT': '5432',       # Default PostgreSQL port
     }
+}
 
 
 # Password validation
