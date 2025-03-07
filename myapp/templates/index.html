@@ -373,98 +373,61 @@ document.getElementById("appointmentForm").onsubmit = function(event) {
 };
 </script>
 
-<!-- Features Start -->
-<div class="container-fluid feature py-5" style="background-color: #F5F5F5;">
-    <div class="container py-5">
-        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-            <h4 style="color: #3CB371; font-weight: bold;">Why Choose Us?</h4>
-            <h1 class="display-4 mb-4" style="color: #004080; font-weight: 700;">Discover Our Key Features</h1>
-            <p class="mb-0" style="color: #333333; font-size: 1.2rem;">
-                Books for All is committed to promoting literacy, education, and access to books for everyone. Whether you're donating books to help others, exchanging books to discover new stories, or searching for learning resources, we make it easy and impactful.
-            </p>
-        </div>
-        <div class="feature-carousel owl-carousel">
-            <!-- Feature Item 1 -->
-            <div class="feature-item wow fadeInUp" data-wow-delay="0.2s" style="border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
-                <div class="feature-img" style="width: 100%; height: 250px; overflow: hidden; position: relative;">
-                    <img src="{% static 'img/donate2.jpeg' %}" alt="Donate Books" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <div class="feature-content p-4" style="background-color: #FFFFFF; border-radius: 10px;">
-                    <h4 class="mb-3" style="color: #004080;">Donate Books with Ease</h4>
-                    <p class="mb-4" style="color: #666666;">Contribute to education by donating books to those in need.</p>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal1" style="background-color: #FF8200; color: #FFFFFF; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">Read More</a>
-                </div>
-            </div>
-
-            <!-- Feature Item 2 -->
-            <div class="feature-item wow fadeInUp" data-wow-delay="0.4s" style="border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
-                <div class="feature-img" style="width: 100%; height: 250px; overflow: hidden; position: relative;">
-                    <img src="{% static 'img/donate1.jpeg' %}" alt="Exchange Books" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <div class="feature-content p-4" style="background-color: #FFFFFF; border-radius: 10px;">
-                    <h4 class="mb-3" style="color: #004080;">Exchange Books</h4>
-                    <p class="mb-4" style="color: #666666;">Find and swap books with fellow readers.</p>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal2" style="background-color: #FF8200; color: #FFFFFF; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">Read More</a>
-                </div>
-            </div>
-
-            <!-- Add similar structure for other feature items -->
-
-        </div>
-    </div>
-</div>
-<!-- Features End -->
-
-<!-- Modals -->
-<!-- Modal 1: Donate Books -->
+<!-- Styled Modal 1: Donate Books -->
 <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-content custom-modal">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal1Label">Donate Books with Ease</h5>
+                <h5 class="modal-title">📚 Donate Books with Ease</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="{% static 'img/donate2.jpeg' %}" alt="Donate Books" class="img-fluid mb-3">
-                <p>Contributing books to those in need is one of the best ways to share knowledge and help others access education. Our platform makes it simple for you to donate books directly to individuals, schools, and community libraries.</p>
+                <div class="modal-img">
+                    <img src="{% static 'img/donate2.jpeg' %}" alt="Donate Books">
+                    <div class="overlay"></div>
+                    <h2 class="modal-title-overlay">Make a Difference</h2>
+                </div>
+                <p>Donating books is one of the best ways to support literacy and education. Our platform allows you to connect with schools, libraries, and individuals in need.</p>
                 <ul>
-                    <li>Donate textbooks, novels, and reference materials.</li>
-                    <li>Support schools in underprivileged areas.</li>
-                    <li>Make a lasting impact on literacy and education.</li>
+                    <li>📖 Donate textbooks, novels, and reference materials.</li>
+                    <li>🏫 Support schools and community centers.</li>
+                    <li>✨ Make an impact on education worldwide.</li>
                 </ul>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it!</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal 2: Exchange Books -->
+<!-- Styled Modal 2: Exchange Books -->
 <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="modal2Label" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-content custom-modal">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal2Label">Exchange Books</h5>
+                <h5 class="modal-title">🔄 Exchange Books</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="{% static 'img/donate1.jpeg' %}" alt="Exchange Books" class="img-fluid mb-3">
-                <p>Exchange books with fellow readers and discover new titles while giving others the opportunity to enjoy your pre-loved books. Our exchange program fosters a community of shared knowledge and sustainable reading habits.</p>
+                <div class="modal-img">
+                    <img src="{% static 'img/donate1.jpeg' %}" alt="Exchange Books">
+                    <div class="overlay"></div>
+                    <h2 class="modal-title-overlay">Find & Swap Books</h2>
+                </div>
+                <p>Exchange books with fellow readers and discover new titles while giving others the chance to enjoy your pre-loved books.</p>
                 <ul>
-                    <li>Browse available books for exchange.</li>
-                    <li>Connect with book lovers in your area.</li>
-                    <li>Encourage a culture of sharing and learning.</li>
+                    <li>📚 Browse a variety of books.</li>
+                    <li>🔗 Connect with book lovers in your area.</li>
+                    <li>♻️ Encourage a culture of sharing.</li>
                 </ul>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Got it!</button>
             </div>
         </div>
     </div>
 </div>
-
-<!-- Add Modals for Other Features -->
 
 
 <!-- Books for All - Stories Section Start -->
