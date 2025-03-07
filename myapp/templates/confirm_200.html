@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Payment - Ksh. 200</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .payment-container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-container h1 {
+            color: #004080;
+            margin-bottom: 20px;
+        }
+
+        .payment-container p {
+            color: #333333;
+            margin-bottom: 30px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-confirm {
+            background-color: #3CB371;
+            color: white;
+        }
+
+        .btn-cancel {
+            background-color: #FF0000;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h1>Confirm Payment</h1>
+        <p>You are about to pay <strong>Ksh. 200</strong>to <strong>Books foa all</strong> Please confirm to proceed.</p>
+        <div class="btn-container">
+            <button class="btn btn-confirm" onclick="confirmPayment()">Confirm</button>
+            <button class="btn btn-cancel" onclick="cancelPayment()">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        function confirmPayment() {
+            alert("Payment of Ksh. 200 confirmed!");
+            // Redirect or submit the payment logic here
+        }
+
+        function cancelPayment() {
+            alert("Payment cancelled.");
+            // Redirect or handle cancellation logic here
+        }
+    </script>
+</body>
+</html>

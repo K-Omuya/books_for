@@ -34,7 +34,9 @@ urlpatterns = [
     path('impact/', views.impact, name='impact'),
 
     path('subscribe/', views.subscribe, name='subscribe'),
-    path('subscription_page/', views.subscription_page, name='subscription_page'),
+    path('subscribe/', views.subscribe, name='subscribe'),
+    path('confirm_200/', views.confirm_200, name='confirm_200'),
+    path('confirm_20/', views.confirm_20, name='confirm_20'),
 
 
     path('book-appointment/', views.book_appointment, name='book_appointment'),

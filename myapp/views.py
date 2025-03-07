@@ -202,7 +202,7 @@ def upload_book(request):
         if form.is_valid():
             # Payment verification logic can be added here before saving the book
             form.save()
-            return redirect('book_exchange')  # Redirect to book exchange page
+            return redirect('confirm_20')  # Redirect to book exchange page
     else:
         form = BookForm()
     return render(request, 'upload_book.html', {'form': form})
@@ -272,3 +272,9 @@ def subscribe(request):
 def subscription_page(request):
     form = SubscriptionForm()
     return render(request, 'subscription.html', {'form': form})
+
+def confirm_20(request):
+    return render(request, 'confirm_20.html', )
+
+def confirm_200(request):
+    return render(request, 'confirm_200.html',)
