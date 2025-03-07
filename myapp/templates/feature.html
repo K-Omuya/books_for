@@ -30,7 +30,9 @@
     <!-- Template Stylesheet -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
 </head>
-   <!-- Spinner Start -->
+
+<body>
+    <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
@@ -255,57 +257,57 @@
             color: red;
         }
     </style>
-</head>
-<body>
+{% load static %}
 
-    <!-- Features Start -->
-    <div class="container-fluid feature">
-        <div class="container">
-            <div class="text-center">
-                <h4 style="color: #3CB371; font-weight: bold;">Why Choose Us?</h4>
-                <h1 style="color: #004080; font-weight: 700;">Discover Our Key Features</h1>
-                <p>Books for All is dedicated to bridging the gap in literacy and education by ensuring that books are accessible to everyone, regardless of their background or financial situation. Our platform connects book donors with readers, fostering a culture of sharing knowledge and lifelong learning. Whether you want to donate, exchange, or receive books, we make the process seamless and inclusive. By promoting literacy as a fundamental right, we aim to empower individuals, support students, and inspire communities to cultivate a love for reading. Join us in making books available for all, because education should never be out of reach.</p>
+<!-- Features Start -->
+<div class="container-fluid feature">
+    <div class="container">
+        <div class="text-center">
+            <h4 style="color: #3CB371; font-weight: bold;">Why Choose Us?</h4>
+            <h1 style="color: #004080; font-weight: 700;">Discover Our Key Features</h1>
+            <p>Books for All is dedicated to bridging the gap in literacy and education by ensuring that books are accessible to everyone, regardless of their background or financial situation. Our platform connects book donors with readers, fostering a culture of sharing knowledge and lifelong learning. Whether you want to donate, exchange, or receive books, we make the process seamless and inclusive. By promoting literacy as a fundamental right, we aim to empower individuals, support students, and inspire communities to cultivate a love for reading. Join us in making books available for all, because education should never be out of reach.</p>
+        </div>
+
+        <div class="row">
+            <!-- Feature 1 -->
+            <div class="col-lg-4">
+                <div class="feature-item">
+                    <div class="feature-img">
+                        <img src="{% static 'img/donate1.jpeg' %}" alt="Donate Books">
+                    </div>
+                    <h4>Donate Books with Ease</h4>
+                    <p>Contribute to education by donating books to those in need.</p>
+                    <button onclick="openPopup('popup1')" class="btn">Read More</button>
+                </div>
             </div>
 
-            <div class="row">
-                <!-- Feature 1 -->
-                <div class="col-lg-4">
-                    <div class="feature-item">
-                        <div class="feature-img">
-                            <img src="https://via.placeholder.com/300x200" alt="Donate Books">
-                        </div>
-                        <h4>Donate Books with Ease</h4>
-                        <p>Contribute to education by donating books to those in need.</p>
-                        <button onclick="openPopup('popup1')" class="btn">Read More</button>
+            <!-- Feature 2 -->
+            <div class="col-lg-4">
+                <div class="feature-item">
+                    <div class="feature-img">
+                        <img src="{% static 'img/exchange.jpeg' %}" alt="Exchange Books">
                     </div>
+                    <h4>Exchange Books</h4>
+                    <p>Find and swap books with fellow readers.</p>
+                    <button onclick="openPopup('popup2')" class="btn">Read More</button>
                 </div>
+            </div>
 
-                <!-- Feature 2 -->
-                <div class="col-lg-4">
-                    <div class="feature-item">
-                        <div class="feature-img">
-                            <img src="https://via.placeholder.com/300x200" alt="Exchange Books">
-                        </div>
-                        <h4>Exchange Books</h4>
-                        <p>Find and swap books with fellow readers.</p>
-                        <button onclick="openPopup('popup2')" class="btn">Read More</button>
+            <!-- Feature 3 -->
+            <div class="col-lg-4">
+                <div class="feature-item">
+                    <div class="feature-img">
+                        <img src="{% static 'img/materials.jpeg' %}" alt="Free Materials">
                     </div>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="col-lg-4">
-                    <div class="feature-item">
-                        <div class="feature-img">
-                            <img src="https://via.placeholder.com/300x200" alt="Free Materials">
-                        </div>
-                        <h4>Access Free Learning Materials</h4>
-                        <p>Browse a wide selection of free educational materials.</p>
-                        <button onclick="openPopup('popup3')" class="btn">Read More</button>
-                    </div>
+                    <h4>Access Free Learning Materials</h4>
+                    <p>Browse a wide selection of free educational materials.</p>
+                    <button onclick="openPopup('popup3')" class="btn">Read More</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 
     <!-- Popups -->
     <div id="popup1" class="popup">
