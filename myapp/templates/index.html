@@ -157,10 +157,10 @@
                                 Explore a world of knowledge with our vast collection of books. Whether you love fiction, history, or self-improvement, we have something for everyone. Start your reading journey today!
                             </p>
                             <div class="d-flex justify-content-center justify-content-md-start flex-shrink-0 mb-4">
-                                <a class="btn py-3 px-4 px-md-5 me-2" style="background-color: #FF8200; color: #FFFFFF;" href="#">
+                                <a class="btn py-3 px-4 px-md-5 me-2" style="background-color: #FF8200; color: #FFFFFF;" href="#" onclick="openModal('videoModal1')">
                                     <i class="fas fa-play-circle me-2"></i> <span>Watch Video</span>
                                 </a>
-                                <a class="btn py-3 px-4 px-md-5 ms-2" style="background-color: #3CB371; color: #FFFFFF;" href="#">
+                                <a class="btn py-3 px-4 px-md-5 ms-2" style="background-color: #3CB371; color: #FFFFFF;" href="#" onclick="openModal('learnMoreModal1')">
                                     <span>Learn More</span>
                                 </a>
                             </div>
@@ -185,10 +185,10 @@
                                 Discover a treasure trove of books for every reader. From timeless classics to modern bestsellers, we bring knowledge and stories closer to you. Start your reading adventure today!
                             </p>
                             <div class="d-flex justify-content-center justify-content-md-start flex-shrink-0 mb-4">
-                                <a class="btn py-3 px-4 px-md-5 me-2" style="background-color: #FF8200; color: #FFFFFF;" href="#">
+                                <a class="btn py-3 px-4 px-md-5 me-2" style="background-color: #FF8200; color: #FFFFFF;" href="#" onclick="openModal('videoModal2')">
                                     <i class="fas fa-play-circle me-2"></i> <span>Watch Video</span>
                                 </a>
-                                <a class="btn py-3 px-4 px-md-5 ms-2" style="background-color: #3CB371; color: #FFFFFF;" href="#">
+                                <a class="btn py-3 px-4 px-md-5 ms-2" style="background-color: #3CB371; color: #FFFFFF;" href="#" onclick="openModal('learnMoreModal2')">
                                     <span>Learn More</span>
                                 </a>
                             </div>
@@ -213,10 +213,10 @@
                                 Dive into an ocean of books, curated for your reading pleasure. Whether you seek adventure, knowledge, or inspiration, we have the perfect book for you. Join us today!
                             </p>
                             <div class="d-flex justify-content-center justify-content-md-start flex-shrink-0 mb-4">
-                                <a class="btn py-3 px-4 px-md-5 me-2" style="background-color: #FF8200; color: #FFFFFF;" href="#">
+                                <a class="btn py-3 px-4 px-md-5 me-2" style="background-color: #FF8200; color: #FFFFFF;" href="#" onclick="openModal('videoModal3')">
                                     <i class="fas fa-play-circle me-2"></i> <span>Watch Video</span>
                                 </a>
-                                <a class="btn py-3 px-4 px-md-5 ms-2" style="background-color: #3CB371; color: #FFFFFF;" href="#">
+                                <a class="btn py-3 px-4 px-md-5 ms-2" style="background-color: #3CB371; color: #FFFFFF;" href="#" onclick="openModal('learnMoreModal3')">
                                     <span>Learn More</span>
                                 </a>
                             </div>
@@ -228,6 +228,34 @@
     </div>
 </div>
 <!-- Carousel End -->
+
+<!-- Modal Structure -->
+<div id="modalsContainer"></div>
+
+<script>
+function openModal(id) {
+    let content = '';
+    if (id.includes('video')) {
+        content = `<h2 style="color: #004080;">Watch Video</h2><p>Here is a preview of the Books for All initiative.</p>`;
+    } else {
+        content = `<h2 style="color: #004080;">Learn More</h2><p>Find out more about how we bring books closer to you.</p>`;
+    }
+
+    document.getElementById('modalsContainer').innerHTML = `
+        <div id="${id}" class="modal-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 1000;">
+            <div class="modal-content" style="background: white; padding: 20px; border-radius: 8px; text-align: center; max-width: 400px; width: 90%;">
+                ${content}
+                <button onclick="closeModal('${id}')" style="margin-top: 10px; padding: 10px 20px; background: #FF8200; color: white; border: none; cursor: pointer; border-radius: 5px;">Close</button>
+            </div>
+        </div>
+    `;
+    document.getElementById(id).style.display = 'block';
+}
+
+function closeModal(id) {
+    document.getElementById(id).remove();
+}
+</script>
 
 
 <!-- About Start -->
