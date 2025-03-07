@@ -158,25 +158,10 @@
                                 Explore a world of knowledge with our vast collection of books. Whether you love fiction, history, or self-improvement, we have something for everyone. Start your reading journey today!
                             </p>
                             <div class="d-flex justify-content-center justify-content-md-start flex-shrink-0 mb-4">
-                                <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="videoModalLabel">Watch Our Introduction Video</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="ratio ratio-16x9">
-                                                    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Books for All Introduction" allowfullscreen></iframe>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a class="btn py-3 px-4 px-md-5 ms-2" style="background-color: #3CB371; color: #FFFFFF;" href="#">
+                                 <a class="btn py-3 px-4 px-md-5 me-2" style="background-color: #FF8200; color: #FFFFFF;" data-bs-toggle="modal" data-bs-target="#videoModal">
+                                    <i class="fas fa-play-circle me-2"></i> <span>Watch Video</span>
+                                </a>
+                                <a class="btn py-3 px-4 px-md-5 ms-2" style="background-color: #3CB371; color: #FFFFFF;" data-bs-toggle="modal" data-bs-target="#learnMoreModal">
                                     <span>Learn More</span>
                                 </a>
                             </div>
@@ -186,6 +171,44 @@
             </div>
         </div>
     </div>
+    <!-- Learn More Modal -->
+<div class="modal fade" id="learnMoreModal" tabindex="-1" aria-labelledby="learnMoreModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="learnMoreModalLabel">Learn More About Books for All</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Books for All is a platform that connects book lovers to a wide collection of books across different genres. We believe in making knowledge accessible to everyone, everywhere.</p>
+                <p>Join us in our mission to spread the joy of reading by exploring our store and engaging in book donations, exchanges, and sales.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Watch Video Modal -->
+<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="videoModalLabel">Watch Our Introduction Video</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="ratio ratio-16x9">
+                    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Books for All Introduction" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- Carousel Item 2 -->
     <div class="header-carousel-item hero-section" style="background-color: #004080;">
