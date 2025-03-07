@@ -13,6 +13,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 
     <!-- Icon Font Stylesheet -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
@@ -155,67 +157,194 @@
             </div>
         </div>
         <!-- Header End -->
-<!-- Features Start -->
-<div class="container-fluid feature py-5" style="background-color: #F5F5F5;">
-    <div class="container py-5">
-        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-            <h4 style="color: #3CB371; font-weight: bold;">Why Choose Us?</h4>
-            <h1 class="display-4 mb-4" style="color: #004080; font-weight: 700;">Discover Our Key Features</h1>
-            <p style="color: #333333; font-size: 1.2rem;">Books for All is committed to promoting literacy, education, and access to books for everyone. Whether you're donating books to help others, exchanging books to discover new stories, or searching for learning resources, we make it easy and impactful.</p>
-        </div>
 
-        <div class="row g-4">
-            <!-- Feature 1 -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                <div class="feature-item bg-white p-4 text-center" style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-                    <div class="feature-img" style="height: 200px; overflow: hidden; border-radius: 10px;">
-                        <img src="{% static 'img/donate2.jpeg' %}" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="Feature 1">
-                    </div>
-                    <h4 style="color: #004080; font-weight: bold; margin-top: 15px;">Donate Books with Ease</h4>
-                    <p style="color: #333333;">Contribute to education by donating books to those in need. Your generosity helps create a world where knowledge is accessible to all.</p>
-                    <a href="#" class="btn py-2 px-4" style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px;">Read More</a>
-                </div>
+
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F5F5F5;
+        }
+
+        .container-fluid {
+            padding: 50px 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Feature Styles */
+        .feature-item {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .feature-img img {
+            border-radius: 10px;
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .feature-item h4 {
+            color: #004080;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .feature-item p {
+            color: #333333;
+        }
+
+        .feature-item .btn {
+            background-color: #FF8200;
+            color: white;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .feature-item .btn:hover {
+            background-color: #FF9500;
+        }
+
+        /* Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            z-index: 9999;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .popup-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .popup-content h3 {
+            color: #004080;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .popup-content p {
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        .popup-content .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Features Start -->
+    <div class="container-fluid feature">
+        <div class="container">
+            <div class="text-center">
+                <h4 style="color: #3CB371; font-weight: bold;">Why Choose Us?</h4>
+                <h1 style="color: #004080; font-weight: 700;">Discover Our Key Features</h1>
+                <p>Books for All is committed to promoting literacy, education, and access to books for everyone.</p>
             </div>
 
-            <!-- Feature 2 -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
-                <div class="feature-item bg-white p-4 text-center" style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-                    <div class="feature-img" style="height: 200px; overflow: hidden; border-radius: 10px;">
-                        <img src="{% static 'img/exchange.jpeg' %}" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="Feature 2">
+            <div class="row">
+                <!-- Feature 1 -->
+                <div class="col-lg-4">
+                    <div class="feature-item">
+                        <div class="feature-img">
+                            <img src="https://via.placeholder.com/300x200" alt="Donate Books">
+                        </div>
+                        <h4>Donate Books with Ease</h4>
+                        <p>Contribute to education by donating books to those in need.</p>
+                        <button onclick="openPopup('popup1')" class="btn">Read More</button>
                     </div>
-                    <h4 style="color: #004080; font-weight: bold; margin-top: 15px;">Exchange Books</h4>
-                    <p style="color: #333333;">Find and swap books with fellow readers. Get access to new titles while giving others a chance to enjoy your pre-loved books.</p>
-                    <a href="#" class="btn py-2 px-4" style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px;">Read More</a>
                 </div>
-            </div>
 
-            <!-- Feature 3 -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-                <div class="feature-item bg-white p-4 text-center" style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-                    <div class="feature-img" style="height: 200px; overflow: hidden; border-radius: 10px;">
-                        <img src="{% static 'img/materials.jpeg' %}" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="Feature 3">
+                <!-- Feature 2 -->
+                <div class="col-lg-4">
+                    <div class="feature-item">
+                        <div class="feature-img">
+                            <img src="https://via.placeholder.com/300x200" alt="Exchange Books">
+                        </div>
+                        <h4>Exchange Books</h4>
+                        <p>Find and swap books with fellow readers.</p>
+                        <button onclick="openPopup('popup2')" class="btn">Read More</button>
                     </div>
-                    <h4 style="color: #004080; font-weight: bold; margin-top: 15px;">Access Free Learning Materials</h4>
-                    <p style="color: #333333;">Browse a wide selection of free educational materials, including textbooks, novels, and reference guides, for all age groups.</p>
-                    <a href="#" class="btn py-2 px-4" style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px;">Read More</a>
                 </div>
-            </div>
 
-            <!-- Feature 4 -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.8s">
-                <div class="feature-item bg-white p-4 text-center" style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-                    <div class="feature-img" style="height: 200px; overflow: hidden; border-radius: 10px;">
-                        <img src="{% static 'img/support.jpeg' %}" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="Support Literacy Campaigns">
+                <!-- Feature 3 -->
+                <div class="col-lg-4">
+                    <div class="feature-item">
+                        <div class="feature-img">
+                            <img src="https://via.placeholder.com/300x200" alt="Free Materials">
+                        </div>
+                        <h4>Access Free Learning Materials</h4>
+                        <p>Browse a wide selection of free educational materials.</p>
+                        <button onclick="openPopup('popup3')" class="btn">Read More</button>
                     </div>
-                    <h4 style="color: #004080; font-weight: bold; margin-top: 15px;">Support Literacy Campaigns</h4>
-                    <p style="color: #333333;">Join our mission to promote literacy by participating in community book drives, reading programs, and awareness initiatives.</p>
-                    <a href="#" class="btn py-2 px-4" style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px;">Read More</a>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Features End -->
+
+    <!-- Popups -->
+    <div id="popup1" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('popup1')">&times;</span>
+            <h3>Donate Books with Ease</h3>
+            <p>Your generous donations help expand access to books for those in need!</p>
+        </div>
+    </div>
+
+    <div id="popup2" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('popup2')">&times;</span>
+            <h3>Exchange Books</h3>
+            <p>Participate in our book exchange program to discover new stories!</p>
+        </div>
+    </div>
+
+    <div id="popup3" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('popup3')">&times;</span>
+            <h3>Access Free Learning Materials</h3>
+            <p>Explore a wide range of free educational resources for everyone.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function openPopup(popupId) {
+            document.getElementById(popupId).style.display = 'block';
+        }
+
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+        }
+    </script>
+
 
 
 

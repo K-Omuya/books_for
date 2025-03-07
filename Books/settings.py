@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
-import dj_database_url
 from django.template.context_processors import static
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -79,13 +78,12 @@ WSGI_APPLICATION = 'Books.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+import dj_database_url
+import os
 
-from decouple import config
 DATABASES = {
-    'default': dj_database_url.parse(config('DATABASE_URL'))
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
 
 
 # Password validation
