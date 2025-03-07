@@ -252,3 +252,23 @@ def book_appointment(request):
     else:
         form = AppointmentForm()
     return render(request, 'appointment.html', {'form': form})
+
+
+# views.py
+from django.http import JsonResponse
+from django.shortcuts import render
+from .forms import SubscriptionForm
+
+def subscribe(request):
+    if request.method == 'POST' and request.is_ajax():
+        form = SubscriptionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'message': 'Subscribed successfully!'}, status=200)
+        else:
+            return JsonResponse({'error': 'Invalid email!'}, status=400)
+    return JsonResponse({'error': 'Invalid request!'}, status=400)
+
+def subscription_page(request):
+    form = SubscriptionForm()
+    return render(request, 'subscription.html', {'form': form})

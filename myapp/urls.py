@@ -33,5 +33,9 @@ urlpatterns = [
     path('edit-impact/', views.edit_impact, name='edit_impact'),
     path('impact/', views.impact, name='impact'),
 
+    path('subscribe/', views.subscribe, name='subscribe'),
+    path('subscription_page/', views.subscription_page, name='subscription_page'),
+
+
     path('book-appointment/', views.book_appointment, name='book_appointment'),
 ]

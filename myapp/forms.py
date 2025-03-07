@@ -128,3 +128,20 @@ class AppointmentForm(forms.ModelForm):
             'date': forms.DateInput(attrs={'type': 'date'}),
             'time': forms.TimeInput(attrs={'type': 'time'}),
         }
+
+
+# forms.py
+from django import forms
+from .models import Subscription
+
+class SubscriptionForm(forms.ModelForm):
+    class Meta:
+        model = Subscription
+        fields = ['email']
+        widgets = {
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control border-0 w-100 py-3 pe-5',
+                'placeholder': 'Email address to Subscribe',
+                'style': 'background-color: #F5F5F5; color: #333333;'
+            })
+        }
