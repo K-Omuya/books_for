@@ -373,183 +373,116 @@ document.getElementById("appointmentForm").onsubmit = function(event) {
 };
 </script>
 
-
-    <!-- Bootstrap 5 Required -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <div class="container mt-5">
-    <div class="row">
-        <!-- Card 1 -->
-        <div class="col-md-4">
-            <div class="card custom-card">
-                <div class="card-img-container">
-                    <img src="{% static 'img/donate2.jpeg' %}" class="card-img-top" alt="Donate Books">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">📚 Donate Books</h5>
-                    <p class="card-text">Make a difference by donating books to those in need.</p>
-                    <p class="text-muted small">By: <strong>John Doe</strong> | Date: <strong>March 7, 2025</strong></p>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">Read More</button>
-                </div>
-            </div>
-        </div>
+    <h2 class="text-center mb-4">📚 Donate & Exchange Books</h2>
 
-        <!-- Card 2 -->
-        <div class="col-md-4">
-            <div class="card custom-card">
-                <div class="card-img-container">
-                    <img src="{% static 'img/donate1.jpeg' %}" class="card-img-top" alt="Exchange Books">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">🔄 Exchange Books</h5>
-                    <p class="card-text">Swap books with fellow readers and expand your collection.</p>
-                    <p class="text-muted small">By: <strong>Jane Smith</strong> | Date: <strong>March 7, 2025</strong></p>
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal2">Read More</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <!-- Styled Modal 1: Donate Books -->
-<div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content custom-modal">
-            <div class="modal-header">
-                <h5 class="modal-title">📚 Donate Books with Ease</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-img">
-                    <img src="{% static 'img/donate2.jpeg' %}" alt="Donate Books">
-                    <div class="overlay"></div>
-                    <h2 class="modal-title-overlay">Make a Difference</h2>
-                </div>
-                <p>Donating books is one of the best ways to support literacy and education. Our platform allows you to connect with schools, libraries, and individuals in need.</p>
-                <ul>
-                    <li>📖 Donate textbooks, novels, and reference materials.</li>
-                    <li>🏫 Support schools and community centers.</li>
-                    <li>✨ Make an impact on education worldwide.</li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it!</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Styled Modal 2: Exchange Books -->
-<div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="modal2Label" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content custom-modal">
-            <div class="modal-header">
-                <h5 class="modal-title">🔄 Exchange Books</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-img">
-                    <img src="{% static 'img/donate1.jpeg' %}" alt="Exchange Books">
-                    <div class="overlay"></div>
-                    <h2 class="modal-title-overlay">Find & Swap Books</h2>
-                </div>
-                <p>Exchange books with fellow readers and discover new titles while giving others the chance to enjoy your pre-loved books.</p>
-                <ul>
-                    <li>📚 Browse a variety of books.</li>
-                    <li>🔗 Connect with book lovers in your area.</li>
-                    <li>♻️ Encourage a culture of sharing.</li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Got it!</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Styled Modal 1: Donate Books -->
-<div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content custom-modal">
-            <div class="modal-header">
-                <h5 class="modal-title">📚 Donate Books with Ease</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-img">
-                    <img src="{% static 'img/donate2.jpeg' %}" alt="Donate Books">
-                    <div class="overlay"></div>
-                    <h2 class="modal-title-overlay">Make a Difference</h2>
-                </div>
-                <p>Donating books is one of the best ways to support literacy and education. Our platform allows you to connect with schools, libraries, and individuals in need.</p>
-                <ul>
-                    <li>📖 Donate textbooks, novels, and reference materials.</li>
-                    <li>🏫 Support schools and community centers.</li>
-                    <li>✨ Make an impact on education worldwide.</li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it!</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Styled Modal 2: Exchange Books -->
-<div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="modal2Label" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content custom-modal">
-            <div class="modal-header">
-                <h5 class="modal-title">🔄 Exchange Books</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-img">
-                    <img src="{% static 'img/donate1.jpeg' %}" alt="Exchange Books">
-                    <div class="overlay"></div>
-                    <h2 class="modal-title-overlay">Find & Swap Books</h2>
-                </div>
-                <p>Exchange books with fellow readers and discover new titles while giving others the chance to enjoy your pre-loved books.</p>
-                <ul>
-                    <li>📚 Browse a variety of books.</li>
-                    <li>🔗 Connect with book lovers in your area.</li>
-                    <li>♻️ Encourage a culture of sharing.</li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Got it!</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-            <!-- Blog Item 2 -->
-            <div class="blog-item wow fadeInUp" data-wow-delay="0.4s" style="border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
-                <div class="blog-img" style="width: 100%; height: 250px; overflow: hidden; position: relative; background-color: #FFFFFF;">
-                    <a href="#">
-                        <img src="{% static 'img/seredioity mindset.jpeg' %}" alt="Library Initiative" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; object-fit: cover;">
-                    </a>
-                </div>
-                <div class="blog-content p-4" style="background-color: #FFFFFF; border-radius: 10px;">
-                    <div class="blog-comment d-flex justify-content-between py-2 px-3 mb-4" style="border-bottom: 2px solid #EEEEEE;">
-                        <div class="small" style="color: #333333;"><span class="fa fa-user" style="color: #FF8200;"></span> Liam N.</div>
-                        <div class="small" style="color: #333333;"><span class="fa fa-calendar" style="color: #FF8200;"></span> 10 Jan 2025</div>
+    <!-- Carousel -->
+    <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner" style="display: flex;">
+            <!-- Card 1 -->
+            <div class="carousel-item active" style="flex: 0 0 33.3333%; padding: 15px;">
+                <div class="card" style="height: 100%; display: flex; flex-direction: column;">
+                    <img src="{% static 'img/donate2.jpeg' %}" class="card-img-top" alt="Donate Books" style="object-fit: cover; height: 200px;">
+                    <div class="card-body" style="flex-grow: 1;">
+                        <h5 class="card-title">📖 Donate Books</h5>
+                        <p class="card-text">Support literacy by donating books to schools and libraries.</p>
+                        <p><strong>By:</strong> John Doe | <strong>Date:</strong> 10th Mar 2025</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">Read More</button>
                     </div>
-                    <a href="#" class="h4 d-inline-block mb-3" style="color: #004080; font-weight: 600;">Inspiring Young Minds with Books</a>
-                    <p class="mb-3" style="color: #666666;">Read about the impact of book donations on children’s education and their growing love for reading.</p>
-                    <a href="#" class="btn py-2 px-4" style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px; text-decoration: none;">
-                        <span class="me-2">Read More</span>
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
                 </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="carousel-item" style="flex: 0 0 33.3333%; padding: 15px;">
+                <div class="card" style="height: 100%; display: flex; flex-direction: column;">
+                    <img src="{% static 'img/donate1.jpeg' %}" class="card-img-top" alt="Exchange Books" style="object-fit: cover; height: 200px;">
+                    <div class="card-body" style="flex-grow: 1;">
+                        <h5 class="card-title">🔄 Exchange Books</h5>
+                        <p class="card-text">Swap books with fellow readers and expand your library.</p>
+                        <p><strong>By:</strong> Jane Smith | <strong>Date:</strong> 8th Mar 2025</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal2">Read More</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Add 4 More Cards -->
+            <div class="carousel-item" style="flex: 0 0 33.3333%; padding: 15px;">
+                <div class="card" style="height: 100%; display: flex; flex-direction: column;">
+                    <img src="{% static 'img/book3.jpeg' %}" class="card-img-top" alt="Educational Books" style="object-fit: cover; height: 200px;">
+                    <div class="card-body" style="flex-grow: 1;">
+                        <h5 class="card-title">📘 Educational Books</h5>
+                        <p class="card-text">Access the best educational books for students.</p>
+                        <p><strong>By:</strong> Alex Turner | <strong>Date:</strong> 5th Mar 2025</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal3">Read More</button>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" style="flex: 0 0 33.3333%; padding: 15px;">
+                <div class="card" style="height: 100%; display: flex; flex-direction: column;">
+                    <img src="{% static 'img/book4.jpeg' %}" class="card-img-top" alt="Rare Books" style="object-fit: cover; height: 200px;">
+                    <div class="card-body" style="flex-grow: 1;">
+                        <h5 class="card-title">📕 Rare Books</h5>
+                        <p class="card-text">Discover and exchange rare and collectible books.</p>
+                        <p><strong>By:</strong> Emma Brown | <strong>Date:</strong> 3rd Mar 2025</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal4">Read More</button>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" style="flex: 0 0 33.3333%; padding: 15px;">
+                <div class="card" style="height: 100%; display: flex; flex-direction: column;">
+                    <img src="{% static 'img/book5.jpeg' %}" class="card-img-top" alt="Children’s Books" style="object-fit: cover; height: 200px;">
+                    <div class="card-body" style="flex-grow: 1;">
+                        <h5 class="card-title">📗 Children’s Books</h5>
+                        <p class="card-text">Help young readers grow with exciting children’s books.</p>
+                        <p><strong>By:</strong> Liam Davis | <strong>Date:</strong> 1st Mar 2025</p>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal5">Read More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev" style="background: rgba(0, 0, 0, 0.5);">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next" style="background: rgba(0, 0, 0, 0.5);">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+    </div>
+</div>
+
+<!-- Modals -->
+<div class="modal fade" id="modal1" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">📖 Donate Books</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Support literacy by donating books to schools and libraries.</p>
             </div>
         </div>
     </div>
 </div>
-<!-- Books for All - Stories Section End -->
+
+<div class="modal fade" id="modal2" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">🔄 Exchange Books</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Swap books with fellow readers and expand your library.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 <!-- Blog Start -->
 <div class="container-fluid blog py-5" style="background-color: #F5F5F5;">
