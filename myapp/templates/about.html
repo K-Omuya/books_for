@@ -157,7 +157,9 @@
 </div>
    <!-- Header End -->
 
-    <!-- About Start -->
+
+
+<!-- About Start -->
 <div class="container-fluid about pt-5" style="background-color: #F5F5F5;">
     <div class="container pt-5">
         <div class="row g-5 align-items-center">
@@ -166,40 +168,42 @@
                 <div class="about-content h-100">
                     <h4 style="color: #3CB371; font-weight: bold;">About Books for All</h4>
                     <h1 class="display-4 mb-4" style="color: #004080; font-weight: 700;">Unlock Your Potential with the Power of Books</h1>
-                    <p class="mb-4" style="color: #333333; font-size: 1.2rem;">Explore a world of knowledge, imagination, and inspiration. Whether for learning or leisure, Books for All brings stories and wisdom right to your fingertips.</p>
+                    <p class="mb-4" style="color: #333333; font-size: 1.2rem;">
+                        Explore a world of knowledge, imagination, and inspiration. Whether for learning or leisure,
+                        Books for All brings stories and wisdom right to your fingertips.
+                    </p>
                     <div class="tab-class pb-4">
                         <ul class="nav d-flex mb-3">
-                            <!-- Tabs with background colors -->
                             <li class="nav-item">
-                                <a class="d-flex py-2 px-3 active" data-bs-toggle="pill" href="#tab-1" style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px; font-weight: bold;">Our Mission</a>
+                                <a class="d-flex py-2 px-3 active" data-bs-toggle="pill" href="#tab-1"
+                                    style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px; font-weight: bold;">Our Mission</a>
                             </li>
                             <li class="nav-item mx-2">
-                                <a class="d-flex py-2 px-3" data-bs-toggle="pill" href="#tab-2" style="background-color: #004080; color: #FFFFFF; border-radius: 5px; font-weight: bold;">Our Vision</a>
+                                <a class="d-flex py-2 px-3" data-bs-toggle="pill" href="#tab-2"
+                                    style="background-color: #004080; color: #FFFFFF; border-radius: 5px; font-weight: bold;">Our Vision</a>
                             </li>
                             <li class="nav-item">
-                                <a class="d-flex py-2 px-3" data-bs-toggle="pill" href="#tab-3" style="background-color: #3CB371; color: #FFFFFF; border-radius: 5px; font-weight: bold;">Our Goal</a>
+                                <a class="d-flex py-2 px-3" data-bs-toggle="pill" href="#tab-3"
+                                    style="background-color: #3CB371; color: #FFFFFF; border-radius: 5px; font-weight: bold;">Our Goal</a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <!-- Tab 1 Content -->
                             <div id="tab-1" class="tab-pane fade show active p-3" style="background-color: #FFFFFF; border: 2px solid #FF8200; border-radius: 10px;">
                                 <div class="d-flex align-items-center py-3">
                                     <span class="fas fa-rocket" style="color: #3CB371; font-size: 2.5rem; margin-right: 15px;"></span>
-                                    <p class="mb-0" style="color: #333333;">To bridge the educational inequality by ensuring every student has access to books through donations and exchanges, fostering a culture of learning and knowledge sharing.</p>
+                                    <p class="mb-0" style="color: #333333;">To bridge the educational inequality by ensuring every student has access to books through donations and exchanges.</p>
                                 </div>
                             </div>
-                            <!-- Tab 2 Content -->
                             <div id="tab-2" class="tab-pane fade p-3" style="background-color: #FFFFFF; border: 2px solid #004080; border-radius: 10px;">
                                 <div class="d-flex align-items-center py-3">
                                     <span class="fas fa-rocket" style="color: #FF8200; font-size: 2.5rem; margin-right: 15px;"></span>
                                     <p class="mb-0" style="color: #333333;">A future where no child lacks books and education is accessible to all.</p>
                                 </div>
                             </div>
-                            <!-- Tab 3 Content -->
                             <div id="tab-3" class="tab-pane fade p-3" style="background-color: #FFFFFF; border: 2px solid #3CB371; border-radius: 10px;">
                                 <div class="d-flex align-items-center py-3">
                                     <span class="fas fa-rocket" style="color: #004080; font-size: 2.5rem; margin-right: 15px;"></span>
-                                    <p class="mb-0" style="color: #333333;">Our goal is to make books accessible to everyone, fostering a culture of reading and learning. We believe in empowering minds, sparking creativity, and building a brighter future through the power of books.</p>
+                                    <p class="mb-0" style="color: #333333;">Our goal is to make books accessible to everyone, fostering a culture of reading and learning.</p>
                                 </div>
                             </div>
                         </div>
@@ -207,7 +211,7 @@
                     <!-- Action Buttons -->
                     <div class="row g-3 align-items-center">
                         <div class="col-sm-6">
-                            <a href="#" class="btn py-3 px-4" style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px; font-weight: bold;">Make Appointment</a>
+                            <button id="openAppointmentForm" class="btn py-3 px-4" style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px; font-weight: bold;">Make Appointment</button>
                         </div>
                         <div class="col-sm-6 d-flex align-items-center">
                             <a href="#" class="btn btn-light btn-lg-square me-3" style="border: 2px solid #3CB371;">
@@ -222,16 +226,79 @@
                 </div>
             </div>
             <!-- Right Image -->
-            <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.2s">
+            <div class="col-xl-6 wow fadeInUp text-end" data-wow-delay="0.2s">
                 <div class="about-img h-100">
-                    <img src="{% static 'img/why we sleep.jpeg' %}" class="img-fluid" style="border-radius: 10px; border: 5px solid #FF8200;" alt="About Books for All">
+                    <img src="{% static 'img/back.jpg' %}" class="img-fluid" style="width: 100%; height: auto; object-fit: cover;" alt="Books for All">
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- About End -->
-<!-- Books for All Goal Start -->
+
+<!-- Appointment Form Modal -->
+
+<!-- Styles -->
+<style>
+.modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); }
+.modal-content { text-align: center; }
+.close { cursor: pointer; float: right; font-size: 20px; }
+#successMessage { display: none; position: fixed; top: 20px; right: 20px; background: green; color: white; padding: 10px; border-radius: 5px; }
+</style>
+<div id="appointmentModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Book an Appointment</h2>
+        <form id="appointmentForm">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <input type="date" id="date" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+<!-- Success Popup -->
+<div id="successMessage">Appointment Booked Successfully!</div>
+
+<!-- JavaScript -->
+<script>
+document.getElementById("openAppointmentForm").onclick = function() {
+    document.getElementById("appointmentModal").style.display = "block";
+};
+
+document.querySelector(".close").onclick = function() {
+    document.getElementById("appointmentModal").style.display = "none";
+};
+
+document.getElementById("appointmentForm").onsubmit = function(event) {
+    event.preventDefault();
+
+    // Collect form data
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let date = document.getElementById("date").value;
+
+    // Send data to database (You need to implement the backend part)
+    console.log("Appointment Data:", { name, email, date });
+
+    // Close the form
+    document.getElementById("appointmentModal").style.display = "none";
+
+    // Show success message
+    let successMessage = document.getElementById("successMessage");
+    successMessage.style.display = "block";
+
+    // Hide success message after 3 seconds
+    setTimeout(() => {
+        successMessage.style.display = "none";
+    }, 3000);
+};
+</script>
+
+
+
+    <!-- Books for All Goal Start -->
 <div class="container-fluid goal pt-5" style="background-color: #F5F5F5;">
     <div class="container pt-5">
         <div class="row g-5 align-items-center">
