@@ -1,0 +1,39 @@
+<form id="appointmentForm">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="email" name="email" placeholder="Email Address" required>
+    <input type="text" name="phone" placeholder="Phone Number" required>
+    <input type="date" name="date" required>
+    <input type="time" name="time" required>
+    <textarea name="message" placeholder="Additional Message"></textarea>
+    <button type="submit">Book Appointment</button>
+</form>
+
+<div id="successMessage" style="display: none; color: green; font-weight: bold;">
+    Appointment booked successfully!
+</div>
+
+<script>
+    document.getElementById("appointmentForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        let formData = new FormData(this);
+
+        fetch("{% url 'book_appointment' %}", {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById("successMessage").style.display = "block";
+                setTimeout(() => {
+                    document.getElementById("successMessage").style.display = "none";
+                }, 3000);
+                this.reset();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    });
+</script>

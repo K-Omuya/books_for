@@ -235,3 +235,20 @@ def edit_impact(request):
     else:
         form = ImpactForm(instance=impact)
     return render(request, 'edit_impact.html', {'form': form})
+
+
+from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from .forms import AppointmentForm
+
+def book_appointment(request):
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({"success": True, "message": "Appointment booked successfully!"})
+        else:
+            return JsonResponse({"success": False, "message": "Invalid data, please check your inputs."})
+    else:
+        form = AppointmentForm()
+    return render(request, 'appointment.html', {'form': form})

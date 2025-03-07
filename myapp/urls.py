@@ -32,4 +32,6 @@ urlpatterns = [
     path('book-exchange/', views.book_exchange, name='book_exchange'),
     path('edit-impact/', views.edit_impact, name='edit_impact'),
     path('impact/', views.impact, name='impact'),
+
+    path('book-appointment/', views.book_appointment, name='book_appointment'),
 ]
