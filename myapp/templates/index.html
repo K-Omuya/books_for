@@ -381,80 +381,83 @@ document.getElementById("appointmentForm").onsubmit = function(event) {
 
     <!-- Carousel -->
     <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner" style="display: flex;">
-            <!-- Card 1 -->
-            <div class="carousel-item active" style="flex: 0 0 33.3333%; padding: 15px;">
-                <div class="card" style="height: 100%; display: flex; flex-direction: column;">
-                    <img src="{% static 'img/donate2.jpeg' %}" class="card-img-top" alt="Donate Books" style="object-fit: cover; height: 200px;">
-                    <div class="card-body" style="flex-grow: 1;">
-                        <h5 class="card-title">📖 Donate Books</h5>
-                        <p class="card-text">Support literacy by donating books to schools and libraries.</p>
-                        <p><strong>By:</strong> John Doe | <strong>Date:</strong> 10th Mar 2025</p>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">Read More</button>
+        <div class="carousel-inner">
+
+            <!-- First Slide (Contains 3 Cards) -->
+            <div class="carousel-item active">
+                <div class="d-flex justify-content-center">
+                    <div class="card mx-2" style="width: 30%;">
+                        <img src="{% static 'img/donate2.jpeg' %}" class="card-img-top" alt="Donate Books" style="object-fit: cover; height: 200px;">
+                        <div class="card-body">
+                            <h5 class="card-title">📖 Donate Books</h5>
+                            <p class="card-text">Support literacy by donating books to schools and libraries.</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">Read More</button>
+                        </div>
+                    </div>
+                    <div class="card mx-2" style="width: 30%;">
+                        <img src="{% static 'img/donate1.jpeg' %}" class="card-img-top" alt="Exchange Books" style="object-fit: cover; height: 200px;">
+                        <div class="card-body">
+                            <h5 class="card-title">🔄 Exchange Books</h5>
+                            <p class="card-text">Swap books with fellow readers and expand your library.</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal2">Read More</button>
+                        </div>
+                    </div>
+                    <div class="card mx-2" style="width: 30%;">
+                        <img src="{% static 'img/book3.jpeg' %}" class="card-img-top" alt="Educational Books" style="object-fit: cover; height: 200px;">
+                        <div class="card-body">
+                            <h5 class="card-title">📘 Educational Books</h5>
+                            <p class="card-text">Access the best educational books for students.</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal3">Read More</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Card 2 -->
-            <div class="carousel-item" style="flex: 0 0 33.3333%; padding: 15px;">
-                <div class="card" style="height: 100%; display: flex; flex-direction: column;">
-                    <img src="{% static 'img/donate1.jpeg' %}" class="card-img-top" alt="Exchange Books" style="object-fit: cover; height: 200px;">
-                    <div class="card-body" style="flex-grow: 1;">
-                        <h5 class="card-title">🔄 Exchange Books</h5>
-                        <p class="card-text">Swap books with fellow readers and expand your library.</p>
-                        <p><strong>By:</strong> Jane Smith | <strong>Date:</strong> 8th Mar 2025</p>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal2">Read More</button>
+
+            <!-- Second Slide (Contains 3 Cards) -->
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center">
+                    <div class="card mx-2" style="width: 30%;">
+                        <img src="{% static 'img/book4.jpeg' %}" class="card-img-top" alt="Rare Books" style="object-fit: cover; height: 200px;">
+                        <div class="card-body">
+                            <h5 class="card-title">📕 Rare Books</h5>
+                            <p class="card-text">Discover and exchange rare and collectible books.</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal4">Read More</button>
+                        </div>
+                    </div>
+                    <div class="card mx-2" style="width: 30%;">
+                        <img src="{% static 'img/book5.jpeg' %}" class="card-img-top" alt="Children’s Books" style="object-fit: cover; height: 200px;">
+                        <div class="card-body">
+                            <h5 class="card-title">📗 Children’s Books</h5>
+                            <p class="card-text">Help young readers grow with exciting children’s books.</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal5">Read More</button>
+                        </div>
+                    </div>
+                    <div class="card mx-2" style="width: 30%;">
+                        <img src="{% static 'img/book6.jpeg' %}" class="card-img-top" alt="Fiction Books" style="object-fit: cover; height: 200px;">
+                        <div class="card-body">
+                            <h5 class="card-title">📙 Fiction Books</h5>
+                            <p class="card-text">Enjoy thrilling fiction books from various genres.</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal6">Read More</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Add 4 More Cards -->
-            <div class="carousel-item" style="flex: 0 0 33.3333%; padding: 15px;">
-                <div class="card" style="height: 100%; display: flex; flex-direction: column;">
-                    <img src="{% static 'img/book3.jpeg' %}" class="card-img-top" alt="Educational Books" style="object-fit: cover; height: 200px;">
-                    <div class="card-body" style="flex-grow: 1;">
-                        <h5 class="card-title">📘 Educational Books</h5>
-                        <p class="card-text">Access the best educational books for students.</p>
-                        <p><strong>By:</strong> Alex Turner | <strong>Date:</strong> 5th Mar 2025</p>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal3">Read More</button>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item" style="flex: 0 0 33.3333%; padding: 15px;">
-                <div class="card" style="height: 100%; display: flex; flex-direction: column;">
-                    <img src="{% static 'img/book4.jpeg' %}" class="card-img-top" alt="Rare Books" style="object-fit: cover; height: 200px;">
-                    <div class="card-body" style="flex-grow: 1;">
-                        <h5 class="card-title">📕 Rare Books</h5>
-                        <p class="card-text">Discover and exchange rare and collectible books.</p>
-                        <p><strong>By:</strong> Emma Brown | <strong>Date:</strong> 3rd Mar 2025</p>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal4">Read More</button>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item" style="flex: 0 0 33.3333%; padding: 15px;">
-                <div class="card" style="height: 100%; display: flex; flex-direction: column;">
-                    <img src="{% static 'img/book5.jpeg' %}" class="card-img-top" alt="Children’s Books" style="object-fit: cover; height: 200px;">
-                    <div class="card-body" style="flex-grow: 1;">
-                        <h5 class="card-title">📗 Children’s Books</h5>
-                        <p class="card-text">Help young readers grow with exciting children’s books.</p>
-                        <p><strong>By:</strong> Liam Davis | <strong>Date:</strong> 1st Mar 2025</p>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal5">Read More</button>
-                    </div>
-                </div>
-            </div>
+
         </div>
-{##}
-{#        <!-- Carousel Controls -->#}
-{#        <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev" style="background: rgba(0, 0, 0, 0.5);">#}
-{#            <span class="carousel-control-prev-icon" aria-hidden="true"></span>#}
-{#        </button>#}
-{#        <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next" style="background: rgba(0, 0, 0, 0.5);">#}
-{#            <span class="carousel-control-next-icon" aria-hidden="true"></span>#}
-{#        </button>#}
+
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev" style="background: rgba(0, 0, 0, 0.5);">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next" style="background: rgba(0, 0, 0, 0.5);">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
     </div>
 </div>
 
-<!-- Modals -->
+<!-- Modal Structure Example -->
 <div class="modal fade" id="modal1" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">📖 Donate Books</h5>
@@ -468,7 +471,7 @@ document.getElementById("appointmentForm").onsubmit = function(event) {
 </div>
 
 <div class="modal fade" id="modal2" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">🔄 Exchange Books</h5>
