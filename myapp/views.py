@@ -1,8 +1,16 @@
-from django.shortcuts import render
+
+from requests.auth import HTTPBasicAuth
+import requests
+from django.http import HttpResponse
+
+
+from myapp.credentials import MpesaAccessToken, LipanaMpesaPpassword
+
+def upload_fee(request):
+    return render(request, 'upload_fee.html')
 
 def home(request):
     return render(request, 'index.html')
-
 def about(request):
     return render(request, 'about.html')
 
@@ -24,10 +32,10 @@ def testimonial(request):
 def contact(request):
     return render(request, 'contact.html')
 from django.shortcuts import render
-from .models import BlogPost
+from .models import Blog
 
-def blog_list(request):
-    blogs = BlogPost.objects.all().order_by('-created_at')
+def blog(request):
+    blogs = Blog.objects.all().order_by('-created_at')
     return render(request, 'index.html', {'blogs': blogs})
 
 
@@ -41,15 +49,6 @@ def donate_book(request):
         form = BookForm()
     return render(request, 'donate_book.html', {'form': form})
 
-def upload_book(request):
-    if request.method == 'POST':
-        form = PledgeForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = PledgeForm()
-    return render(request, 'upload_book.html', {'form': form})
 
 
 from .models import BookClub
@@ -75,14 +74,6 @@ def create_book_club(request):
     else:
         form = BookClubForm()
     return render(request, 'create_book_club.html', {'form': form})
-
-
-
-
-
-def book_catalogue(request):
-    books = Book.objects.all()
-    return render(request, 'book_exchange_catalogue.html', {'books': books})
 
 
 
@@ -193,26 +184,6 @@ def delete_testimonial(request, pk):
 
 
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Book
-from .forms import BookForm
-
-def upload_book(request):
-    if request.method == 'POST':
-        form = BookForm(request.POST, request.FILES)
-        if form.is_valid():
-            # Payment verification logic can be added here before saving the book
-            form.save()
-            return redirect('confirm_20')  # Redirect to book exchange page
-    else:
-        form = BookForm()
-    return render(request, 'upload_book.html', {'form': form})
-
-def book_exchange(request):
-    books = Book.objects.all().order_by('-created_at')
-    query = request.GET.get('q')
-    if query:
-        books = books.filter(title__icontains=query)  # Allow search by title
-    return render(request, 'book_exchange.html', {'books': books})
 
 
 from django.shortcuts import render
@@ -273,8 +244,235 @@ def subscription_page(request):
     form = SubscriptionForm()
     return render(request, 'subscription.html', {'form': form})
 
-def confirm_20(request):
-    return render(request, 'confirm_20.html', )
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from .mpesa import initiate_payment
+from .models import Payment
 
-def confirm_200(request):
-    return render(request, 'confirm_200.html',)
+@csrf_exempt
+def start_payment(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        phone = data.get("phone_number")
+        response = initiate_payment(phone)
+
+        # Save payment request
+        Payment.objects.create(phone_number=phone, transaction_id=response.get("CheckoutRequestID"), status="Pending")
+
+        return JsonResponse({"success": True, "message": "Payment initiated. Approve it on your phone."})
+
+
+def check_payment_status(request):
+    phone = request.GET.get("phone")
+    payment = Payment.objects.filter(phone_number=phone, status="Completed").first()
+
+    if payment:
+        return JsonResponse({"paid": True})
+    return JsonResponse({"paid": False})
+
+from django.shortcuts import render, redirect
+from .forms import BookForm
+
+def upload_book(request):
+    if request.method == "POST":
+        form = BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect("book_exchange")
+    else:
+        form = BookForm()
+    return render(request, "upload_book.html", {"form": form})
+
+
+
+from django.shortcuts import render
+from .models import Book
+
+def book_exchange(request):
+    """
+    Handles the book exchange view with support for searching and sorting books.
+    """
+    # Retrieve query parameters
+    search_query = request.GET.get('q', '')  # The search query for book titles
+    sort_by = request.GET.get('sort_by', 'title')  # The sorting criteria, default to 'title'
+
+    # Filter books based on the search query
+    if search_query:
+        books = Book.objects.filter(title__icontains=search_query)
+    else:
+        books = Book.objects.all()
+
+    # Sort books based on the selected criteria
+    if sort_by in ['title', 'author', 'genre']:
+        books = books.order_by(sort_by)
+
+    # Pass context to the template
+    context = {
+        'books': books,
+        'search_query': search_query,
+        'sort_by': sort_by,
+    }
+    return render(request, 'book_exchange.html', context)
+
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+
+
+
+
+def token(request):
+    consumer_key = '77bgGpmlOxlgJu6oEXhEgUgnu0j2WYxA'
+    consumer_secret = 'viM8ejHgtEmtPTHd'
+    api_URL = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
+
+    r = requests.get(api_URL, auth=HTTPBasicAuth(
+        consumer_key, consumer_secret))
+    mpesa_access_token = json.loads(r.text)
+    validated_mpesa_access_token = mpesa_access_token["access_token"]
+
+    return render(request, 'token.html', {"token":validated_mpesa_access_token})
+
+def pay(request):
+   return render(request, 'pay.html')
+
+
+from django.http import HttpResponse, JsonResponse
+import requests
+from requests.auth import HTTPBasicAuth
+import json
+from datetime import datetime
+import base64
+
+
+def stk(request):
+    if request.method == "POST":
+        phone = request.POST.get('phone')
+
+        # Validate Phone Number
+        if not phone or len(phone) != 12 or not phone.startswith('254'):
+            return JsonResponse({"error": "Invalid phone number. Ensure it starts with 254 and is 12 digits long."},
+                                status=400)
+
+        # Set Amount to Ksh. 200
+        amount = 200
+
+        # Get Access Token
+        consumer_key = 'rmNIDA9T8cvKiNARUzpWq6IGO7nAaPGVXQMXkIKRlUZ1g3lt'
+        consumer_secret = 'R1SBVyJaTEt0GljTaA6aVR77fjZNfzARnKrU5k2Tu8q6Wxdj1FoS7AEGaajq3Zh7'
+        access_token_url = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
+        r = requests.get(access_token_url, auth=HTTPBasicAuth(consumer_key, consumer_secret))
+        access_token = json.loads(r.text).get('access_token')
+
+        # STK Push Configuration
+        lipa_time = datetime.now().strftime('%Y%m%d%H%M%S')
+        business_shortcode = "174379"
+        passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
+
+        # Encode the password
+        data_to_encode = business_shortcode + passkey + lipa_time
+        online_password = base64.b64encode(data_to_encode.encode()).decode('utf-8')
+
+        stk_url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
+        headers = {"Authorization": f"Bearer {access_token}"}
+        payload = {
+            "BusinessShortCode": business_shortcode,
+            "Password": online_password,
+            "Timestamp": lipa_time,
+            "TransactionType": "CustomerPayBillOnline",
+            "Amount": amount,  # Set amount to Ksh. 200
+            "PartyA": phone,
+            "PartyB": business_shortcode,
+            "PhoneNumber": phone,
+            "CallBackURL": "https://yourdomain.com/callback/",
+            "AccountReference": "Book Payment",
+            "TransactionDesc": "Payment for Book Purchase"
+        }
+
+        # Make the STK Push Request
+        response = requests.post(stk_url, json=payload, headers=headers)
+        response_data = response.json()
+
+        if response_data.get('ResponseCode') == '0':
+            return HttpResponse("STK Push successfully initiated. Check your phone to complete the payment.")
+        else:
+            error_message = response_data.get('errorMessage', "Something went wrong.")
+            return JsonResponse({"error": error_message}, status=400)
+
+
+from django.shortcuts import render
+from django.http import HttpResponseBadRequest
+
+def pay(request):
+    """Renders the payment form for the selected book."""
+    # Retrieve `book_id` and `action` from query parameters
+    book_id = request.GET.get('book_id')
+    action = request.GET.get('action')
+
+    # Validate the presence of required parameters
+    if not book_id or not action:
+        return HttpResponseBadRequest("Missing required parameters: book_id or action")
+
+    # You can also fetch the book from the database if necessary:
+    # book = Book.objects.get(id=book_id)
+
+    return render(request, 'pay.html', {
+        'book_id': book_id,
+        'action': action,
+        # Pass book details if retrieved from the database:
+        # 'book': book
+    })
+
+
+from django.shortcuts import render, redirect
+from .forms import BookForm
+
+def redirect_to_payment(request):
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Temporarily store the book details in the session
+            request.session['book_data'] = form.cleaned_data
+            return redirect('upload_fee')  # Redirect to payment page
+    else:
+        form = BookForm()
+    return render(request, 'upload_book.html', {'form': form})
+
+
+from django.shortcuts import render, redirect
+from .models import Book
+
+def process_upload_payment(request):
+    if request.method == 'POST':
+        safaricom_number = request.POST.get('safaricom_number')
+        book_data = request.session.get('book_data', {})
+
+        # Validate Safaricom number
+        if not safaricom_number or len(safaricom_number) != 12 or not safaricom_number.startswith('254'):
+            return render(request, 'upload_fee.html', {'error': 'Please provide a valid Safaricom number.'})
+
+        # Process payment (M-Pesa STK Push logic goes here)
+        # Simulate success for now:
+        payment_successful = True
+
+        if payment_successful:
+            # Save the book to the database
+            Book.objects.create(
+                title=book_data.get('title'),
+                author=book_data.get('author'),
+                genre=book_data.get('genre'),
+                donor_name=book_data.get('donor_name'),
+                contact_details=book_data.get('contact_details'),
+                location=book_data.get('location'),
+                delivery_option=book_data.get('delivery_option'),
+                cover_image=book_data.get('cover_image'),
+                document=book_data.get('document'),
+            )
+            # Clear session data after saving
+            request.session.pop('book_data', None)
+            return redirect('book_exchange')  # Redirect to the book exchange page
+        else:
+            return render(request, 'upload_fee.html', {'error': 'Payment failed. Please try again.'})

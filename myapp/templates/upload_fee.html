@@ -1,0 +1,24 @@
+<div style="width: 100%; max-width: 500px; margin: 50px auto; padding: 30px; background-color: #FFFFFF;
+            border: 1px solid #DDD; border-radius: 15px; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);">
+    <h2 style="text-align: center; font-size: 24px; color: #4CAF50; font-weight: bold; margin-bottom: 20px;">
+        Complete Payment
+    </h2>
+    <p style="text-align: center; font-size: 16px; color: #666; margin-bottom: 25px;">
+        Enter your Safaricom number to pay <strong>Ksh. 20</strong> for uploading your book.
+    </p>
+
+    <form method="POST" action="{% url 'process_upload_payment' %}">
+        {% csrf_token %}
+
+        <!-- Safaricom Number -->
+        <label for="safaricom_number" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Safaricom Number:</label>
+        <input type="number" name="safaricom_number" placeholder="2547XXXXXXXX" required
+               style="width: 100%; padding: 14px; margin-bottom: 20px; border: 1px solid #CCC; border-radius: 6px;">
+
+        <!-- Submit Button -->
+        <button type="submit" style="width: 100%; background-color: #FF8200; color: #FFF; padding: 14px; font-size: 18px;
+                                     font-weight: bold; border: none; border-radius: 6px; cursor: pointer; transition: background-color 0.3s;">
+            Pay Ksh. 20
+        </button>
+    </form>
+</div>

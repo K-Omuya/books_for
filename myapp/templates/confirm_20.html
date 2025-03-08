@@ -2,87 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Payment - Ksh. 20</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .payment-container {
-            text-align: center;
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .payment-container h1 {
-            color: #004080;
-            margin-bottom: 20px;
-        }
-
-        .payment-container p {
-            color: #333333;
-            margin-bottom: 30px;
-        }
-
-        .btn-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .btn-confirm {
-            background-color: #3CB371;
-            color: white;
-        }
-
-        .btn-cancel {
-            background-color: #FF0000;
-            color: white;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
-    </style>
+    <title>Confirm Payment & Upload Book</title>
 </head>
-<body>
-    <div class="payment-container">
-        <h1>Confirm Payment</h1>
-        <p>You are about to pay <strong>Ksh. 20</strong> to <stong>Books for All.</stong>Please confirm to proceed.</p>
-        <div class="btn-container">
-            <button class="btn btn-confirm" onclick="confirmPayment()">Confirm</button>
-            <button class="btn btn-cancel" onclick="cancelPayment()">Cancel</button>
-        </div>
-    </div>
+<body style="font-family: Arial, sans-serif; background-color: #F5F5F5; text-align: center; padding: 20px;">
+
+    <h2>Confirm Payment</h2>
+    <p>You are about to pay <strong>Ksh. 20</strong> to <strong>Books for All</strong>. Confirm to proceed.</p>
+
+    <input type="text" id="phoneNumber" placeholder="Enter Safaricom number" style="padding: 8px;">
+    <button onclick="processPayment()" style="padding: 8px 20px; background-color: #004080; color: white;">Confirm & Pay</button>
+
+    <hr>
+
+    <h2>Upload Book</h2>
+    <input type="file" id="bookFile" accept=".pdf,.epub,.txt">
+    <button onclick="uploadBook()" style="padding: 8px 20px; background-color: #FF8200; color: white;">Upload</button>
 
     <script>
-        function confirmPayment() {
-            alert("Payment of Ksh. 20 confirmed!");
-            // Redirect or submit the payment logic here
+        function processPayment() {
+            let phoneNumber = document.getElementById("phoneNumber").value;
+            fetch('/api/mpesa-payment/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ phone_number: phoneNumber })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Payment request sent! Wait for M-Pesa prompt.");
+                } else {
+                    alert("Payment failed. Try again.");
+                }
+            })
+            .catch(error => console.error('Error:', error));
         }
 
-        function cancelPayment() {
-            alert("Payment cancelled.");
-            // Redirect or handle cancellation logic here
+        function uploadBook() {
+            let bookFile = document.getElementById("bookFile").files[0];
+
+            if (!bookFile) {
+                alert("Please select a book file.");
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("book", bookFile);
+
+            fetch('/api/upload-book/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Book uploaded successfully!");
+                } else {
+                    alert("Book upload failed.");
+                }
+            })
+            .catch(error => console.error('Error:', error));
         }
     </script>
+
 </body>
 </html>

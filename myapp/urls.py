@@ -21,7 +21,6 @@ urlpatterns = [
     path('pledge-book/', views.pledge_book, name='pledge_book'),
     path('create-book-club/', views.create_book_club, name='create_book_club'),
     path('view-book-clubs/', views.view_book_clubs, name='view_book_clubs'),
-    path('book-catalogue/', views.book_catalogue, name='book_catalogue'),
     path('contact/', views.contact, name='contact'),
     path('messages/', views.view_messages, name='view_messages'),
     path('messages/read/<int:pk>/', views.read_message, name='read_message'),
@@ -35,9 +34,28 @@ urlpatterns = [
 
     path('subscribe/', views.subscribe, name='subscribe'),
     path('subscribe/', views.subscribe, name='subscribe'),
-    path('confirm_200/', views.confirm_200, name='confirm_200'),
-    path('confirm_20/', views.confirm_20, name='confirm_20'),
+
+    path('upload-book/', views.upload_book, name="upload_book"),
+
 
 
     path('book-appointment/', views.book_appointment, name='book_appointment'),
+
+
+
+    path("api/mpesa-payment/", views.start_payment, name="mpesa_payment"),
+    path("api/check-payment-status/", views.check_payment_status, name="check_payment_status"),
+    path("upload-book/", views.upload_book, name="upload_book"),
+
+    path('book-exchange/', views.book_exchange, name='book_exchange'),
+    path('initiate_payment/', views.initiate_payment, name='initiate_payment'),
+
+    path('initiate-payment/', views.initiate_payment, name='initiate_payment'),
+    path('pay/', views.pay, name='pay'),  # The pay view
+
+    path('stk/', views.stk, name='stk'),
+    path('upload-book/', views.redirect_to_payment, name='redirect_to_payment'),
+    path('upload-fee/', views.process_upload_payment, name='process_upload_payment'),
+    path('upload-fee-page/', views.upload_fee, name='upload_fee'),  # Payment input page
 ]
+

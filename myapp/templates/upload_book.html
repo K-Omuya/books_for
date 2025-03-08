@@ -142,11 +142,11 @@
     </div>
     <!-- Navbar & Hero End -->
 
-            <!-- Header Start -->
+        <!-- Header Start -->
         <div class="container-fluid bg-breadcrumb">
     <div class="container text-center py-5" style="max-width: 900px;">
         <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">
-            {{ page_title|default:" Upload Book" }}
+            {{ page_title|default:"Upload Book" }}
         </h4>
         <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
             <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
@@ -155,98 +155,105 @@
         </ol>
     </div>
 </div>
+<div style="width: 100%; max-width: 800px; margin: 50px auto; padding: 30px; background-color: #FFFFFF;
+            border: 1px solid #DDD; border-radius: 15px; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);">
+    <h2 style="text-align: center; font-size: 28px; color: #4CAF50; font-weight: bold; margin-bottom: 20px;">
+        Upload Your Book
+    </h2>
+    <p style="text-align: center; font-size: 16px; color: #666; margin-bottom: 25px;">
+        Fill out your book details below and click **Upload** to proceed to payment.
+    </p>
 
-<div id="upload-book-section" style="background-color: #f9f9f9; padding: 50px 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); max-width: 600px; margin: auto;">
-    <h2 class="text-center mb-4" style="color: #004080; font-weight: bold;">Upload Book for Exchange</h2>
-    <form method="post" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data" action="{% url 'redirect_to_payment' %}">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary w-100" style="background-color: #FF8200; font-size: 1.1rem; font-weight: bold; border: none; border-radius: 5px; padding: 10px;">Pay & Upload</button>
+
+        <!-- Submit Button -->
+        <button type="submit" style="width: 100%; background-color: #FF8200; color: #FFF; padding: 14px; font-size: 18px;
+                                     font-weight: bold; border: none; border-radius: 6px; cursor: pointer; transition: background-color 0.3s;">
+            Upload Book
+        </button>
     </form>
 </div>
 
 <!-- Footer Start -->
 <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" style="background-color: #004080; color: #FFFFFF;">
     <div class="container py-5">
-        <div class="row g-5 mb-5 align-items-center">
-            <div class="col-lg-7">
-                <div class="position-relative d-flex" style="transform: skew(18deg);">
-                    <input class="form-control border-0 w-100 py-3 pe-5" type="text" placeholder="Email address to Subscribe" style="background-color: #F5F5F5; color: #333333;">
-                    <button type="button" class="btn" style="background-color: #FF8200; color: #FFFFFF;"> <span>Subscribe</span></button>
-                </div>
-            </div>
-            <div class="col-lg-5">
-                <div class="d-flex align-items-center justify-content-center justify-content-lg-end">
-                    <a class="btn btn-md-square me-3" href="https://facebook.com/bookforall20" style="background-color: #3CB371; color: #FFFFFF;"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-md-square me-3" href="ttps://x.com/Bookforall20" style="background-color: #3CB371; color: #FFFFFF;"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-md-square me-3" href=" https://instagram.com/bookforall20" style="background-color: #3CB371; color: #FFFFFF;"><i class="fab fa-instagram"></i></a>
-                    <a class="btn btn-md-square me-0" href=" https://linkedln.com/bookforall20 " style="background-color: #3CB371; color: #FFFFFF;"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-        </div>
         <div class="row g-5">
+            <!-- About Section -->
             <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item">
-                    <h4 class="mb-4" style="color: #FF8200;"><i class="fas fa-book text-white me-2"></i> Books for All</h4>
-                    <p class="mb-0">SHARE A BOOK, SHARE A DREAM..</p>
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #FF8200; font-size: 18px; font-weight: bold; margin-bottom: 15px;">
+                        <i class="fas fa-book text-white me-2"></i> Books for All
+                    </h4>
+                    <p style="margin: 0; font-size: 14px; line-height: 1.7;">SHARE A BOOK, SHARE A DREAM..</p>
                 </div>
             </div>
+
+            <!-- Quick Links -->
             <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item">
-                    <h4 class="mb-4 text-white">Quick Links</h4>
-                    <a href="{% url 'blogs' %}" style="color: #FF8200;">Blogs</a>
-                     <a href="{% url 'about' %}" style="color: #FF8200;">About Us</a>
-                     <a href="{% url 'book_exchange' %}" style="color: #FF8200;">Books catalogue</a>
-                     <a href="{% url 'features' %}" style="color: #FF8200;">Our Features</a>
-                     <a href="{% url 'view_book_clubs' %}" style="color: #FF8200;">Book Clubs</a>
-                     <a href="{% url 'testimonial' %}" style="color: #FF8200;"></a>
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #FFFFFF; font-size: 18px; font-weight: bold; margin-bottom: 15px;">Quick Links</h4>
+                    <ul style="list-style-type: none; padding: 0; font-size: 14px; line-height: 1.7;">
+                        <li><a href="{% url 'blogs' %}" style="color: #FF8200; text-decoration: none;">Blogs</a></li>
+                        <li><a href="{% url 'about' %}" style="color: #FF8200; text-decoration: none;">About Us</a></li>
+                        <li><a href="{% url 'book_exchange' %}" style="color: #FF8200; text-decoration: none;">Books Catalogue</a></li>
+                        <li><a href="{% url 'features' %}" style="color: #FF8200; text-decoration: none;">Our Features</a></li>
+                        <li><a href="{% url 'view_book_clubs' %}" style="color: #FF8200; text-decoration: none;">Book Clubs</a></li>
+                        <li><a href="{% url 'testimonial' %}" style="color: #FF8200; text-decoration: none;">Testimonials</a></li>
+                    </ul>
                 </div>
             </div>
+
+            <!-- Contact Info -->
             <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item">
-                    <h4 class="mb-4 text-white">Contact Info</h4>
-                    <div class="row g-2">
-                        <div class="col-12">
-                            <div class="d-flex">
-                                <i class="fas fa-map-marker-alt text-white me-2"></i>
-                                <div>
-                                    <h5 class="text-white mb-2">Address</h5>
-                                    <p class="mb-0">753-10101, Westlands, Nairobi</p>
-                                </div>
-                            </div>
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #FFFFFF; font-size: 18px; font-weight: bold; margin-bottom: 15px;">Contact Info</h4>
+                    <div style="font-size: 14px; line-height: 1.7;">
+                        <div style="margin-bottom: 10px;">
+                            <i class="fas fa-map-marker-alt text-white me-2"></i>
+                            <strong style="color: #FFFFFF;">Address:</strong>
+                            <p style="margin: 0; display: inline;">753-10101, Westlands, Nairobi</p>
                         </div>
-                        <div class="col-12">
-                            <div class="d-flex">
-                                <i class="fas fa-envelope text-white me-2"></i>
-                                <div>
-                                    <h5 class="text-white mb-2">Mail Us</h5>
-                                    <p class="mb-0">Bookforall@prc.cx</p>
-                                </div>
-                            </div>
+                        <div style="margin-bottom: 10px;">
+                            <i class="fas fa-envelope text-white me-2"></i>
+                            <strong style="color: #FFFFFF;">Mail Us:</strong>
+                            <p style="margin: 0; display: inline;">Bookforall@prc.cx</p>
                         </div>
-                        <div class="col-12">
-                            <div class="d-flex">
-                                <i class="fa fa-phone-alt text-white me-2"></i>
-                                <div>
-                                    <h5 class="text-white mb-2">Telephone</h5>
-                                    <p class="mb-0">+254 743 688354</p>
-                                </div>
-                            </div>
+                        <div>
+                            <i class="fa fa-phone-alt text-white me-2"></i>
+                            <strong style="color: #FFFFFF;">Telephone:</strong>
+                            <p style="margin: 0; display: inline;">+254 703 128 764</p>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Social Media Links -->
             <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item">
-                    <h4 class="mb-4 text-white">Recent Exchanges</h4>
-                    <div class="row g-2">
-                        {% for i in 1|rjust:"12" %}
-                            <div class="col-3">
-                                <div class="footer-item-img">
-                                    <a href="#"><img src="{% static 'img/why we sleep.jpeg'|add:i|add:'.jpg' %}" class="img-fluid" alt=""></a>
-                                </div>
-                            </div>
-                        {% endfor %}
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #FFFFFF; font-size: 18px; font-weight: bold; margin-bottom: 15px;">Social Media Links</h4>
+                    <div style="display: flex; gap: 10px; justify-content: start;">
+                        <!-- Facebook -->
+                        <a href="https://facebook.com/bookforall20"
+                           style="width: 50px; height: 50px; background-color: #3B5998; color: #FFFFFF; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: all 0.3s;">
+                            <i class="fab fa-facebook-f" style="font-size: 18px;"></i>
+                        </a>
+                        <!-- Twitter -->
+                        <a href="https://x.com/Bookforall20"
+                           style="width: 50px; height: 50px; background-color: #1DA1F2; color: #FFFFFF; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: all 0.3s;">
+                            <i class="fab fa-twitter" style="font-size: 18px;"></i>
+                        </a>
+                        <!-- Instagram -->
+                        <a href="https://instagram.com/bookforall20"
+                           style="width: 50px; height: 50px; background: radial-gradient(circle at 30% 30%, #F09433, #E6683C, #DC2743, #CC2366, #BC1888); color: #FFFFFF; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: all 0.3s;">
+                            <i class="fab fa-instagram" style="font-size: 18px;"></i>
+                        </a>
+                        <!-- LinkedIn -->
+                        <a href="https://linkedin.com/bookforall20"
+                           style="width: 50px; height: 50px; background-color: #0A66C2; color: #FFFFFF; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: all 0.3s;">
+                            <i class="fab fa-linkedin-in" style="font-size: 18px;"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -256,9 +263,11 @@
 <!-- Footer End -->
 
 
-<!-- Back to Top -->
-<div class="back-to-top">
-    <a href="#" class="btn" style="background-color: #FF8200; color: #FFFFFF;"><i class="fa fa-arrow-up"></i></a>
+<!-- Back to Top Button -->
+<div class="back-to-top" style="position: fixed; bottom: 20px; right: 20px; z-index: 99;">
+    <a href="#" class="btn" style="width: 45px; height: 45px; font-size: 20px; background-color: #FF8200; color: #FFFFFF; display: flex; justify-content: center; align-items: center; border-radius: 50%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); transition: all 0.3s;">
+        <i class="fa fa-arrow-up"></i>
+    </a>
 </div>
 
 <!-- JavaScript Libraries -->

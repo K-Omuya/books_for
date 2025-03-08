@@ -156,45 +156,85 @@
     </div>
 </div>
    <!-- Header End -->
-
-
-<!-- Section for Book Exchange -->
 <div style="background-image: url('{% static "img/library_quill.jpg" %}');
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            padding: 30px 0;">
+            background-size: cover; background-position: center; padding: 50px 0;">
+    <div class="container py-5" style="background-color: rgba(255, 255, 255, 0.95); border-radius: 15px;
+                                       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);">
+        <h2 class="text-center mb-4" style="color: #004080; font-size: 2.5rem; font-weight: bold;">
+            📚 Browse Books for Exchange
+        </h2>
 
-    <div class="container py-5" style="background-color: rgba(255, 255, 255, 0.8);
-                                       border-radius: 10px;
-                                       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-                                       padding: 20px;">
-        <h2 class="text-center mb-4" style="color: #004080; font-weight: bold; text-shadow: none;">Browse Books for Exchange</h2>
+        <!-- Search and Sort Section -->
+        <form method="get" class="mb-5">
+            <div class="row align-items-center">
+                <!-- Search Bar -->
+                <div class="col-lg-8 col-md-6 col-sm-12 mb-2">
+                    <input type="text" name="q" value="{{ search_query }}" placeholder="Search books by title..."
+                           class="form-control" style="padding: 15px; font-size: 1rem; border-radius: 8px;">
+                </div>
 
-        <!-- Search Form -->
-        <form method="get" class="mb-4">
-            <input type="text" name="q" placeholder="Search by title"
-                   class="form-control"
-                   style="border-radius: 5px; margin-bottom: 20px; padding: 10px;">
+                <!-- Sort Dropdown -->
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <select name="sort_by" class="form-control" style="padding: 15px; font-size: 1rem; border-radius: 8px;">
+                        <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Sort by Title</option>
+                        <option value="author" {% if sort_by == 'author' %}selected{% endif %}>Sort by Author</option>
+                        <option value="genre" {% if sort_by == 'genre' %}selected{% endif %}>Sort by Genre</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Submit Button -->
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary" style="background-color: #FF8200; font-weight: bold;
+                        padding: 12px 30px; font-size: 1.1rem; border-radius: 8px; border: none;">
+                    Apply Filters
+                </button>
+            </div>
         </form>
 
         <!-- Books Display -->
         <div class="row">
             {% for book in books %}
-                <div class="col-md-4 mb-4">
-                    <div class="card" style="box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-                                             border-radius: 5px; overflow: hidden;">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card" style="border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); overflow: hidden;">
                         {% if book.cover_image %}
                             <img src="{{ book.cover_image.url }}" class="card-img-top" alt="Book Cover"
-                                 style="height: 200px; object-fit: cover;">
+                                 style="height: 220px; object-fit: cover;">
+                        {% else %}
+                            <div class="d-flex justify-content-center align-items-center"
+                                 style="height: 220px; background-color: #f5f5f5; color: #AAA;">
+                                No Cover Available
+                            </div>
                         {% endif %}
-                        <div class="card-body" style="text-align: left;">
-                            <h5 class="card-title" style="color: #004080;">{{ book.title }}</h5>
-                            <p class="card-text" style="color: #333333; font-size: 0.9rem;"><strong>Author:</strong> {{ book.author }}</p>
-                            <p class="card-text" style="color: #333333; font-size: 0.9rem;"><strong>Genre:</strong> {{ book.genre }}</p>
-                            <p class="card-text" style="color: #333333; font-size: 0.9rem;"><strong>Donor:</strong> {{ book.donor_name }}</p>
-                            <p class="card-text" style="color: #333333; font-size: 0.9rem;"><strong>Location:</strong> {{ book.location }}</p>
-                            <p class="card-text" style="color: #333333; font-size: 0.9rem;"><strong>Delivery:</strong> {{ book.delivery_option }}</p>
+                        <div class="card-body" style="padding: 20px;">
+                            <h5 class="card-title" style="color: #004080; font-weight: bold;">{{ book.title }}</h5>
+                            <ul style="list-style: none; padding: 0; font-size: 1rem; color: #666;">
+                                <li><strong>Author:</strong> {{ book.author }}</li>
+                                <li><strong>Genre:</strong> {{ book.genre }}</li>
+                                <li><strong>Donor:</strong> {{ book.donor_name }}</li>
+                                <li><strong>Location:</strong> {{ book.location }}</li>
+                                <li><strong>Delivery:</strong> {{ book.delivery_option }}</li>
+                            </ul>
+                            <div class="d-flex justify-content-between mt-4">
+                                <!-- Exchange Button -->
+                                <a href="{% url 'pay' %}?book_id={{ book.id }}&action=exchange" class="btn btn-warning"
+                                   style="font-size: 1rem; font-weight: bold; padding: 10px 20px; width: 48%;
+                                          background-color: #FF8200; border: none; color: white; border-radius: 8px;">
+                                    🔄 Exchange
+                                </a>
+                                <!-- Download Button -->
+                                {% if book.document %}
+                                    <a href="{% url 'pay' %}?book_id={{ book.id }}&action=download" class="btn btn-primary"
+                                       style="font-size: 1rem; font-weight: bold; padding: 10px 20px; width: 48%;
+                                              background-color: #004080; border: none; color: white; border-radius: 8px;">
+                                        ⬇️ Download
+                                    </a>
+                                {% else %}
+                                    <div class="d-flex justify-content-center align-items-center"
+                                         style="background-color: #EEE; color: #AAA; font-size: 0.9rem; padding: 10px 20px; border-radius: 8px; width: 48%;">
+                                        No Document
+                                    </div>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -206,85 +246,81 @@
 <!-- Footer Start -->
 <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" style="background-color: #004080; color: #FFFFFF;">
     <div class="container py-5">
-        <div class="row g-5 mb-5 align-items-center">
-            <div class="col-lg-7">
-                <div class="position-relative d-flex" style="transform: skew(18deg);">
-                    <input class="form-control border-0 w-100 py-3 pe-5" type="text" placeholder="Email address to Subscribe" style="background-color: #F5F5F5; color: #333333;">
-                    <button type="button" class="btn" style="background-color: #FF8200; color: #FFFFFF;"> <span>Subscribe</span></button>
-                </div>
-            </div>
-            <div class="col-lg-5">
-                <div class="d-flex align-items-center justify-content-center justify-content-lg-end">
-                    <a class="btn btn-md-square me-3" href="https://facebook.com/bookforall20" style="background-color: #3CB371; color: #FFFFFF;"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-md-square me-3" href="ttps://x.com/Bookforall20" style="background-color: #3CB371; color: #FFFFFF;"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-md-square me-3" href=" https://instagram.com/bookforall20" style="background-color: #3CB371; color: #FFFFFF;"><i class="fab fa-instagram"></i></a>
-                    <a class="btn btn-md-square me-0" href=" https://linkedln.com/bookforall20 " style="background-color: #3CB371; color: #FFFFFF;"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-        </div>
         <div class="row g-5">
+            <!-- About Section -->
             <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item">
-                    <h4 class="mb-4" style="color: #FF8200;"><i class="fas fa-book text-white me-2"></i> Books for All</h4>
-                    <p class="mb-0">SHARE A BOOK, SHARE A DREAM..</p>
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #FF8200; font-size: 18px; font-weight: bold; margin-bottom: 15px;">
+                        <i class="fas fa-book text-white me-2"></i> Books for All
+                    </h4>
+                    <p style="margin: 0; font-size: 14px; line-height: 1.7;">SHARE A BOOK, SHARE A DREAM..</p>
                 </div>
             </div>
+
+            <!-- Quick Links -->
             <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item">
-                    <h4 class="mb-4 text-white">Quick Links</h4>
-                    <a href="{% url 'blogs' %}" style="color: #FF8200;">Blogs</a>
-                     <a href="{% url 'about' %}" style="color: #FF8200;">About Us</a>
-                     <a href="{% url 'book_exchange' %}" style="color: #FF8200;">Books catalogue</a>
-                     <a href="{% url 'features' %}" style="color: #FF8200;">Our Features</a>
-                     <a href="{% url 'view_book_clubs' %}" style="color: #FF8200;">Book Clubs</a>
-                     <a href="{% url 'testimonial' %}" style="color: #FF8200;"></a>
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #FFFFFF; font-size: 18px; font-weight: bold; margin-bottom: 15px;">Quick Links</h4>
+                    <ul style="list-style-type: none; padding: 0; font-size: 14px; line-height: 1.7;">
+                        <li><a href="{% url 'blogs' %}" style="color: #FF8200; text-decoration: none;">Blogs</a></li>
+                        <li><a href="{% url 'about' %}" style="color: #FF8200; text-decoration: none;">About Us</a></li>
+                        <li><a href="{% url 'book_exchange' %}" style="color: #FF8200; text-decoration: none;">Books Catalogue</a></li>
+                        <li><a href="{% url 'features' %}" style="color: #FF8200; text-decoration: none;">Our Features</a></li>
+                        <li><a href="{% url 'view_book_clubs' %}" style="color: #FF8200; text-decoration: none;">Book Clubs</a></li>
+                        <li><a href="{% url 'testimonial' %}" style="color: #FF8200; text-decoration: none;">Testimonials</a></li>
+                    </ul>
                 </div>
             </div>
+
+            <!-- Contact Info -->
             <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item">
-                    <h4 class="mb-4 text-white">Contact Info</h4>
-                    <div class="row g-2">
-                        <div class="col-12">
-                            <div class="d-flex">
-                                <i class="fas fa-map-marker-alt text-white me-2"></i>
-                                <div>
-                                    <h5 class="text-white mb-2">Address</h5>
-                                    <p class="mb-0">753-10101, Westlands, Nairobi</p>
-                                </div>
-                            </div>
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #FFFFFF; font-size: 18px; font-weight: bold; margin-bottom: 15px;">Contact Info</h4>
+                    <div style="font-size: 14px; line-height: 1.7;">
+                        <div style="margin-bottom: 10px;">
+                            <i class="fas fa-map-marker-alt text-white me-2"></i>
+                            <strong style="color: #FFFFFF;">Address:</strong>
+                            <p style="margin: 0; display: inline;">753-10101, Westlands, Nairobi</p>
                         </div>
-                        <div class="col-12">
-                            <div class="d-flex">
-                                <i class="fas fa-envelope text-white me-2"></i>
-                                <div>
-                                    <h5 class="text-white mb-2">Mail Us</h5>
-                                    <p class="mb-0">Bookforall@prc.cx</p>
-                                </div>
-                            </div>
+                        <div style="margin-bottom: 10px;">
+                            <i class="fas fa-envelope text-white me-2"></i>
+                            <strong style="color: #FFFFFF;">Mail Us:</strong>
+                            <p style="margin: 0; display: inline;">Bookforall@prc.cx</p>
                         </div>
-                        <div class="col-12">
-                            <div class="d-flex">
-                                <i class="fa fa-phone-alt text-white me-2"></i>
-                                <div>
-                                    <h5 class="text-white mb-2">Telephone</h5>
-                                    <p class="mb-0">+254 743 688354</p>
-                                </div>
-                            </div>
+                        <div>
+                            <i class="fa fa-phone-alt text-white me-2"></i>
+                            <strong style="color: #FFFFFF;">Telephone:</strong>
+                            <p style="margin: 0; display: inline;">+254 703 128 764</p>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Social Media Links -->
             <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item">
-                    <h4 class="mb-4 text-white">Recent Exchanges</h4>
-                    <div class="row g-2">
-                        {% for i in 1|rjust:"12" %}
-                            <div class="col-3">
-                                <div class="footer-item-img">
-                                    <a href="#"><img src="{% static 'img/why we sleep.jpeg'|add:i|add:'.jpg' %}" class="img-fluid" alt=""></a>
-                                </div>
-                            </div>
-                        {% endfor %}
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #FFFFFF; font-size: 18px; font-weight: bold; margin-bottom: 15px;">Social Media Links</h4>
+                    <div style="display: flex; gap: 10px; justify-content: start;">
+                        <!-- Facebook -->
+                        <a href="https://facebook.com/bookforall20"
+                           style="width: 50px; height: 50px; background-color: #3B5998; color: #FFFFFF; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: all 0.3s;">
+                            <i class="fab fa-facebook-f" style="font-size: 18px;"></i>
+                        </a>
+                        <!-- Twitter -->
+                        <a href="https://x.com/Bookforall20"
+                           style="width: 50px; height: 50px; background-color: #1DA1F2; color: #FFFFFF; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: all 0.3s;">
+                            <i class="fab fa-twitter" style="font-size: 18px;"></i>
+                        </a>
+                        <!-- Instagram -->
+                        <a href="https://instagram.com/bookforall20"
+                           style="width: 50px; height: 50px; background: radial-gradient(circle at 30% 30%, #F09433, #E6683C, #DC2743, #CC2366, #BC1888); color: #FFFFFF; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: all 0.3s;">
+                            <i class="fab fa-instagram" style="font-size: 18px;"></i>
+                        </a>
+                        <!-- LinkedIn -->
+                        <a href="https://linkedin.com/bookforall20"
+                           style="width: 50px; height: 50px; background-color: #0A66C2; color: #FFFFFF; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: all 0.3s;">
+                            <i class="fab fa-linkedin-in" style="font-size: 18px;"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -294,9 +330,11 @@
 <!-- Footer End -->
 
 
-<!-- Back to Top -->
-<div class="back-to-top">
-    <a href="#" class="btn" style="background-color: #FF8200; color: #FFFFFF;"><i class="fa fa-arrow-up"></i></a>
+<!-- Back to Top Button -->
+<div class="back-to-top" style="position: fixed; bottom: 20px; right: 20px; z-index: 99;">
+    <a href="#" class="btn" style="width: 45px; height: 45px; font-size: 20px; background-color: #FF8200; color: #FFFFFF; display: flex; justify-content: center; align-items: center; border-radius: 50%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); transition: all 0.3s;">
+        <i class="fa fa-arrow-up"></i>
+    </a>
 </div>
 
 <!-- JavaScript Libraries -->
