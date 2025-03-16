@@ -25,8 +25,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-162)*a$o%&#zq_jjd=g7o8ysod9bn%z0m)5d4b8rb-)fgwex0a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+#
+# ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = ['books-for-1.onrender.com']  # Replace with your Render domain
+
+
+
+
 
 # ALLOWED_HOSTS = ['books-for-1.onrender.com']
 
@@ -94,12 +100,19 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Absolute path to the media direc
 #     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 # }
 #
+LOGOUT_REDIRECT_URL = '/login/'
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # The database file is stored in the project root.
     }
 }
+
+
+
+
 MPESA_CONSUMER_KEY = "rmNIDA9T8cvKiNARUzpWq6IGO7nAaPGVXQMXkIKRlUZ1g3lt"
 MPESA_CONSUMER_SECRET = "R1SBVyJaTEt0GljTaA6aVR77fjZNfzARnKrU5k2Tu8q6Wxdj1FoS7AEGaajq3Zh7"
 MPESA_SHORTCODE = "174379"

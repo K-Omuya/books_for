@@ -216,14 +216,14 @@
                             </ul>
                             <div class="d-flex justify-content-between mt-4">
                                 <!-- Exchange Button -->
-                                <a href="{% url 'pay' %}?book_id={{ book.id }}&action=exchange" class="btn btn-warning"
+                                <a href="{% url 'wallet' %}?book_id={{ book.id }}&action=exchange" class="btn btn-warning"
                                    style="font-size: 1rem; font-weight: bold; padding: 10px 20px; width: 48%;
                                           background-color: #FF8200; border: none; color: white; border-radius: 8px;">
                                     🔄 Exchange
                                 </a>
                                 <!-- Download Button -->
                                 {% if book.document %}
-                                    <a href="{% url 'pay' %}?book_id={{ book.id }}&action=download" class="btn btn-primary"
+                                    <a href="{% url 'wallet' %}?book_id={{ book.id }}&action=download" class="btn btn-primary"
                                        style="font-size: 1rem; font-weight: bold; padding: 10px 20px; width: 48%;
                                               background-color: #004080; border: none; color: white; border-radius: 8px;">
                                         ⬇️ Download

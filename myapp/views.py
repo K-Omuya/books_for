@@ -13,6 +13,16 @@ def home(request):
     return render(request, 'index.html')
 def about(request):
     return render(request, 'about.html')
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')
+
+@login_required
+def settings(request):
+    return render(request, 'settings.html')
 
 
 def blogs(request):
@@ -476,3 +486,28 @@ def process_upload_payment(request):
             return redirect('book_exchange')  # Redirect to the book exchange page
         else:
             return render(request, 'upload_fee.html', {'error': 'Payment failed. Please try again.'})
+
+
+
+from django.shortcuts import render
+from .models import Blog
+
+def blog_list(request):
+    blogs = Blog.objects.all().order_by('-created_at')  # Fetch latest blogs first
+    return render(request, 'blog.html', {'blogs': blogs})
+
+
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from .models import ExchangedBook, DownloadedPDF  # Models for books
+
+@login_required
+def wallet(request):
+    exchanged_books = ExchangedBook.objects.filter(user=request.user, status="Pending")
+    downloaded_pdfs = DownloadedPDF.objects.filter(user=request.user)
+
+    context = {
+        'exchanged_books': exchanged_books,
+        'downloaded_pdfs': downloaded_pdfs,
+    }
+    return render(request, 'wallet.html', context)

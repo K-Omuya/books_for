@@ -197,3 +197,24 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+
+from django.db import models
+from django.contrib.auth.models import User
+
+class ExchangedBook(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book_title = models.CharField(max_length=255)
+    status = models.CharField(max_length=50, choices=[('Pending', 'Pending'), ('Delivered', 'Delivered')])
+    exchange_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.book_title} - {self.status}"
+
+class DownloadedPDF(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book_title = models.CharField(max_length=255)
+    download_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.book_title} - {self.download_date}"

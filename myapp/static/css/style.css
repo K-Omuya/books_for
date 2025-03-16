@@ -669,7 +669,7 @@
 .goal {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgba(255, 245, 225, 0.9), rgba(12, 24, 68, 0.9)), url(../img/back2.jpeg);
+    background: linear-gradient(rgba(255, 245, 225, 0.9), rgba(12, 24, 68, 0.9)), url(../img/back3.png);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

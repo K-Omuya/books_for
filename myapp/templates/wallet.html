@@ -1,0 +1,47 @@
+<div style="display: flex; justify-content: center; align-items: center; min-height: 80vh; background-color: #f8f9fa; padding: 20px;">
+    <div style="background: #ffffff; border-radius: 12px; padding: 30px; max-width: 500px; width: 100%; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); border-top: 5px solid #007bff;">
+        <h2 style="color: #004080; text-align: center; margin-bottom: 20px;">
+            <i class="fas fa-wallet"></i> My Wallet
+        </h2>
+
+        <!-- Exchanged Books -->
+        <div style="margin-top: 20px;">
+            <h4 style="color: #004080; font-weight: 600; text-align: center; border-bottom: 2px solid #007bff; padding-bottom: 5px; margin-bottom: 10px;">
+                <i class="fas fa-exchange-alt"></i> Exchanged Books
+            </h4>
+            <p style="color: #6c757d; text-align: center; font-style: italic;">Books awaiting delivery</p>
+            {% if exchanged_books %}
+                <ul style="list-style: none; padding: 0;">
+                    {% for book in exchanged_books %}
+                        <li style="background: #f8f9fa; padding: 10px; margin-bottom: 5px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; border: none;">
+                            <span style="font-weight: bold;">{{ book.book_title }}</span>
+                            <span style="background: #ffc107; color: #212529; padding: 6px 12px; border-radius: 6px; font-size: 0.9rem;">{{ book.status }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p style="text-align: center; color: #6c757d; font-style: italic; font-size: 14px; padding: 10px; background: #f8f9fa; border-radius: 8px;">No books waiting for delivery.</p>
+            {% endif %}
+        </div>
+
+        <!-- Downloaded PDFs -->
+        <div style="margin-top: 20px;">
+            <h4 style="color: #004080; font-weight: 600; text-align: center; border-bottom: 2px solid #007bff; padding-bottom: 5px; margin-bottom: 10px;">
+                <i class="fas fa-download"></i> Downloaded PDFs
+            </h4>
+            <p style="color: #6c757d; text-align: center; font-style: italic;">Books you have downloaded</p>
+            {% if downloaded_pdfs %}
+                <ul style="list-style: none; padding: 0;">
+                    {% for pdf in downloaded_pdfs %}
+                        <li style="background: #f8f9fa; padding: 10px; margin-bottom: 5px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; border: none;">
+                            <span style="font-weight: bold;">{{ pdf.book_title }}</span>
+                            <span style="color: #6c757d; font-size: 0.9rem;">{{ pdf.download_date }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p style="text-align: center; color: #6c757d; font-style: italic; font-size: 14px; padding: 10px; background: #f8f9fa; border-radius: 8px;">No downloaded PDFs.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>

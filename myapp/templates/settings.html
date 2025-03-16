@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #007bff;
+            text-align: center;
+        }
+
+        .profile-picture {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .profile-picture img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #007bff;
+        }
+
+        .file-input {
+            margin-top: 10px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 80px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 style="color: #004080; font-weight: bold;">Edit Profile</h2>
+
+        <!-- Profile Picture -->
+        <div class="profile-picture">
+            <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
+            <form action="{% url 'settings' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="profile_picture" class="file-input">
+            </form>
+        </div>
+
+        <form action="{% url 'settings' %}" method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" value="{{ user.username }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" value="{{ user.email }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone_number">Phone Number</label>
+                <input type="text" id="phone_number" name="phone_number" value="{{ user.phone_number|default:'' }}">
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" value="{{ user.location|default:'' }}">
+            </div>
+
+            <div class="form-group">
+                <label for="bio">Bio</label>
+                <textarea id="bio" name="bio">{{ user.bio|default:'' }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="favorite_genres">Favorite Book Genres</label>
+                <select id="favorite_genres" name="favorite_genres">
+                    <option value="" disabled selected>Select genres</option>
+                    <option value="fiction">Fiction</option>
+                    <option value="non-fiction">Non-Fiction</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="science-fiction">Science Fiction</option>
+                    <option value="romance">Romance</option>
+                    <option value="biography">Biography</option>
+                </select>
+            </div>
+
+            <div class="buttons">
+                <button type="submit" class="btn">Save Changes</button>
+                <a href="{% url 'profile' %}" class="btn btn-secondary">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+</html>

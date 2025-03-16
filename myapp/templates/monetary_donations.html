@@ -154,63 +154,18 @@
             </div>
         </div>
         <!-- Header End -->
-<div style="max-width: 600px; margin: auto; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); padding: 30px;">
-    <h2 style="text-align: center; color: #004080; font-weight: bold; margin-bottom: 20px;">Make a Monetary Donation</h2>
-    <form>
-        <div style="margin-bottom: 20px;">
-            <label for="donorName" style="font-weight: bold; color: #333333; display: block; margin-bottom: 5px;">Donor Name</label>
-            <input type="text" id="donorName" placeholder="Enter your full name" style="width: 100%; padding: 10px; font-size: 1rem; border-radius: 5px; border: 1px solid #ccc;" required>
-        </div>
-        <div style="margin-bottom: 20px;">
-            <label for="donorEmail" style="font-weight: bold; color: #333333; display: block; margin-bottom: 5px;">Donor Email</label>
-            <input type="email" id="donorEmail" placeholder="Enter your email address" style="width: 100%; padding: 10px; font-size: 1rem; border-radius: 5px; border: 1px solid #ccc;" required>
-        </div>
-        <div style="margin-bottom: 20px;">
-            <label for="donationAmount" style="font-weight: bold; color: #333333; display: block; margin-bottom: 5px;">Amount (USD)</label>
-            <input type="number" id="donationAmount" placeholder="Enter donation amount" style="width: 100%; padding: 10px; font-size: 1rem; border-radius: 5px; border: 1px solid #ccc;" required>
-        </div>
-        <button type="button" id="donateBtn" style="width: 100%; padding: 10px; font-size: 1.1rem; font-weight: bold; color: #FFFFFF; background-color: #FF8200; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">Proceed to Donate</button>
-    </form>
-</div>
 
-<!-- Payment Modal -->
-<div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: #004080; color: #FFFFFF;">
-                <h5 class="modal-title" id="paymentModalLabel">Select Payment Method</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <label for="paymentMethod" style="font-weight: bold; color: #333333; display: block; margin-bottom: 10px;">Choose Payment Method</label>
-                <select id="paymentMethod" style="width: 100%; padding: 10px; font-size: 1rem; border-radius: 5px; border: 1px solid #ccc;">
-                    <option value="visa">Visa</option>
-                    <option value="mpesa">M-Pesa</option>
-                    <option value="mastercard">MasterCard</option>
-                    <option value="amex">American Express</option>
-                </select>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="padding: 10px 20px; border-radius: 5px; font-size: 1rem;">Cancel</button>
-                <button type="submit" class="btn btn-success" style="padding: 10px 20px; border-radius: 5px; font-size: 1rem;">Proceed with Payment</button>
-            </div>
-        </div>
-    </div>
-</div>
+    <h1>Make a Donation</h1>
+    <form action="{% url 'process_donation' %}" method="POST">
+        {% csrf_token %}
+        <label for="name">Your Name (Optional):</label><br>
+        <input type="text" id="name" name="name" placeholder="Enter your name"><br><br>
 
-<!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $("#donateBtn").click(function() {
-            $("#paymentModal").modal("show");
-        });
-    });
-</script>
+        <label for="phone">Your Phone Number:</label><br>
+        <input type="tel" id="phone" name="phone" placeholder="254xxxxxxxxx" required><br><br>
 
-
-
+        <label for="amount">Donation Amount (Ksh):</label><br>
+        <input type="number" id="amount" name="amount" placeholder="Enter amount" min="10" required>
 <!-- Footer Start -->
 <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" style="background-color: #004080; color: #FFFFFF;">
     <div class="container py-5">
