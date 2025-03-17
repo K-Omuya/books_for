@@ -1,18 +1,7 @@
 from django.db import models
 
-class Blog(models.Model):
-    title = models.CharField(max_length=255)
-    author = models.CharField(max_length=100)
-    content = models.TextField()
-    image = models.ImageField(upload_to='blog_images/')
-    created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.title
-
-    from django.db import models
-
-    class Book(models.Model):
+class Book(models.Model):
         title = models.CharField(max_length=200)
         author = models.CharField(max_length=100)
         genre = models.CharField(max_length=50, choices=[
@@ -158,6 +147,10 @@ class Subscription(models.Model):
         return self.email
 
 
+
+
+
+
 from django.db import models
 
 class Payment(models.Model):
@@ -218,3 +211,51 @@ class DownloadedPDF(models.Model):
 
     def __str__(self):
         return f"{self.book_title} - {self.download_date}"
+
+from django.utils.timezone import now  # Import this at the top
+
+class Blog(models.Model):
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+    image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(default=now)  # ✅ Added default
+
+    def __str__(self):
+        return self.title
+
+
+from django.db import models
+
+class FeaturedBook(models.Model):
+    title = models.CharField(max_length=255)
+    author = models.CharField(max_length=255)
+    description = models.TextField()
+    cover_image = models.ImageField(upload_to='book_covers/', blank=True, null=True)
+    contact_email = models.EmailField()  # New field for seller contact
+    added_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+
+from django.contrib.auth.models import User
+
+class WalletTransaction(models.Model):
+    TRANSACTION_TYPES = [
+        ('exchange', 'Exchange'),
+        ('download', 'Download'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    transaction_type = models.CharField(max_length=10, choices=TRANSACTION_TYPES)
+    payment_status = models.CharField(max_length=20, choices=[
+        ('pending', 'Pending'),
+        ('paid', 'Paid'),
+    ], default='pending')
+    status = models.CharField(max_length=20, default='Active')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.book.title} ({self.transaction_type})"

@@ -157,76 +157,39 @@
 </div>
 
 
+    <div style="width: 90%; max-width: 600px; margin: 20px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+        <h1 style="text-align: center; color: #004080; font-size: 24px;">Pledge a Book</h1>
+
+        <form method="post" style="display: flex; flex-direction: column;">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" style="width: 100%; padding: 14px; background: #FF8200; border: none; color: white; font-size: 18px; cursor: pointer; border-radius: 5px; margin-top: 15px;">Pledge Book</button>
+        </form>
+
+        <a href="{% url 'view_pledged_books' %}" style="display: block; text-align: center; margin-top: 15px; text-decoration: none; color: #004080; font-weight: bold; font-size: 16px;">View Pledged Books</a>
+    </div>
+
+    <!-- Mobile Styles -->
     <style>
-    .pledge-container {
-    max-width: 500px;
-    margin: 30px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    border-top: 5px solid #FF8200; /* Orange Accent */
-}
-
-h2 {
-    color: #004080;
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.pledge-form {
-    display: flex;
-    flex-direction: column;
-}
-
-.pledge-form p {
-    text-align: left;
-    margin-bottom: 10px;
-}
-
-.pledge-form input,
-.pledge-form select,
-.pledge-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-.btn.submit-btn {
-    background: #FF8200; /* Orange */
-    color: white;
-    font-size: 16px;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
-}
-
-.btn.submit-btn:hover {
-    background: #004080; /* Deep Blue on hover */
-}
-
+        @media (max-width: 400px) {
+            div {
+                width: 95% !important; /* Slightly wider on very small screens */
+                padding: 15px !important;
+            }
+            h1 {
+                font-size: 20px !important; /* Reduce title size */
+            }
+            button {
+                font-size: 16px !important; /* Adjust button size */
+                padding: 12px !important;
+            }
+            a {
+                font-size: 14px !important;
+            }
+        }
     </style>
-<div class="pledge-container">
-    <h2>Pledge a Book</h2>
 
-    <form method="POST" class="pledge-form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn submit-btn">Submit Pledge</button>
-    </form>
-
-    <!-- Back Link -->
-    <a href="{% url 'view_pledged_books' %}"
-       style="color: #004080; text-decoration: none; font-size: 14px; font-weight: bold; display: inline-block;
-              margin-top: 15px;"
-       onmouseover="this.style.textDecoration='underline'"
-       onmouseout="this.style.textDecoration='none'">
-        ⬅ View Pledged Books </a>
 </div>
 
 <!-- Apply styles to form fields -->

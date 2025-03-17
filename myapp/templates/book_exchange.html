@@ -156,10 +156,10 @@
     </div>
 </div>
    <!-- Header End -->
-<div style="background-image: url('{% static "img/library_quill.jpg" %}');
-            background-size: cover; background-position: center; padding: 50px 0;">
-    <div class="container py-5" style="background-color: rgba(255, 255, 255, 0.95); border-radius: 15px;
-                                       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);">
+<div style="background-image: url('{% static "img/library_quill.jpg" %}'); background-size: cover; background-position: center; padding: 50px 0;">
+    <div class="container py-5" style="background-color: rgba(255, 255, 255, 0.95); border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);">
+
+        <!-- Title -->
         <h2 class="text-center mb-4" style="color: #004080; font-size: 2.5rem; font-weight: bold;">
             📚 Browse Books for Exchange
         </h2>
@@ -168,26 +168,29 @@
         <form method="get" class="mb-5">
             <div class="row align-items-center">
                 <!-- Search Bar -->
-                <div class="col-lg-8 col-md-6 col-sm-12 mb-2">
+                <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
                     <input type="text" name="q" value="{{ search_query }}" placeholder="Search books by title..."
-                           class="form-control" style="padding: 15px; font-size: 1rem; border-radius: 8px;">
+                           class="form-control" style="padding: 12px; font-size: 1rem; border-radius: 8px; border: 1px solid #ccc;">
                 </div>
 
                 <!-- Sort Dropdown -->
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
-                    <select name="sort_by" class="form-control" style="padding: 15px; font-size: 1rem; border-radius: 8px;">
+                    <select name="sort_by" class="form-control" style="padding: 12px; font-size: 1rem; border-radius: 8px; border: 1px solid #ccc;">
                         <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Sort by Title</option>
                         <option value="author" {% if sort_by == 'author' %}selected{% endif %}>Sort by Author</option>
                         <option value="genre" {% if sort_by == 'genre' %}selected{% endif %}>Sort by Genre</option>
                     </select>
                 </div>
-            </div>
-            <!-- Submit Button -->
-            <div class="text-center mt-3">
-                <button type="submit" class="btn btn-primary" style="background-color: #FF8200; font-weight: bold;
-                        padding: 12px 30px; font-size: 1.1rem; border-radius: 8px; border: none;">
-                    Apply Filters
-                </button>
+
+                <!-- Buttons -->
+                <div class="col-lg-2 col-md-12 col-sm-12 text-center mt-2">
+                    <button type="submit" class="btn btn-primary" style="background-color: #FF8200; font-weight: bold; padding: 10px 20px; border-radius: 8px; border: none;">
+                        Apply Filters
+                    </button>
+                    <a href="{% url 'books_list' %}" class="btn btn-secondary" style="padding: 10px 20px; border-radius: 8px; margin-left: 5px;">
+                        Reset
+                    </a>
+                </div>
             </div>
         </form>
 
@@ -196,15 +199,17 @@
             {% for book in books %}
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="card" style="border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); overflow: hidden;">
+
+                        <!-- Book Cover -->
                         {% if book.cover_image %}
-                            <img src="{{ book.cover_image.url }}" class="card-img-top" alt="Book Cover"
-                                 style="height: 220px; object-fit: cover;">
+                            <img src="{{ book.cover_image.url }}" class="card-img-top" alt="Book Cover" style="height: 220px; object-fit: cover;">
                         {% else %}
-                            <div class="d-flex justify-content-center align-items-center"
-                                 style="height: 220px; background-color: #f5f5f5; color: #AAA;">
+                            <div class="d-flex justify-content-center align-items-center" style="height: 220px; background-color: #f5f5f5; color: #AAA;">
                                 No Cover Available
                             </div>
                         {% endif %}
+
+                        <!-- Book Details -->
                         <div class="card-body" style="padding: 20px;">
                             <h5 class="card-title" style="color: #004080; font-weight: bold;">{{ book.title }}</h5>
                             <ul style="list-style: none; padding: 0; font-size: 1rem; color: #666;">
@@ -214,34 +219,41 @@
                                 <li><strong>Location:</strong> {{ book.location }}</li>
                                 <li><strong>Delivery:</strong> {{ book.delivery_option }}</li>
                             </ul>
+
+                            <!-- Buttons -->
                             <div class="d-flex justify-content-between mt-4">
                                 <!-- Exchange Button -->
                                 <a href="{% url 'wallet' %}?book_id={{ book.id }}&action=exchange" class="btn btn-warning"
-                                   style="font-size: 1rem; font-weight: bold; padding: 10px 20px; width: 48%;
-                                          background-color: #FF8200; border: none; color: white; border-radius: 8px;">
+                                   style="font-size: 1rem; font-weight: bold; padding: 10px 15px; width: 48%; background-color: #FF8200; border: none; color: white; border-radius: 8px; transition: 0.3s;">
                                     🔄 Exchange
                                 </a>
                                 <!-- Download Button -->
                                 {% if book.document %}
                                     <a href="{% url 'wallet' %}?book_id={{ book.id }}&action=download" class="btn btn-primary"
-                                       style="font-size: 1rem; font-weight: bold; padding: 10px 20px; width: 48%;
-                                              background-color: #004080; border: none; color: white; border-radius: 8px;">
+                                       style="font-size: 1rem; font-weight: bold; padding: 10px 15px; width: 48%; background-color: #004080; border: none; color: white; border-radius: 8px; transition: 0.3s;">
                                         ⬇️ Download
                                     </a>
                                 {% else %}
                                     <div class="d-flex justify-content-center align-items-center"
-                                         style="background-color: #EEE; color: #AAA; font-size: 0.9rem; padding: 10px 20px; border-radius: 8px; width: 48%;">
+                                         style="background-color: #EEE; color: #AAA; font-size: 0.9rem; padding: 10px 15px; border-radius: 8px; width: 48%;">
                                         No Document
                                     </div>
                                 {% endif %}
                             </div>
+
                         </div>
                     </div>
                 </div>
+            {% empty %}
+                <div class="col-12 text-center">
+                    <p style="color: #666; font-size: 1.2rem;">No books available for exchange at the moment.</p>
+                </div>
             {% endfor %}
         </div>
+
     </div>
 </div>
+
 
 <!-- Footer Start -->
 <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" style="background-color: #004080; color: #FFFFFF;">

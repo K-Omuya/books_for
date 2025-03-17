@@ -1,16 +1,8 @@
-
-from requests.auth import HTTPBasicAuth
-import requests
-from django.http import HttpResponse
-
-
-from myapp.credentials import MpesaAccessToken, LipanaMpesaPpassword
-
 def home(request):
     return render(request, 'index.html')
+def monetary_donations(request):
+    return render(request, 'monetary_donations.html')
 
-def blogs(request):
-    return render(request, 'blog.html')
 def upload_fee(request):
     return render(request, 'upload_fee.html')
 
@@ -18,7 +10,6 @@ def index(request):
     return render(request, 'index.html')
 def about(request):
     return render(request, 'about.html')
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 @login_required
@@ -35,35 +26,13 @@ def features(request):
 def team(request):
     return render(request, 'team.html')
 
-def monetary_donations(request):
-    return render(request, 'monetary_donations.html')
 def testimonial(request):
     return render(request, 'testimonials.html')
 
-def contact(request):
-    return render(request, 'contact.html')
-from django.shortcuts import render
-from .models import Blog
-
-def blog(request):
-    blogs = Blog.objects.all().order_by('-created_at')
-    return render(request, 'index.html', {'blogs': blogs})
 
 
-def donate_book(request):
-    if request.method == 'POST':
-        form = BookForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('book_catalogue')
-    else:
-        form = BookForm()
-    return render(request, 'donate_book.html', {'form': form})
-
-
-
-from .models import BookClub
-from .forms import BookClubForm
+from .models import BookClub, BookDonation
+from .forms import BookClubForm, BookDonationForm
 
 
 def view_book_clubs(request):
@@ -88,28 +57,6 @@ def create_book_club(request):
 
 
 
-
-from django.shortcuts import render, redirect
-from .models import PledgedBook
-from .forms import PledgedBookForm
-
-def pledge_book(request):
-    if request.method == 'POST':
-        form = PledgedBookForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('view_pledged_books')  # Redirect to pledged books list
-    else:
-        form = PledgedBookForm()
-    return render(request, 'pledge_book.html', {'form': form})
-
-def view_pledged_books(request):
-    pledged_books = PledgedBook.objects.all().order_by('-pledge_date')  # Latest pledges first
-    return render(request, 'view_pledged_books.html', {'pledged_books': pledged_books})
-
-from .models import BookDonation
-from .forms import BookDonationForm
-
 def donate_book(request):
     if request.method == 'POST':
         form = BookDonationForm(request.POST, request.FILES)
@@ -124,15 +71,6 @@ def view_donated_books(request):
     books = BookDonation.objects.all().order_by('-donated_at')
     return render(request, 'view_donated_books.html', {'books': books})
 
-
-from django.shortcuts import render, redirect
-from django.contrib import messages
-
-
-from django.http import HttpResponse
-
-
-from django.shortcuts import render, redirect, get_object_or_404
 from .models import Message
 from .forms import MessageForm
 
@@ -166,12 +104,6 @@ def delete_message(request, pk):
     return render(request, 'delete_message.html', {'message': message})
 
 
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Testimonial
-from .forms import TestimonialForm
-
-
-# Display testimonials and handle form submission
 def testimonials(request):
     testimonials = Testimonial.objects.all().order_by('-created_at')
     form = TestimonialForm()
@@ -235,54 +167,6 @@ def book_appointment(request):
         form = AppointmentForm()
     return render(request, 'appointment.html', {'form': form})
 
-
-# views.py
-from django.http import JsonResponse
-from django.shortcuts import render
-from .forms import SubscriptionForm
-
-def subscribe(request):
-    if request.method == 'POST' and request.is_ajax():
-        form = SubscriptionForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return JsonResponse({'message': 'Subscribed successfully!'}, status=200)
-        else:
-            return JsonResponse({'error': 'Invalid email!'}, status=400)
-    return JsonResponse({'error': 'Invalid request!'}, status=400)
-
-def subscription_page(request):
-    form = SubscriptionForm()
-    return render(request, 'subscription.html', {'form': form})
-
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-import json
-from .mpesa import initiate_payment
-from .models import Payment
-
-@csrf_exempt
-def start_payment(request):
-    if request.method == "POST":
-        data = json.loads(request.body)
-        phone = data.get("phone_number")
-        response = initiate_payment(phone)
-
-        # Save payment request
-        Payment.objects.create(phone_number=phone, transaction_id=response.get("CheckoutRequestID"), status="Pending")
-
-        return JsonResponse({"success": True, "message": "Payment initiated. Approve it on your phone."})
-
-
-def check_payment_status(request):
-    phone = request.GET.get("phone")
-    payment = Payment.objects.filter(phone_number=phone, status="Completed").first()
-
-    if payment:
-        return JsonResponse({"paid": True})
-    return JsonResponse({"paid": False})
-
-from django.shortcuts import render, redirect
 from .forms import BookForm
 
 def upload_book(request):
@@ -327,192 +211,6 @@ def book_exchange(request):
     return render(request, 'book_exchange.html', context)
 
 
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-import json
-
-
-
-
-
-def token(request):
-    consumer_key = '77bgGpmlOxlgJu6oEXhEgUgnu0j2WYxA'
-    consumer_secret = 'viM8ejHgtEmtPTHd'
-    api_URL = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
-
-    r = requests.get(api_URL, auth=HTTPBasicAuth(
-        consumer_key, consumer_secret))
-    mpesa_access_token = json.loads(r.text)
-    validated_mpesa_access_token = mpesa_access_token["access_token"]
-
-    return render(request, 'token.html', {"token":validated_mpesa_access_token})
-
-def pay(request):
-   return render(request, 'pay.html')
-
-
-from django.http import HttpResponse, JsonResponse
-import requests
-from requests.auth import HTTPBasicAuth
-import json
-from datetime import datetime
-import base64
-
-
-def stk(request):
-    if request.method == "POST":
-        phone = request.POST.get('phone')
-
-        # Validate Phone Number
-        if not phone or len(phone) != 12 or not phone.startswith('254'):
-            return JsonResponse({"error": "Invalid phone number. Ensure it starts with 254 and is 12 digits long."},
-                                status=400)
-
-        # Set Amount to Ksh. 200
-        amount = 200
-
-        # Get Access Token
-        consumer_key = 'rmNIDA9T8cvKiNARUzpWq6IGO7nAaPGVXQMXkIKRlUZ1g3lt'
-        consumer_secret = 'R1SBVyJaTEt0GljTaA6aVR77fjZNfzARnKrU5k2Tu8q6Wxdj1FoS7AEGaajq3Zh7'
-        access_token_url = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
-        r = requests.get(access_token_url, auth=HTTPBasicAuth(consumer_key, consumer_secret))
-        access_token = json.loads(r.text).get('access_token')
-
-        # STK Push Configuration
-        lipa_time = datetime.now().strftime('%Y%m%d%H%M%S')
-        business_shortcode = "174379"
-        passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
-
-        # Encode the password
-        data_to_encode = business_shortcode + passkey + lipa_time
-        online_password = base64.b64encode(data_to_encode.encode()).decode('utf-8')
-
-        stk_url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
-        headers = {"Authorization": f"Bearer {access_token}"}
-        payload = {
-            "BusinessShortCode": business_shortcode,
-            "Password": online_password,
-            "Timestamp": lipa_time,
-            "TransactionType": "CustomerPayBillOnline",
-            "Amount": amount,  # Set amount to Ksh. 200
-            "PartyA": phone,
-            "PartyB": business_shortcode,
-            "PhoneNumber": phone,
-            "CallBackURL": "https://yourdomain.com/callback/",
-            "AccountReference": "Book Payment",
-            "TransactionDesc": "Payment for Book Purchase"
-        }
-
-        # Make the STK Push Request
-        response = requests.post(stk_url, json=payload, headers=headers)
-        response_data = response.json()
-
-        if response_data.get('ResponseCode') == '0':
-            return HttpResponse("STK Push successfully initiated. Check your phone to complete the payment.")
-        else:
-            error_message = response_data.get('errorMessage', "Something went wrong.")
-            return JsonResponse({"error": error_message}, status=400)
-
-
-from django.shortcuts import render
-from django.http import HttpResponseBadRequest
-
-def pay(request):
-    """Renders the payment form for the selected book."""
-    # Retrieve `book_id` and `action` from query parameters
-    book_id = request.GET.get('book_id')
-    action = request.GET.get('action')
-
-    # Validate the presence of required parameters
-    if not book_id or not action:
-        return HttpResponseBadRequest("Missing required parameters: book_id or action")
-
-    # You can also fetch the book from the database if necessary:
-    # book = Book.objects.get(id=book_id)
-
-    return render(request, 'pay.html', {
-        'book_id': book_id,
-        'action': action,
-        # Pass book details if retrieved from the database:
-        # 'book': book
-    })
-
-
-from django.shortcuts import render, redirect
-from .forms import BookForm
-
-def redirect_to_payment(request):
-    if request.method == 'POST':
-        form = BookForm(request.POST, request.FILES)
-        if form.is_valid():
-            # Temporarily store the book details in the session
-            request.session['book_data'] = form.cleaned_data
-            return redirect('upload_fee')  # Redirect to payment page
-    else:
-        form = BookForm()
-    return render(request, 'upload_book.html', {'form': form})
-
-
-from django.shortcuts import render, redirect
-from .models import Book
-
-def process_upload_payment(request):
-    if request.method == 'POST':
-        safaricom_number = request.POST.get('safaricom_number')
-        book_data = request.session.get('book_data', {})
-
-        # Validate Safaricom number
-        if not safaricom_number or len(safaricom_number) != 12 or not safaricom_number.startswith('254'):
-            return render(request, 'upload_fee.html', {'error': 'Please provide a valid Safaricom number.'})
-
-        # Process payment (M-Pesa STK Push logic goes here)
-        # Simulate success for now:
-        payment_successful = True
-
-        if payment_successful:
-            # Save the book to the database
-            Book.objects.create(
-                title=book_data.get('title'),
-                author=book_data.get('author'),
-                genre=book_data.get('genre'),
-                donor_name=book_data.get('donor_name'),
-                contact_details=book_data.get('contact_details'),
-                location=book_data.get('location'),
-                delivery_option=book_data.get('delivery_option'),
-                cover_image=book_data.get('cover_image'),
-                document=book_data.get('document'),
-            )
-            # Clear session data after saving
-            request.session.pop('book_data', None)
-            return redirect('book_exchange')  # Redirect to the book exchange page
-        else:
-            return render(request, 'upload_fee.html', {'error': 'Payment failed. Please try again.'})
-
-
-
-from django.shortcuts import render
-from .models import Blog
-
-def blog_list(request):
-    blogs = Blog.objects.all().order_by('-created_at')  # Fetch latest blogs first
-    return render(request, 'blog.html', {'blogs': blogs})
-
-
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from .models import ExchangedBook, DownloadedPDF  # Models for books
-
-@login_required
-def wallet(request):
-    exchanged_books = ExchangedBook.objects.filter(user=request.user, status="Pending")
-    downloaded_pdfs = DownloadedPDF.objects.filter(user=request.user)
-
-    context = {
-        'exchanged_books': exchanged_books,
-        'downloaded_pdfs': downloaded_pdfs,
-    }
-    return render(request, 'wallet.html', context)
-
 
 
 from django.shortcuts import render
@@ -536,9 +234,107 @@ def testimonials_page(request):
     testimonials = Testimonial.objects.all().order_by('-id')
     form = TestimonialForm()
     return render(request, 'testimonials.html', {'form': form, 'testimonials': testimonials})
-from django.shortcuts import render
-from .models import Blog  # Ensure Blog model is imported
 
-def blog_list(request):
-    blogs = Blog.objects.all()  # Fetch all blog posts
+from django.shortcuts import render, redirect
+from .models import Blog
+from .forms import BlogForm
+from django.contrib.auth.decorators import login_required
+
+# Create Blog
+@login_required
+def create_blog(request):
+    if request.method == 'POST':
+        form = BlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            blog = form.save(commit=False)
+            blog.author = request.user
+            blog.save()
+            return redirect('view_blogs')
+    else:
+        form = BlogForm()
+    return render(request, 'create_blog.html', {'form': form})
+
+# View Blogs
+def blogs(request):
+    blogs = Blog.objects.all().order_by('-created_at')
     return render(request, 'blog.html', {'blogs': blogs})
+
+from django.shortcuts import render
+from .models import PledgedBook
+
+def view_pledged_books(request):
+    pledged_books = PledgedBook.objects.all().order_by('-pledge_date')
+    return render(request, 'view_pledged_books.html', {'pledged_books': pledged_books})
+from django.shortcuts import render, redirect
+from .forms import PledgedBookForm
+from .models import PledgedBook
+
+def pledge_book(request):
+    if request.method == "POST":
+        form = PledgedBookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('view_pledged_books')  # Redirect to the pledged books list
+    else:
+        form = PledgedBookForm()
+
+    return render(request, 'pledge_book.html', {'form': form})
+
+
+
+from django.shortcuts import render, redirect
+from .models import FeaturedBook
+from .forms import FeaturedBookForm
+
+def add_featured_book(request):
+    if request.method == "POST":
+        form = FeaturedBookForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')  # Redirect to index page after adding
+    else:
+        form = FeaturedBookForm()
+
+    return render(request, 'add_featured_book.html', {'form': form})
+
+
+from django.shortcuts import render
+from .models import FeaturedBook
+
+def featured_books(request):
+    books = FeaturedBook.objects.all()  # Fetch all books from DB
+    return render(request, 'home.html', {'books': books})
+
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Book, WalletTransaction
+
+@login_required
+def wallet(request):
+    transactions = WalletTransaction.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'wallet.html', {'transactions': transactions})
+
+@login_required
+def process_transaction(request):
+    book_id = request.GET.get('book_id')
+    action = request.GET.get('action')
+
+    if not book_id or action not in ['exchange', 'download']:
+        return redirect('book_exchange')
+
+    book = Book.objects.get(id=book_id)
+
+    # Create a wallet transaction
+    WalletTransaction.objects.create(
+        user=request.user,
+        book=book,
+        transaction_type=action,
+        payment_status='pending',
+        status='Active'
+    )
+
+    return redirect('wallet')
+@login_required
+def payment(request):
+    return render(request, 'payment.html')

@@ -5,11 +5,18 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
-    path('blogs', views.blog, name='blog'),
-    path('blogs', views.blogs, name='blogs'),
+
+    path('create/', views.create_blog, name='create_blog'),
+    path('blogs/', views.blogs, name='blogs'),
+
+    path('add-featured-book/', views.add_featured_book, name='add_featured_book'),
+
     path('monetary_donations/', views.monetary_donations, name='monetary_donations'),
     path('features/', views.features, name='features'),
     path('team/', views.team, name='team'),
+
+    path('featured-books/', views.featured_books, name='featured_books'),
+
     path('testimonial/', views.testimonial, name='testimonial'),
     path('contact/', views.contact, name='contact'),
 
@@ -39,27 +46,18 @@ urlpatterns = [
     path('edit-impact/', views.edit_impact, name='edit_impact'),
     path('impact/', views.impact, name='impact'),
 
-    path('subscribe/', views.subscribe, name='subscribe'),
-    path('subscribe/', views.subscribe, name='subscribe'),
-
 
     path('book-appointment/', views.book_appointment, name='book_appointment'),
 
+    path('book_exchange/', views.book_exchange, name='book_exchange'),
+    path('wallet/', views.wallet, name='wallet'),
+    path('process_transaction/', views.process_transaction, name='process_transaction'),
+    path('payment/', views.payment, name='payment'),
 
-
-    path("blog", views.blog, name="blog"),
-    path("api/mpesa-payment/", views.start_payment, name="mpesa_payment"),
-    path("api/check-payment-status/", views.check_payment_status, name="check_payment_status"),
     path("upload-book/", views.upload_book, name="upload_book"),
 
     path('book-exchange/', views.book_exchange, name='book_exchange'),
-    path('initiate_payment/', views.initiate_payment, name='initiate_payment'),
 
-    path('initiate-payment/', views.initiate_payment, name='initiate_payment'),
-    path('pay/', views.pay, name='pay'),  # The pay view
-
-    path('stk/', views.stk, name='stk'),
-    path('upload-book/', views.redirect_to_payment, name='redirect_to_payment'),
     # path('upload-fee/', views.process_upload_payment, name='process_upload_payment'),
     path('upload-fee-page/', views.upload_fee, name='upload_fee'),  # Payment input page
 ]

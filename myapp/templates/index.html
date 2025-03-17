@@ -414,98 +414,103 @@ document.getElementById("appointmentForm").onsubmit = function(event) {
 };
 </script>
 
-    <style>
-        .carousel-control-prev, .carousel-control-next {
-            width: auto;
-            top: 100%; /* Moves controls below the carousel */
-            transform: translateY(50%);
-        }
-        .carousel-control-prev {
-            left: 40%;
-        }
-        .carousel-control-next {
-            right: 40%;
-        }
-        .modal-dialog {
-            max-width: 500px; /* Limits modal width */
-        }
-        .modal-content {
-            text-align: center; /* Centers content */
-        }
-    </style>
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4">📚 Donate & Exchange Books</h2>
+      <h1>Featured Books</h1>
 
-    <!-- Carousel -->
-    <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
+    {% if books %}
+        {% for book in books %}
+            <p>{{ book.title }} by {{ book.author }}</p>
+        {% endfor %}
+    {% else %}
+        <p>No featured books yet.</p>
+    {% endif %}
 
-            <!-- First Slide (Contains 3 Cards) -->
-            <div class="carousel-item active">
-                <div class="d-flex justify-content-center">
-                    <div class="card mx-2" style="width: 30%;">
-                        <img src="{% static 'img/donate2.jpeg' %}" class="card-img-top" alt="Donate Books" style="object-fit: cover; height: 200px;">
-                        <div class="card-body">
-                            <h5 class="card-title">📖 Donate Books</h5>
-                            <p>Book donations empower communities by providing access to knowledge and education. Join us in making a difference.</p>
-                        </div>
-                    </div>
-                    <div class="card mx-2" style="width: 30%;">
-                        <img src="{% static 'img/donate1.jpeg' %}" class="card-img-top" alt="Exchange Books" style="object-fit: cover; height: 200px;">
-                        <div class="card-body">
-                            <h5 class="card-title">🔄 Exchange Books</h5>
-                             <p>Book exchanges allow you to trade books you’ve finished with others. It’s a great way to discover new reads while sharing your collection.</p>
-                        </div>
-                    </div>
-                    <div class="card mx-2" style="width: 30%;">
-                        <img src="{% static 'img/exchange.jpeg' %}" class="card-img-top" alt="Educational Books" style="object-fit: cover; height: 200px;">
-                        <div class="card-body">
-                            <h5 class="card-title">📘 Educational Books</h5>
-                            <p class="card-text">Find learning resources for students and teachers.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <a href="{% url 'add_featured_book' %}">Add a Featured Book</a>
+        <!-- Navigation Buttons -->
+        <button onclick="prevSlide()" style="
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+        ">❮</button>
 
-            <!-- Second Slide (Contains 3 Cards) -->
-            <div class="carousel-item">
-                <div class="d-flex justify-content-center">
-                    <div class="card mx-2" style="width: 30%;">
-                        <img src="{% static 'img/why we sleep.jpeg' %}" class="card-img-top" alt="Rare Books" style="object-fit: cover; height: 200px;">
-                        <div class="card-body">
-                            <h5 class="card-title">📕 Rare Books</h5>
-                            <p class="card-text">Discover unique and antique books.</p>
-                        </div>
-                    </div>
-                    <div class="card mx-2" style="width: 30%;">
-                        <img src="{% static 'img/why we sleep.jpeg' %}" class="card-img-top" alt="Children’s Books" style="object-fit: cover; height: 200px;">
-                        <div class="card-body">
-                            <h5 class="card-title">📗 Children’s Books</h5>
-                            <p class="card-text">Engaging books for young minds.</p>
-                        </div>
-                    </div>
-                    <div class="card mx-2" style="width: 30%;">
-                        <img src="{% static 'img/seredioity mindset.jpeg' %}" class="card-img-top" alt="Fiction Books" style="object-fit: cover; height: 200px;">
-                        <div class="card-body">
-                            <h5 class="card-title">📙 Fiction Books</h5>
-                            <p class="card-text">Explore thrilling stories and novels.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Carousel Controls (Placed Below) -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </button>
+        <button onclick="nextSlide()" style="
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+        ">❯</button>
     </div>
-</div>
+
+    <!-- Add Featured Book Button (Now at Bottom) -->
+    <a href="{% url 'add_featured_book' %}" style="
+        display: inline-block;
+        text-align: center;
+        margin: 30px auto;
+        padding: 12px 20px;
+        background: #004080;
+        color: white;
+        border-radius: 5px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: 0.3s;
+    "
+    onmouseover="this.style.background='#002c66'"
+    onmouseout="this.style.background='#004080'">
+        Add a Featured Book
+    </a>
+
+    <!-- JavaScript for Carousel -->
+    <script>
+        let index = 0;
+        const slides = document.querySelectorAll(".carousel-item");
+        const totalSlides = slides.length;
+        const carousel = document.getElementById("carousel");
+
+        function updateCarousel() {
+            let slideWidth = document.querySelector(".carousel-item").clientWidth;
+            carousel.style.transform = `translateX(${-index * slideWidth}px)`;
+        }
+
+        function nextSlide() {
+            if (index < totalSlides - 1) {
+                index++;
+            } else {
+                index = 0; // Loop back to first slide
+            }
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            if (index > 0) {
+                index--;
+            } else {
+                index = totalSlides - 1; // Loop to last slide
+            }
+            updateCarousel();
+        }
+
+        // Auto slide every 4 seconds
+        setInterval(nextSlide, 4000);
+
+        // Resize handler to adjust carousel
+        window.addEventListener("resize", updateCarousel);
+    </script>
+
 
 
 <!-- Blog Start -->

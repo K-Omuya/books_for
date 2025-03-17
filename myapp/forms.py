@@ -3,11 +3,6 @@ from .models import Book, Pledge, BookClub, BookDonation
 
 
 
-class PledgedBookForm(forms.ModelForm):
-    class Meta:
-        model = Pledge
-        fields = ['name', 'email', 'book_count']
-
 from django import forms
 from .models import BookClub
 
@@ -329,3 +324,36 @@ class SafaricomPaymentForm(forms.Form):
         if not number.startswith('254') or len(number) != 12:
             raise forms.ValidationError('Enter a valid Safaricom number starting with 254.')
         return number
+
+
+from django import forms
+from .models import Blog
+
+class BlogForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = ['title', 'content', 'image']
+
+from django import forms
+from .models import PledgedBook
+
+class PledgedBookForm(forms.ModelForm):
+    class Meta:
+        model = PledgedBook
+        fields = ['donor_name', 'donor_email', 'book_title', 'book_type']
+
+        widgets = {
+            'donor_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your full name'}),
+            'donor_email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email'}),
+            'book_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter book title'}),
+            'book_type': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+
+from django import forms
+from .models import FeaturedBook
+
+class FeaturedBookForm(forms.ModelForm):
+    class Meta:
+        model = FeaturedBook
+        fields = ['title', 'author', 'description', 'cover_image', 'contact_email']
