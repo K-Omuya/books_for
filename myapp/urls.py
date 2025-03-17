@@ -53,12 +53,9 @@ urlpatterns = [
 
     path('upload/', views.upload_book, name='upload_book'),
     path('book-exchange/', views.book_exchange, name='book_exchange'),
-    path('mini-library/', views.mini_library, name='mini_library'),
 
     path('request-exchange/<int:book_id>/', views.request_exchange, name='request_exchange'),
 
-    path('book/<int:pk>/', views.book_detail, name='book_detail'),
-    path('book_list/', views.book_list, name='book_list'),
     path('download/<int:book_id>/', views.download_book, name='download_book'),
     path('request-exchange/<int:book_id>/', views.request_exchange, name='request_exchange'),
 

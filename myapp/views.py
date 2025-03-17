@@ -28,7 +28,7 @@ def testimonial(request):
 
 
 
-from .models import BookClub, BookDonation
+from .models import BookClub, BookDonation, ExchangeRequest
 from .forms import BookClubForm, BookDonationForm
 
 
@@ -231,63 +231,43 @@ def pledge_book(request):
     return render(request, 'pledge_book.html', {'form': form})
 
 
-
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from .models import Book
-from .forms import BookForm
+from .forms import BookUploadForm
 
-# Upload a book
+# Upload Book View
 def upload_book(request):
     if request.method == 'POST':
-        form = BookForm(request.POST, request.FILES)
+        form = BookUploadForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('book_exchange')
+            return redirect('book_exchange')  # Redirect to the Book Exchange page
     else:
-        form = BookForm()
+        form = BookUploadForm()
     return render(request, 'upload_book.html', {'form': form})
 
-# Display book exchange library
+
+from django.db.models import Q
+
 def book_exchange(request):
     books = Book.objects.all()
-    return render(request, 'book_exchange.html', {'books': books})
 
-@login_required
-def mini_library(request):
-    user_books = Book.objects.filter(donor=request.user)
-    return render(request, 'mini_library.html', {'books': user_books})
-@login_required
-def view_requests(request):
-    exchange_requests = ExchangeRequest.objects.filter(book__donor_name=request.user.username)
-    return render(request, 'view_requests.html', {'exchange_requests': exchange_requests})
-
-
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from .models import Book, ExchangeRequest
-
-from django.shortcuts import render
-from .models import Book
-
-def book_list(request):
+    # Search functionality
     search_query = request.GET.get('search', '')
-    sort_by = request.GET.get('sort_by', '')
-
-    books = Book.objects.all()
     if search_query:
-        books = books.filter(title__icontains=search_query)
+        books = books.filter(
+            Q(title__icontains=search_query) |
+            Q(author__icontains=search_query) |
+            Q(genre__icontains=search_query) |
+            Q(location__icontains=search_query)
+        )
 
-    if sort_by:
+    # Sort functionality
+    sort_by = request.GET.get('sort_by', '')
+    if sort_by in ['title', 'author', 'genre', 'location']:
         books = books.order_by(sort_by)
 
-    return render(request, 'book_exchange.html', {'books': books})
-
-from django.shortcuts import render, get_object_or_404
-from .models import Book
-
-def book_detail(request, pk):
-    book = get_object_or_404(Book, pk=pk)
-    return render(request, 'book_detail.html', {'book': book})
+    return render(request, 'book_exchange.html', {'books': books, 'search_query': search_query, 'sort_by': sort_by})
 
 
 @login_required
@@ -295,7 +275,7 @@ def download_book(request, book_id):
     book = get_object_or_404(Book, id=book_id)
     if book.download_available and book.document:
         return render(request, 'download.html', {'book': book})
-    return render(request, 'error.html', {'message': 'This book cannot be downloaded.'})
+    return render(request, '404.html', {'message': 'This book cannot be downloaded.'})
 
 @login_required
 def request_exchange(request, book_id):

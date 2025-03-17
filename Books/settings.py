@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-162)*a$o%&#zq_jjd=g7o8ysod9bn%z0m)5d4b8rb-)fgwex0a
 # SECURITY WARNING: don't run with debug turned on in production!
 #
 # ALLOWED_HOSTS = []
-DEBUG = True
+DEBUG = False
 
 
 import os
@@ -45,6 +45,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # ALLOWED_HOSTS = ['books-for-1.onrender.com']
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800
+FILE_UPLOAD_MAX_MEMORY_SIZE = 192428800
 
 
 # Application definition

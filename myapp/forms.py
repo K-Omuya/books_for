@@ -129,67 +129,28 @@ class AppointmentForm(forms.ModelForm):
             'time': forms.TimeInput(attrs={'type': 'time'}),
         }
 
-
-# forms.py
 from django import forms
 from .models import Book
 
-class BookForm(forms.ModelForm):
+class BookUploadForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = [
-            'title', 'author', 'genre', 'donor_name',
-            'contact_email', 'contact_phone', 'location',
-            'delivery_options', 'cover_image', 'document'
+            'title', 'author', 'genre', 'location', 'cover_image', 'document',
+            'download_available', 'exchange_available', 'donor_name',
+            'contact_email', 'contact_phone', 'delivery_options'
         ]
         widgets = {
-            'title': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter book title',
-                'style': 'border: 1px solid #DDD; border-radius: 6px; padding: 10px;'
-            }),
-            'author': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter author name',
-                'style': 'border: 1px solid #DDD; border-radius: 6px; padding: 10px;'
-            }),
-            'genre': forms.Select(attrs={
-                'class': 'form-control',
-                'style': 'border: 1px solid #DDD; border-radius: 6px; padding: 10px;'
-            }),
-            'donor_name': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Your name',
-                'style': 'border: 1px solid #DDD; border-radius: 6px; padding: 10px;'
-            }),
-            'contact_email': forms.EmailInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter email',
-                'style': 'border: 1px solid #DDD; border-radius: 6px; padding: 10px;'
-            }),
-            'contact_phone': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter phone number',
-                'style': 'border: 1px solid #DDD; border-radius: 6px; padding: 10px;'
-            }),
-            'location': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'City or town',
-                'style': 'border: 1px solid #DDD; border-radius: 6px; padding: 10px;'
-            }),
-            'delivery_options': forms.Textarea(attrs={
-                'class': 'form-control',
-                'placeholder': 'Describe delivery options',
-                'style': 'border: 1px solid #DDD; border-radius: 6px; padding: 10px;'
-            }),
-            'cover_image': forms.FileInput(attrs={
-                'class': 'form-control',
-                'style': 'border: 1px solid #DDD; border-radius: 6px; padding: 10px;'
-            }),
-            'document': forms.FileInput(attrs={
-                'class': 'form-control',
-                'style': 'border: 1px solid #DDD; border-radius: 6px; padding: 10px;'
-            }),
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Book Title'}),
+            'author': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Author'}),
+            'genre': forms.Select(attrs={'class': 'form-select'}),
+            'location': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Location'}),
+            'donor_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Donor Name'}),
+            'contact_email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
+            'contact_phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone Number'}),
+            'delivery_options': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Delivery options'}),
+            'cover_image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'document': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
 
 
