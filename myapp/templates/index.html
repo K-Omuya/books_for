@@ -61,7 +61,7 @@
                         <div class="col-lg-8 text-center text-lg-center mb-lg-0">
                             <div class="d-flex flex-wrap">
                                 <div class="pe-4">
-                                    <a href="Bookforall@prc.cx" class="text-muted small"><i class="fas fa-envelope text-primary me-2"></i>Bookforall@prc.cx</a>
+                                    <a href="Bookforall@prc.cx" class="text-muted small"><i class="fas fa-envelope text-primary me-2" style="color: white"></i>Bookforall@prc.cx</a>
                                 </div>
                                 <div class="pe-0">
                                     <a href="#" class="text-muted small"><i class="fa fa-clock text-primary me-2"></i>Mon - Sat: 8.00 am-7.00 pm</a>
@@ -89,19 +89,26 @@
                                         </a>
                                     </div>
 
-                                    <!-- Profile Dropdown -->
-                                    <div class="dropdown ms-3">
-                                        <button class="btn btn-outline-primary dropdown-toggle d-flex align-items-center" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fas fa-user-circle me-1"></i> Profile
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                                            <li><a class="dropdown-item" href="{% url 'profile' %}">View Profile</a></li>
-                                            <li><a class="dropdown-item" href="{% url 'wallet' %}">My wallet</a></li>
-                                            <li><a class="dropdown-item" href="{% url 'settings' %}">Settings</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item text-danger" href="{% url 'logout' %}">Logout</a></li>
-                                        </ul>
-                                    </div>
+                                    <!-- Profile Dropdown - Fixed to the Right -->
+<div class="position-absolute end-0 me-3">
+    <div class="dropdown">
+        <button class="btn btn-outline-light dropdown-toggle d-flex align-items-center"
+                type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user-circle me-1"></i> Profile
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end position-absolute end-0 mt-2"
+            aria-labelledby="profileDropdown" style="right: 0;">
+            <li><a class="dropdown-item" href="{% url 'profile' %}">View Profile</a></li>
+            <li><a class="dropdown-item" href="{% url 'wallet' %}">My Wallet</a></li>
+            <li><a class="dropdown-item" href="{% url 'settings' %}">Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="{% url 'logout' %}">Logout</a></li>
+            <li><a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">Admin Panel</a></li>
+
+        </ul>
+    </div>
+</div>
+
                                 </div>
 
                             </div>
@@ -117,50 +124,40 @@
                             <span class="fa fa-bars"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarCollapse">
-                            <div class="navbar-nav mx-0 mx-lg-auto">
-                                <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
-                                <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Exchange</a>
-                                    <div class="dropdown-menu">
-                                        <a href="{% url 'upload_book' %}" class="dropdown-item">Upload Book</a>
-                                        <a href="{% url 'book_exchange' %}" class="dropdown-item">Book Catalogue</a>
-                                        <a href="{% url 'view_donated_books' %}" class="dropdown-item">Donated Books</a>
-                                        <a href="{% url 'view_pledged_books' %}" class="dropdown-item">Pledged Books</a>
-                                    </div>
-                                </div>
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Donate</a>
-                                    <div class="dropdown-menu">
-                                        <a href="{% url 'monetary_donations' %}" class="dropdown-item">Donate Money</a>
-                                        <a href="{% url 'pledge_book' %}" class="dropdown-item">Pledge Book</a>
-                                        <a href="{% url 'donate_book' %}" class="dropdown-item">Donate book</a>
-                                    </div>
-                                </div>
-
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Clubs</a>
-                                    <div class="dropdown-menu">
-                                        <a href="{% url 'create_book_club' %}" class="dropdown-item">Create Book Club</a>
-                                        <a href="{% url 'view_book_clubs' %}" class="dropdown-item">Book Clubs</a>
-                                    </div>
-                                </div>
-                                <a href="{% url 'blogs' %}" class="nav-item nav-link">Blogs</a>
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Explore</a>
-                                    <div class="dropdown-menu">
-                                        <a href="{% url 'features' %}" class="dropdown-item">Our Features</a>
-                                        <a href="{% url 'team' %}" class="dropdown-item">Our Team</a>
-                                        <a href="{% url 'testimonials' %}" class="dropdown-item">Testimonials</a>
-                                        <a href="{% url 'impact' %}" class="dropdown-item">Impact</a>
-                                    </div>
-                                </div>
-                                <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
-                                <div class="nav-btn ps-3">
-                                    </button>
+                        <div class="navbar-nav mx-0 mx-lg-auto">
+                            <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
+                            <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Exchange</a>
+                                <div class="dropdown-menu">
+                                    <a href="{% url 'upload_book' %}" class="dropdown-item">Upload Book</a>
+                                    <a href="{% url 'book_exchange' %}" class="dropdown-item">Book Catalogue</a>
+                                    <a href="{% url 'view_donated_books' %}" class="dropdown-item">Donated Books</a>
+                                    <a href="{% url 'view_pledged_books' %}" class="dropdown-item">Pledged Books</a>
                                 </div>
                             </div>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Donate</a>
+                                <div class="dropdown-menu">
+                                    <a href="{% url 'monetary_donations' %}" class="dropdown-item">Donate Money</a>
+                                    <a href="{% url 'pledge_book' %}" class="dropdown-item">Pledge Book</a>
+                                    <a href="{% url 'donate_book' %}" class="dropdown-item">Donate Book</a>
+                                </div>
+                            </div>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Clubs</a>
+                                <div class="dropdown-menu">
+                                    <a href="{% url 'create_book_club' %}" class="dropdown-item">Create Book Club</a>
+                                    <a href="{% url 'view_book_clubs' %}" class="dropdown-item">Book Clubs</a>
+                                </div>
+                            </div>
+                            <a href="{% url 'blogs' %}" class="nav-item nav-link">Blogs</a>
+                            <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
                         </div>
+
+
+                    </div>
+
                     </nav>
                 </div>
             </div>
@@ -263,13 +260,12 @@ function closeModal(id) {
     document.getElementById(id).remove();
 }
 </script>
-
 <!-- About Start -->
 <div class="container-fluid about pt-5" style="background-color: #F5F5F5;">
     <div class="container pt-5">
         <div class="row g-5 align-items-center">
             <!-- Left Content -->
-            <div class="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
                 <div class="about-content h-100">
                     <h4 style="color: #3CB371; font-weight: bold;">About Books for All</h4>
                     <h1 class="display-4 mb-4" style="color: #004080; font-weight: 700;">Unlock Your Potential with the Power of Books</h1>
@@ -277,67 +273,86 @@ function closeModal(id) {
                         Explore a world of knowledge, imagination, and inspiration. Whether for learning or leisure,
                         Books for All brings stories and wisdom right to your fingertips.
                     </p>
+
+                    <!-- Tabs -->
                     <div class="tab-class pb-4">
-                        <ul class="nav d-flex mb-3">
+                        <ul class="nav d-flex flex-wrap justify-content-center mb-3">
                             <li class="nav-item">
                                 <a class="d-flex py-2 px-3 active" data-bs-toggle="pill" href="#tab-1"
-                                    style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px; font-weight: bold;">Our Mission</a>
+                                    style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px; font-weight: bold; margin-bottom: 5px;">
+                                    Our Mission
+                                </a>
                             </li>
                             <li class="nav-item mx-2">
                                 <a class="d-flex py-2 px-3" data-bs-toggle="pill" href="#tab-2"
-                                    style="background-color: #004080; color: #FFFFFF; border-radius: 5px; font-weight: bold;">Our Vision</a>
+                                    style="background-color: #004080; color: #FFFFFF; border-radius: 5px; font-weight: bold; margin-bottom: 5px;">
+                                    Our Vision
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a class="d-flex py-2 px-3" data-bs-toggle="pill" href="#tab-3"
-                                    style="background-color: #3CB371; color: #FFFFFF; border-radius: 5px; font-weight: bold;">Our Goal</a>
+                                    style="background-color: #3CB371; color: #FFFFFF; border-radius: 5px; font-weight: bold;">
+                                    Our Goal
+                                </a>
                             </li>
                         </ul>
+
                         <div class="tab-content">
-                            <div id="tab-1" class="tab-pane fade show active p-3" style="background-color: #FFFFFF; border: 2px solid #FF8200; border-radius: 10px;">
+                            <div id="tab-1" class="tab-pane fade show active p-3"
+                                style="background-color: #FFFFFF; border: 2px solid #FF8200; border-radius: 10px;">
                                 <div class="d-flex align-items-center py-3">
-                                    <span class="fas fa-rocket" style="color: #3CB371; font-size: 2.5rem; margin-right: 15px;"></span>
+                                    <span class="fas fa-rocket" style="color: #3CB371; font-size: 2rem; margin-right: 15px;"></span>
                                     <p class="mb-0" style="color: #333333;">To bridge the educational inequality by ensuring every student has access to books through donations and exchanges.</p>
                                 </div>
                             </div>
-                            <div id="tab-2" class="tab-pane fade p-3" style="background-color: #FFFFFF; border: 2px solid #004080; border-radius: 10px;">
+                            <div id="tab-2" class="tab-pane fade p-3"
+                                style="background-color: #FFFFFF; border: 2px solid #004080; border-radius: 10px;">
                                 <div class="d-flex align-items-center py-3">
-                                    <span class="fas fa-rocket" style="color: #FF8200; font-size: 2.5rem; margin-right: 15px;"></span>
+                                    <span class="fas fa-rocket" style="color: #FF8200; font-size: 2rem; margin-right: 15px;"></span>
                                     <p class="mb-0" style="color: #333333;">A future where no child lacks books and education is accessible to all.</p>
                                 </div>
                             </div>
-                            <div id="tab-3" class="tab-pane fade p-3" style="background-color: #FFFFFF; border: 2px solid #3CB371; border-radius: 10px;">
+                            <div id="tab-3" class="tab-pane fade p-3"
+                                style="background-color: #FFFFFF; border: 2px solid #3CB371; border-radius: 10px;">
                                 <div class="d-flex align-items-center py-3">
-                                    <span class="fas fa-rocket" style="color: #004080; font-size: 2.5rem; margin-right: 15px;"></span>
+                                    <span class="fas fa-rocket" style="color: #004080; font-size: 2rem; margin-right: 15px;"></span>
                                     <p class="mb-0" style="color: #333333;">Our goal is to make books accessible to everyone, fostering a culture of reading and learning.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <!-- Action Buttons -->
                     <div class="row g-3 align-items-center">
-                        <div class="col-sm-6">
-                            <button id="openAppointmentForm" class="btn py-3 px-4" style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px; font-weight: bold;">Make Appointment</button>
+                        <div class="col-md-6 text-center text-md-start">
+                            <button id="openAppointmentForm" class="btn py-3 px-4"
+                                style="background-color: #FF8200; color: #FFFFFF; border-radius: 5px; font-weight: bold; width: 100%;">
+                                Make Appointment
+                            </button>
                         </div>
-                        <div class="col-sm-6 d-flex align-items-center">
-                                <i class="" style="color: #3CB371;"></i>
-                            <div class="d-flex flex-column">
-                                <h3>Call Our Experts</h3>
-                                <p  style="color: #004080; font-weight: bold; text-decoration: none;">0703128764</p>
-                               </div>
+                        <div class="col-md-6 d-flex align-items-center justify-content-center">
+                            <div class="d-flex flex-column text-center text-md-start">
+                                <h3 style="font-size: 1.2rem;">Call Our Experts</h3>
+                                <p style="color: #004080; font-weight: bold; text-decoration: none;">0703128764</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Right Image -->
-            <div class="col-xl-6 wow fadeInUp text-end" data-wow-delay="0.2s">
+            <div class="col-lg-6 wow fadeInUp text-center" data-wow-delay="0.2s">
                 <div class="about-img h-100">
-                    <img src="{% static 'img/back.jpg' %}" class="img-fluid" style="width: 100%; height: auto; object-fit: cover;" alt="Books for All">
+                    <img src="{% static 'img/back.jpg' %}" class="img-fluid"
+                        style="width: 100%; height: auto; object-fit: cover; border-radius: 10px;"
+                        alt="Books for All">
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- About End -->
+
 
 <!-- Appointment Form Modal -->
 

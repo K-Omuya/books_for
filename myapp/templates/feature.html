@@ -158,74 +158,177 @@
 
 
 {% load static %}
-<!-- Features Start -->
+
+<!-- Features Section -->
 <div style="padding: 50px 0; background-color: #f8f9fa;">
     <div style="width: 90%; margin: 0 auto;">
         <div style="text-align: center;">
             <h4 style="color: #3CB371; font-weight: bold;">Why Choose Us?</h4>
             <h1 style="color: #004080; font-weight: 700;">Discover Our Key Features</h1>
             <p style="font-size: 16px; color: #333333;">
-                Books for All is dedicated to bridging the gap in literacy and education by ensuring that books are accessible to everyone, regardless of their background or financial situation. Our platform connects book donors with readers, fostering a culture of sharing knowledge and lifelong learning. Whether you want to donate, exchange, or receive books, we make the process seamless and inclusive.
+                Books for All is dedicated to bridging the gap in literacy and education by ensuring that books are accessible to everyone. Our platform connects book donors with readers, fostering a culture of sharing knowledge and lifelong learning.
             </p>
         </div>
 
-        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; margin-top: 30px;">
-            <!-- Feature 1 -->
-            <div style="flex: 1 1 30%; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-                <div style="margin-bottom: 15px;">
-                    <img src="{% static 'img/donate1.jpeg' %}" alt="Donate Books" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
-                </div>
-                <h4 style="color: #004080; font-weight: bold; margin-top: 15px;">Donate Books with Ease</h4>
-                <p style="color: #333333;">Contribute to education by donating books to those in need.</p>
-                <button onclick="openPopup('popup1')" style="background-color: #FF8200; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Read More</button>
+        <div class="feature-container">
+            <!-- Feature 1: Donate Books -->
+            <div class="feature-card">
+                <img src="{% static 'img/donate1.jpeg' %}" alt="Donate Books" class="feature-img">
+                <h4>Donate Books with Ease</h4>
+                <p>Contribute to education by donating books to those in need.</p>
+                <button onclick="openPopup('popup1')">Read More</button>
             </div>
 
-            <!-- Feature 2 -->
-            <div style="flex: 1 1 30%; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-                <div style="margin-bottom: 15px;">
-                    <img src="{% static 'img/exchange.jpeg' %}" alt="Exchange Books" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
-                </div>
-                <h4 style="color: #004080; font-weight: bold; margin-top: 15px;">Exchange Books</h4>
-                <p style="color: #333333;">Find and swap books with fellow readers.</p>
-                <button onclick="openPopup('popup2')" style="background-color: #FF8200; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Read More</button>
+            <!-- Feature 2: Exchange Books -->
+            <div class="feature-card">
+                <img src="{% static 'img/exchange.jpeg' %}" alt="Exchange Books" class="feature-img">
+                <h4>Exchange Books</h4>
+                <p>Find and swap books with fellow readers.</p>
+                <button onclick="openPopup('popup2')">Read More</button>
             </div>
 
-            <!-- Feature 3 -->
-            <div style="flex: 1 1 30%; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-                <div style="margin-bottom: 15px;">
-                    <img src="{% static 'img/materials.jpeg' %}" alt="Free Materials" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
-                </div>
-                <h4 style="color: #004080; font-weight: bold; margin-top: 15px;">Access Free Learning Materials</h4>
-                <p style="color: #333333;">Browse a wide selection of free educational materials.</p>
-                <button onclick="openPopup('popup3')" style="background-color: #FF8200; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Read More</button>
+            <!-- Feature 3: Free Learning Materials -->
+            <div class="feature-card">
+                <img src="{% static 'img/materials.jpeg' %}" alt="Free Materials" class="feature-img">
+                <h4>Access Free Learning Materials</h4>
+                <p>Browse a wide selection of free educational materials.</p>
+                <button onclick="openPopup('popup3')">Read More</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Popups -->
-<div id="popup1" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; z-index: 9999; width: 90%; max-width: 500px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 10px; overflow: hidden;">
-    <div style="padding: 20px; text-align: center;">
-        <span onclick="closePopup('popup1')" style="position: absolute; top: 10px; right: 20px; font-size: 24px; cursor: pointer; color: red;">&times;</span>
-        <h3 style="color: #004080; font-weight: bold; margin-bottom: 20px;">Donate Books with Ease</h3>
-        <p style="color: #333333;">Giving the gift of knowledge has never been simpler. Books for All provides an easy and efficient way to donate your books to those who need them most. Whether you have textbooks, novels, or educational resources, your contribution can make a significant impact on a student's learning journey or someone's passion for reading. With just a few steps, you can help bridge the literacy gap and bring the joy of books to underserved communities. Start donating today and be a part of the movement to make education accessible to everyone!</p>
+<!-- Styled Popups -->
+<div id="popup1" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup('popup1')">&times;</span>
+        <h3>Donate Books with Ease</h3>
+        <p>Books are more than just printed pages; they hold knowledge, inspiration, and a pathway to a better future. By donating books, you contribute to a world where everyone, regardless of financial background, can access learning materials.</p>
+        <p>Many students in underserved communities struggle to access quality books. Your donation helps bridge this gap, ensuring that knowledge is not a privilege but a right for everyone.</p>
+        <p>The process is simple. Visit our donation page, select the books you wish to give, and choose a nearby drop-off location or arrange for a collection.</p>
     </div>
 </div>
 
-<div id="popup2" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; z-index: 9999; width: 90%; max-width: 500px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 10px; overflow: hidden;">
-    <div style="padding: 20px; text-align: center;">
-        <span onclick="closePopup('popup2')" style="position: absolute; top: 10px; right: 20px; font-size: 24px; cursor: pointer; color: red;">&times;</span>
-        <h3 style="color: #004080; font-weight: bold; margin-bottom: 20px;">Exchange Books</h3>
-     <p>Discover a smarter way to expand your personal library with Books for All! Our book exchange system allows you to swap books with fellow readers, giving you access to a diverse collection without extra cost. Whether you're looking for new adventures in fiction, educational materials, or rare finds, you can trade your books for something fresh and exciting. Join a community of passionate readers, share knowledge, and promote sustainability by giving books a second life. Start exchanging today and keep the joy of reading alive!</p></div>
+<div id="popup2" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup('popup2')">&times;</span>
+        <h3>Exchange Books</h3>
+        <p>Book exchange is a smart and eco-friendly way to enjoy new books without spending extra money. Instead of letting books gather dust, swap them with fellow readers and discover new stories.</p>
+        <p>The book exchange feature encourages a sense of community. Whether you love fiction, self-improvement, or academic books, you can connect with like-minded individuals.</p>
+        <p>Browse available books, list the ones you want to exchange, and connect with others. Once a match is found, arrange a meetup or use a secure mailing service to swap books.</p>
+    </div>
 </div>
 
-<div id="popup3" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; z-index: 9999; width: 90%; max-width: 500px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 10px; overflow: hidden;">
-    <div style="padding: 20px; text-align: center;">
-        <span onclick="closePopup('popup3')" style="position: absolute; top: 10px; right: 20px; font-size: 24px; cursor: pointer; color: red;">&times;</span>
-        <h3 style="color: #004080; font-weight: bold; margin-bottom: 20px;">Access Free Learning Materials</h3>
-        <p style="color: #333333;">Learning should never be limited by cost. With Books for All, you can explore a vast collection of free educational resources, including textbooks, study guides, research papers, and skill-building materials. Whether you're a student, teacher, or lifelong learner, our platform provides easy access to high-quality learning materials across various subjects and levels. Empower yourself with knowledge and take advantage of this valuable resource to support your academic and personal growth. Start exploring today and unlock a world of learning—completely free!</p>
-         </div>
+<div id="popup3" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup('popup3')">&times;</span>
+        <h3>Access Free Learning Materials</h3>
+        <p>Learning should not be limited by financial constraints. We provide a vast collection of free educational materials, including textbooks, study guides, and research papers.</p>
+        <p>From science to literature, our platform offers resources across various subjects. Teachers can find lesson plans, and students can access revision materials—all for free.</p>
+        <p>Simply browse our digital library, search for materials, and download them instantly. No hidden fees—just unlimited access to knowledge.</p>
+    </div>
 </div>
+
+<!-- Popup Styles & Mobile Responsiveness -->
+<style>
+    .feature-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-between;
+    }
+
+    .feature-card {
+        flex: 1 1 calc(33.33% - 20px);
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .feature-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .feature-card h4 {
+        color: #004080;
+        font-weight: bold;
+    }
+
+    .feature-card p {
+        color: #333333;
+    }
+
+    .feature-card button {
+        background-color: #FF8200;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        z-index: 9999;
+        width: 90%;
+        max-width: 450px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .popup-content {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .popup h3 {
+        color: #004080;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .popup p {
+        color: #333333;
+        margin-bottom: 15px;
+    }
+
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 24px;
+        cursor: pointer;
+        color: red;
+    }
+
+    @media (max-width: 768px) {
+        .feature-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature-card {
+            flex: 1 1 100%;
+            max-width: 90%;
+        }
+
+        .popup {
+            width: 95%;
+            max-width: 380px;
+        }
+    }
+</style>
 
 <!-- Popup JavaScript -->
 <script>

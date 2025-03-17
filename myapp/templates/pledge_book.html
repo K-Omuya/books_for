@@ -219,6 +219,30 @@ h2 {
         {{ form.as_p }}
         <button type="submit" class="btn submit-btn">Submit Pledge</button>
     </form>
+
+    <!-- Back Link -->
+    <a href="{% url 'view_pledged_books' %}"
+       style="color: #004080; text-decoration: none; font-size: 14px; font-weight: bold; display: inline-block;
+              margin-top: 15px;"
+       onmouseover="this.style.textDecoration='underline'"
+       onmouseout="this.style.textDecoration='none'">
+        ⬅ View Pledged Books </a>
+</div>
+
+<!-- Apply styles to form fields -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll("form input, form select, form textarea").forEach(function(element) {
+            element.style.width = "100%";
+            element.style.padding = "10px";
+            element.style.marginTop = "5px";
+            element.style.marginBottom = "12px";
+            element.style.border = "1px solid #ccc";
+            element.style.borderRadius = "6px";
+            element.style.fontSize = "15px";
+        });
+    });
+</script>
 </div>
 
 

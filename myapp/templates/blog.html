@@ -151,27 +151,22 @@
         <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
             <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
             <li class="breadcrumb-item"><a href="#">Pages</a></li>
-            <li class="breadcrumb-item active text-primary">About Us</li>
+            <li class="breadcrumb-item active text-primary">Blog</li>
         </ol>
     </div>
 </div>
    <!-- Header End -->
 
-        <!-- Blog Start -->
-                <div class="container-fluid blog py-5">
-            <div class="container py-5">
-                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-                    <h4 class="text-primary">Our Blogs</h4>
-                    <h1 class="display-4 mb-4">Check out our latest stories</h1>
-
-                </div>
-
-                <div class="blog-carousel owl-carousel">
+<div class="blog-carousel owl-carousel">
     {% for blog in blogs %}
     <div class="blog-item wow fadeInUp" data-wow-delay="0.{{ forloop.counter }}s">
         <div class="blog-img p-4 pb-0">
-            <a href="#">
-                <img src="{{ blog.image.url }}" class="img-fluid w-100" alt="{{ blog.title }}">
+            <a href="{% url 'blog_detail' blog.id %}">
+                {% if blog.image %}
+                    <img src="{{ blog.image.url }}" class="img-fluid w-100" alt="{{ blog.title }}">
+                {% else %}
+                    <img src="{% static 'images/default-blog.jpg' %}" class="img-fluid w-100" alt="Default Image">
+                {% endif %}
             </a>
         </div>
         <div class="blog-content p-4">
@@ -179,9 +174,9 @@
                 <div class="small"><span class="fa fa-user text-primary me-2"></span> {{ blog.author.username }}</div>
                 <div class="small"><span class="fa fa-calendar text-primary me-2"></span> {{ blog.created_at|date:"d M Y" }}</div>
             </div>
-            <a href="#" class="h4 d-inline-block mb-3">{{ blog.title }}</a>
+            <a href="{% url 'blog_detail' blog.id %}" class="h4 d-inline-block mb-3">{{ blog.title }}</a>
             <p class="mb-3">{{ blog.content|truncatewords:20 }}</p>
-            <a href="#" class="btn btn-dark py-2 px-4 ms-2">
+            <a href="{% url 'blog_detail' blog.id %}" class="btn btn-dark py-2 px-4 ms-2">
                 <span class="me-2">Read More</span>
                 <i class="fa fa-arrow-right"></i>
             </a>
@@ -191,10 +186,6 @@
     <p>No blog posts available.</p>
     {% endfor %}
 </div>
-
-            </div>
-        </div>
-
 
 <!-- Footer Start -->
 <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" style="background-color: #004080; color: #FFFFFF;">

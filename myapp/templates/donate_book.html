@@ -156,120 +156,54 @@
     </div>
 </div>
 
+<div style="max-width: 500px; margin: 40px auto; padding: 25px; background: #f5f5f5; border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); text-align: center;">
 
-    <style>
-/* Ensure styles apply only to donation page */
-.donation-container {
-    max-width: 500px; /* Slightly wider */
-    margin: 40px auto;
-    padding: 25px;
-    background: #f5f5f5; /* Light background */
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
+    <h2 style="color: #004080; margin-bottom: 18px; font-size: 24px; font-weight: bold;">Donate a Book</h2>
 
-/* Heading */
-.donation-container h2 {
-    color: #004080; /* Deep blue */
-    margin-bottom: 18px;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-/* Buttons */
-.btn-container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.btn {
-    flex: 1; /* Equal button spacing */
-    text-decoration: none;
-    background: #FF8200; /* Bright Orange */
-    color: white;
-    padding: 10px 15px;
-    border-radius: 6px;
-    font-weight: bold;
-    transition: 0.3s ease;
-    text-align: center;
-    margin: 0 7px;
-    font-size: 15px;
-}
-
-.btn:hover {
-    background: #cc6800;
-}
-
-/* Form */
-.donation-form {
-    text-align: left;
-}
-
-.donation-form label {
-    font-weight: bold;
-    color: #333;
-    font-size: 15px;
-}
-
-.donation-form input,
-.donation-form select,
-.donation-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 15px;
-}
-
-/* Submit Button */
-.submit-btn {
-    width: 100%;
-    background: #FF8200; /* Soft Green */
-    padding: 12px;
-    border: none;
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s ease;
-    border-radius: 6px;
-}
-
-.submit-btn:hover {
-    background: #2e8b57;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-    .donation-container {
-        width: 95%;
-    }
-    .btn {
-        padding: 8px 12px;
-        font-size: 14px;
-    }
-}
-</style>
-
-<div class="donation-container">
-    <h2>Donate a Book</h2>
-
-    <div class="btn-container">
-{#        <a href="{% url 'pay' %}" class="btn">Donate Money</a>#}
-        <a href="{% url 'pledge_book' %}" class="btn">Pledge a Book</a>
-    </div>
-
-    <form method="POST" enctype="multipart/form-data" class="donation-form">
+    <form method="POST" enctype="multipart/form-data" style="text-align: left;">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn submit-btn">Submit Donation</button>
+
+        <!-- Loop through form fields to apply styles -->
+        {% for field in form %}
+            <label for="{{ field.id_for_label }}" style="font-weight: bold; color: #333; font-size: 15px; display: block; margin-top: 12px;">
+                {{ field.label }}
+            </label>
+            {{ field }}
+        {% endfor %}
+
+        <button type="submit" style="width: 100%; background: #FF8200; padding: 12px; border: none;
+                color: white; font-size: 17px; font-weight: bold; cursor: pointer; transition: 0.3s ease;
+                border-radius: 6px; margin-top: 15px;"
+                onmouseover="this.style.background='#cc6800'"
+                onmouseout="this.style.background='#FF8200'">
+            Submit Donation
+        </button>
     </form>
+
+    <!-- Back Link -->
+    <a href="{% url 'view_donated_books' %}"
+       style="color: #004080; text-decoration: none; font-size: 14px; font-weight: bold; display: inline-block;
+              margin-top: 15px;"
+       onmouseover="this.style.textDecoration='underline'"
+       onmouseout="this.style.textDecoration='none'">
+        ⬅ View Donated Books </a>
 </div>
 
+<!-- Apply styles to form fields -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll("form input, form select, form textarea").forEach(function(element) {
+            element.style.width = "100%";
+            element.style.padding = "10px";
+            element.style.marginTop = "5px";
+            element.style.marginBottom = "12px";
+            element.style.border = "1px solid #ccc";
+            element.style.borderRadius = "6px";
+            element.style.fontSize = "15px";
+        });
+    });
+</script>
 
 <!-- Footer Start -->
 <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" style="background-color: #004080; color: #FFFFFF;">

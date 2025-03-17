@@ -235,67 +235,98 @@
     </div>
 </div>
 <!-- About End -->
+<!-- Open Appointment Button -->
+<button id="openAppointmentForm" style="padding: 10px 15px; background: #004080; color: white;
+    border: none; border-radius: 6px; cursor: pointer;">
+    Book Appointment
+</button>
 
 <!-- Appointment Form Modal -->
+<div id="appointmentModal" style="display: none; position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); width: 90%; max-width: 400px; text-align: center; z-index: 1000;">
 
-<!-- Styles -->
-<style>
-.modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); }
-.modal-content { text-align: center; }
-.close { cursor: pointer; float: right; font-size: 20px; }
-#successMessage { display: none; position: fixed; top: 20px; right: 20px; background: green; color: white; padding: 10px; border-radius: 5px; }
-</style>
-<div id="appointmentModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Book an Appointment</h2>
-        <form id="appointmentForm">
-            <input type="text" id="name" placeholder="Your Name" required>
-            <input type="email" id="email" placeholder="Your Email" required>
-            <input type="date" id="date" required>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+    <span class="close" style="cursor: pointer; float: right; font-size: 20px;">&times;</span>
+
+    <h2>Book an Appointment</h2>
+
+    <form id="appointmentForm">
+        <input type="text" id="name" placeholder="Your Name" required
+            style="width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px;">
+
+        <input type="email" id="email" placeholder="Your Email" required
+            style="width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px;">
+
+        <input type="date" id="date" required
+            style="width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px;">
+
+        <button type="submit" style="width: 100%; background: #FF8200; padding: 10px; border: none;
+            color: white; font-size: 16px; font-weight: bold; cursor: pointer; border-radius: 5px;">
+            Submit
+        </button>
+    </form>
+
+    <p id="errorMessage" style="color: red; display: none; margin-top: 10px;">Please fill all fields.</p>
 </div>
 
 <!-- Success Popup -->
-<div id="successMessage">Appointment Booked Successfully!</div>
+<div id="successMessage" style="display: none; position: fixed; top: 20px; right: 20px;
+    background: green; color: white; padding: 10px; border-radius: 5px; opacity: 0; transition: opacity 0.5s;">
+    ✅ Appointment Booked Successfully!
+</div>
 
 <!-- JavaScript -->
 <script>
-document.getElementById("openAppointmentForm").onclick = function() {
-    document.getElementById("appointmentModal").style.display = "block";
-};
-
-document.querySelector(".close").onclick = function() {
-    document.getElementById("appointmentModal").style.display = "none";
-};
-
-document.getElementById("appointmentForm").onsubmit = function(event) {
-    event.preventDefault();
-
-    // Collect form data
-    let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
-    let date = document.getElementById("date").value;
-
-    // Send data to database (You need to implement the backend part)
-    console.log("Appointment Data:", { name, email, date });
-
-    // Close the form
-    document.getElementById("appointmentModal").style.display = "none";
-
-    // Show success message
+document.addEventListener("DOMContentLoaded", function() {
+    let modal = document.getElementById("appointmentModal");
+    let openBtn = document.getElementById("openAppointmentForm");
+    let closeBtn = document.querySelector(".close");
+    let form = document.getElementById("appointmentForm");
     let successMessage = document.getElementById("successMessage");
-    successMessage.style.display = "block";
+    let errorMessage = document.getElementById("errorMessage");
 
-    // Hide success message after 3 seconds
-    setTimeout(() => {
-        successMessage.style.display = "none";
-    }, 3000);
-};
+    // Open Modal
+    openBtn.onclick = function() {
+        modal.style.display = "block";
+    };
+
+    // Close Modal
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    };
+
+    // Close Modal When Clicking Outside
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+
+    // Form Submission
+    form.onsubmit = function(event) {
+        event.preventDefault();
+
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let date = document.getElementById("date").value;
+
+        if (!name || !email || !date) {
+            errorMessage.style.display = "block";
+            return;
+        }
+
+        errorMessage.style.display = "none";
+        modal.style.display = "none";
+        successMessage.style.display = "block";
+        successMessage.style.opacity = "1";
+
+        setTimeout(() => {
+            successMessage.style.opacity = "0";
+            setTimeout(() => successMessage.style.display = "none", 500);
+        }, 3000);
+    };
+});
 </script>
-
 
 
 

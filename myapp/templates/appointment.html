@@ -1,39 +1,125 @@
-<form id="appointmentForm">
-    {% csrf_token %}
-    <input type="text" name="name" placeholder="Full Name" required>
-    <input type="email" name="email" placeholder="Email Address" required>
-    <input type="text" name="phone" placeholder="Phone Number" required>
-    <input type="date" name="date" required>
-    <input type="time" name="time" required>
-    <textarea name="message" placeholder="Additional Message"></textarea>
-    <button type="submit">Book Appointment</button>
-</form>
+<!-- Dark Mode Toggle -->
+<button onclick="toggleDarkMode()" style="position: absolute; top: 10px; right: 10px; padding: 8px 12px;
+                background: #004080; color: white; border: none; border-radius: 6px; cursor: pointer;">
+    Toggle Dark Mode 🌙
+</button>
 
-<div id="successMessage" style="display: none; color: green; font-weight: bold;">
-    Appointment booked successfully!
+<!-- Appointment Form Container -->
+<div style="max-width: 500px; margin: 40px auto; padding: 25px; background: #f5f5f5; border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); text-align: center;">
+
+    <h2 style="color: #004080; font-size: 24px; font-weight: bold; margin-bottom: 18px;">Book an Appointment</h2>
+
+    <form id="appointmentForm" method="POST" enctype="multipart/form-data"
+          style="text-align: left;">
+        {% csrf_token %}
+
+        <!-- Appointment ID (Hidden) -->
+        <input type="hidden" id="appointmentId" name="appointment_id">
+
+        <!-- Form Fields -->
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="John Doe" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="example@mail.com" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" name="phone" placeholder="+123 456 7890" required>
+
+        <label for="date">Select Date</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="time">Select Time</label>
+        <input type="time" id="time" name="time" required>
+
+        <label for="message">Additional Message</label>
+        <textarea id="message" name="message" placeholder="Any special requests?"></textarea>
+
+        <!-- Submit Button -->
+        <button type="submit" style="width: 100%; background: #FF8200; padding: 12px; border: none;
+                color: white; font-size: 17px; font-weight: bold; cursor: pointer; transition: 0.3s ease;
+                border-radius: 6px; margin-top: 15px;"
+                onmouseover="this.style.background='#cc6800'"
+                onmouseout="this.style.background='#FF8200'">
+            Book Appointment
+        </button>
+    </form>
+
+    <!-- Success Message -->
+    <div id="successMessage" style="display: none; color: green; font-weight: bold; margin-top: 15px;
+                opacity: 0; transition: opacity 0.5s;">
+        ✅ Appointment booked successfully!
+    </div>
 </div>
 
-<script>
-    document.getElementById("appointmentForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-        let formData = new FormData(this);
+<!-- Back Link -->
+<a href="{% url 'book_exchange' %}"
+   style="color: #004080; text-decoration: none; font-size: 14px; font-weight: bold; display: inline-block;
+          margin-top: 15px;"
+   onmouseover="this.style.textDecoration='underline'"
+   onmouseout="this.style.textDecoration='none'">
+    ⬅ Back to Book Catalogue
+</a>
 
-        fetch("{% url 'book_appointment' %}", {
-            method: "POST",
-            body: formData,
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                document.getElementById("successMessage").style.display = "block";
-                setTimeout(() => {
-                    document.getElementById("successMessage").style.display = "none";
-                }, 3000);
-                this.reset();
-            } else {
-                alert(data.message);
+<!-- JavaScript for Enhanced Functionality -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let form = document.getElementById("appointmentForm");
+
+        // Auto-fill saved values
+        ["name", "email", "phone", "date", "time", "message"].forEach(id => {
+            if (localStorage.getItem(id)) {
+                document.getElementById(id).value = localStorage.getItem(id);
             }
-        })
-        .catch(error => console.error("Error:", error));
+        });
+
+        // Prevent selecting past dates and times
+        let today = new Date().toISOString().split("T")[0];
+        document.getElementById("date").setAttribute("min", today);
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            if (!confirm("Are you sure you want to book this appointment?")) return;
+
+            let formData = new FormData(this);
+            formData.append("appointment_id", Math.floor(Math.random() * 1000000));
+
+            fetch("{% url 'book_appointment' %}", {
+                method: "POST",
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    let successMessage = document.getElementById("successMessage");
+                    successMessage.style.display = "block";
+                    successMessage.style.opacity = "1";
+
+                    setTimeout(() => {
+                        successMessage.style.opacity = "0";
+                        setTimeout(() => successMessage.style.display = "none", 500);
+                    }, 3000);
+
+                    // Save inputs to local storage
+                    ["name", "email", "phone", "date", "time", "message"].forEach(id => {
+                        localStorage.setItem(id, document.getElementById(id).value);
+                    });
+
+                    this.reset();
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
     });
+
+    // Dark Mode Toggle
+    function toggleDarkMode() {
+        let body = document.body;
+        body.style.background = body.style.background === "black" ? "#f5f5f5" : "black";
+        body.style.color = body.style.color === "white" ? "black" : "white";
+    }
 </script>

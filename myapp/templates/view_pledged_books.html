@@ -232,6 +232,22 @@ p {
 <div class="pledged-books-container">
     <h2>Pledged Books</h2>
 
+    <a href="{% url 'pledge_book' %}"
+       style="background-color: #FF8200;
+              color: #FFFFFF;
+              padding: 12px 20px;
+              border: none;
+              cursor: pointer;
+              text-decoration: none;
+              font-size: 16px;
+              border-radius: 5px;
+              display: block;
+              text-align: center;
+              width: 200px;
+              margin: 30px auto 0;
+              transition: background 0.3s ease;
+              position: relative;
+              z-index: 2;">➕ Pledge a Book</a>
     <div class="book-list">
         {% for book in pledged_books %}
         <div class="book-card">

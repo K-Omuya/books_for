@@ -27,17 +27,15 @@ SECRET_KEY = 'django-insecure-162)*a$o%&#zq_jjd=g7o8ysod9bn%z0m)5d4b8rb-)fgwex0a
 # SECURITY WARNING: don't run with debug turned on in production!
 #
 # ALLOWED_HOSTS = []
-DEBUG = False
+DEBUG = True
 
 
 import os
 
-ALLOWED_HOSTS = [
-    'books-for-1.onrender.com',  # Your Render domain
-    '127.0.0.1',  # Localhost for testing
-    'localhost',
-    os.getenv('RENDER_EXTERNAL_HOSTNAME', ''),  # Handle dynamic hostname on Render
-]
+import os
+
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'books-for-1.onrender.com,127.0.0.1,localhost').split(',')
+
 
 
 

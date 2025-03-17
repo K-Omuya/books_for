@@ -6,10 +6,15 @@ from django.http import HttpResponse
 
 from myapp.credentials import MpesaAccessToken, LipanaMpesaPpassword
 
+def home(request):
+    return render(request, 'index.html')
+
+def blogs(request):
+    return render(request, 'blog.html')
 def upload_fee(request):
     return render(request, 'upload_fee.html')
 
-def home(request):
+def index(request):
     return render(request, 'index.html')
 def about(request):
     return render(request, 'about.html')
@@ -23,10 +28,6 @@ def profile(request):
 @login_required
 def settings(request):
     return render(request, 'settings.html')
-
-
-def blogs(request):
-    return render(request, 'blog.html')
 
 def features(request):
     return render(request, 'feature.html')
@@ -511,3 +512,33 @@ def wallet(request):
         'downloaded_pdfs': downloaded_pdfs,
     }
     return render(request, 'wallet.html', context)
+
+
+
+from django.shortcuts import render
+from django.http import JsonResponse
+from django.template.loader import render_to_string
+from .models import Testimonial
+from .forms import TestimonialForm
+
+def testimonials_page(request):
+    if request.method == "POST":
+        form = TestimonialForm(request.POST, request.FILES)
+        if form.is_valid():
+            testimonial = form.save()
+
+            # Render the updated testimonials section
+            testimonials = Testimonial.objects.all().order_by('-id')
+            testimonials_html = render_to_string('testimonials.html', {'testimonials': testimonials})
+
+            return JsonResponse({"success": True, "testimonials_html": testimonials_html})
+
+    testimonials = Testimonial.objects.all().order_by('-id')
+    form = TestimonialForm()
+    return render(request, 'testimonials.html', {'form': form, 'testimonials': testimonials})
+from django.shortcuts import render
+from .models import Blog  # Ensure Blog model is imported
+
+def blog_list(request):
+    blogs = Blog.objects.all()  # Fetch all blog posts
+    return render(request, 'blog.html', {'blogs': blogs})

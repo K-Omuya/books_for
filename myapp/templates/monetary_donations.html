@@ -155,17 +155,100 @@
         </div>
         <!-- Header End -->
 
-    <h1>Make a Donation</h1>
-    <form action="{% url 'process_donation' %}" method="POST">
-        {% csrf_token %}
-        <label for="name">Your Name (Optional):</label><br>
-        <input type="text" id="name" name="name" placeholder="Enter your name"><br><br>
 
-        <label for="phone">Your Phone Number:</label><br>
-        <input type="tel" id="phone" name="phone" placeholder="254xxxxxxxxx" required><br><br>
+    {% load static %}
 
-        <label for="amount">Donation Amount (Ksh):</label><br>
-        <input type="number" id="amount" name="amount" placeholder="Enter amount" min="10" required>
+<div style="display: flex; flex-wrap: wrap; width: 90%; margin: 40px auto; background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); overflow: hidden;">
+    <!-- LEFT COLUMN: Encouraging Message -->
+    <div style="flex: 1; padding: 40px; background: #004080; color: white; text-align: center;">
+        <h1 style="font-size: 28px; margin-bottom: 20px;">Make a Difference Today</h1>
+        <p style="font-size: 16px; margin-bottom: 20px;">Your donation helps provide books, education, and resources to those in need.</p>
+        <p style="font-size: 16px; margin-bottom: 20px;">Join us in changing lives through knowledge and literacy.</p>
+        <p style="font-size: 16px; margin-bottom: 20px;">Every contribution counts. Let's create a world where learning is accessible to all!</p>
+    </div>
+
+    <!-- RIGHT COLUMN: Donation Form -->
+    <div style="flex: 1; padding: 40px;">
+        <form id="donationForm">
+            <!-- Step 1: Select Amount -->
+            <div class="form-step active" id="step-1" style="display: block;">
+                <h2>Select Donation Amount</h2>
+                <div style="margin-bottom: 15px;">
+                    <label style="font-weight: bold; color: #333;">Choose Amount:</label>
+                    <select id="amount" style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px;">
+                        <option value="500">KES 500</option>
+                        <option value="1000">KES 1,000</option>
+                        <option value="5000">KES 5,000</option>
+                        <option value="custom">Custom Amount</option>
+                    </select>
+                </div>
+                <div id="customAmountDiv" style="margin-bottom: 15px; display: none;">
+                    <label style="font-weight: bold; color: #333;">Enter Custom Amount:</label>
+                    <input type="number" id="customAmount" placeholder="Enter amount in KES" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                </div>
+                <button type="button" class="btn" onclick="nextStep(2)" style="width: 100%; padding: 12px; border: none; background: #FF8200; color: white; font-size: 16px; cursor: pointer; border-radius: 5px; margin-top: 10px;">Next</button>
+            </div>
+
+            <!-- Step 2: Enter Details -->
+            <div class="form-step" id="step-2" style="display: none;">
+                <h2>Enter Your Details</h2>
+                <div style="margin-bottom: 15px;">
+                    <label style="font-weight: bold; color: #333;">Full Name:</label>
+                    <input type="text" id="name" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="font-weight: bold; color: #333;">Email:</label>
+                    <input type="email" id="email" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="font-weight: bold; color: #333;">Phone Number:</label>
+                    <input type="text" id="phone" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                </div>
+                <button type="button" onclick="prevStep(1)" style="width: 49%; padding: 12px; background: #ccc; border: none; font-size: 16px; cursor: pointer; border-radius: 5px;">Back</button>
+                <button type="button" onclick="nextStep(3)" style="width: 49%; padding: 12px; background: #FF8200; border: none; color: white; font-size: 16px; cursor: pointer; border-radius: 5px;">Next</button>
+            </div>
+
+            <!-- Step 3: Payment Options -->
+            <div class="form-step" id="step-3" style="display: none;">
+                <h2>Choose Payment Method</h2>
+                <div style="margin-bottom: 15px;">
+                    <label style="font-weight: bold; color: #333;">Payment Method:</label>
+                    <select id="paymentMethod" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                        <option value="mpesa">M-Pesa</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="card">Credit/Debit Card</option>
+                    </select>
+                </div>
+                <button type="button" onclick="prevStep(2)" style="width: 49%; padding: 12px; background: #ccc; border: none; font-size: 16px; cursor: pointer; border-radius: 5px;">Back</button>
+                <button type="submit" style="width: 49%; padding: 12px; background: #FF8200; border: none; color: white; font-size: 16px; cursor: pointer; border-radius: 5px;">Donate Now</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function nextStep(step) {
+        document.querySelector('.form-step:not([style*="display: none"])').style.display = 'none';
+        document.getElementById('step-' + step).style.display = 'block';
+    }
+
+    function prevStep(step) {
+        document.querySelector('.form-step:not([style*="display: none"])').style.display = 'none';
+        document.getElementById('step-' + step).style.display = 'block';
+    }
+
+    document.getElementById('amount').addEventListener('change', function () {
+        document.getElementById('customAmountDiv').style.display = this.value === 'custom' ? 'block' : 'none';
+    });
+
+    document.getElementById('donationForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert('Thank you for your donation!');
+    });
+</script>
+
+
+
 <!-- Footer Start -->
 <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" style="background-color: #004080; color: #FFFFFF;">
     <div class="container py-5">
