@@ -1,0 +1,14 @@
+  <h1>Your Mini Library</h1>
+    <ul>
+        {% for book in books %}
+        <li>
+            <strong>{{ book.title }}</strong> by {{ book.author }}
+            <br>Genre: {{ book.genre }}
+            <br>Uploaded on: {{ book.date_uploaded }}
+            {% if book.download_available %}
+                <a href="{{ book.document.url }}" download>Download</a>
+            {% endif %}
+            <button>Remove</button>
+        </li>
+        {% endfor %}
+    </ul>

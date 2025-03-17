@@ -1,28 +1,27 @@
+# models.py
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class Book(models.Model):
-        title = models.CharField(max_length=200)
-        author = models.CharField(max_length=100)
-        genre = models.CharField(max_length=50, choices=[
-            ('Fiction', 'Fiction'),
-            ('Non-Fiction', 'Non-Fiction'),
-            ('Science', 'Science'),
-            ('Biography', 'Biography')
-        ])
-        donor_name = models.CharField(max_length=100)
-        contact_details = models.CharField(max_length=200)
-        location = models.CharField(max_length=100)
-        delivery_option = models.CharField(max_length=100, choices=[
-            ('Pickup', 'Pickup'),
-            ('Courier', 'Courier')
-        ])
-        cover_image = models.ImageField(upload_to='book_images/', null=True, blank=True)
-        document = models.FileField(upload_to='book_documents/', null=True, blank=True)
+    GENRES = [
+        ('Fiction', 'Fiction'),
+        ('Non-Fiction', 'Non-Fiction'),
+        ('Mystery', 'Mystery'),
+        ('Fantasy', 'Fantasy'),
+        ('Science', 'Science'),
+    ]
 
-        def __str__(self):
-            return self.title
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=200)
+    genre = models.CharField(max_length=50, choices=GENRES)
+    document = models.FileField(upload_to='books/')
+    donor = models.ForeignKey(User, on_delete=models.CASCADE)
+    location = models.CharField(max_length=200)
+    exchange_available = models.BooleanField(default=True)
+    download_available = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.title
 
 class Pledge(models.Model):
     name = models.CharField(max_length=255)
@@ -150,68 +149,6 @@ class Subscription(models.Model):
 
 
 
-
-from django.db import models
-
-class Payment(models.Model):
-    phone_number = models.CharField(max_length=15)
-    amount = models.DecimalField(max_digits=10, decimal_places=2, default=20.00)
-    transaction_id = models.CharField(max_length=100, blank=True, null=True)
-    status = models.CharField(max_length=20, choices=[("Pending", "Pending"), ("Completed", "Completed")], default="Pending")
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.phone_number} - {self.status}"
-
-
-from django.db import models
-
-from django.db import models
-
-class Book(models.Model):
-    title = models.CharField(max_length=200)
-    author = models.CharField(max_length=100)
-    genre = models.CharField(max_length=50, choices=[
-        ('Fiction', 'Fiction'),
-        ('Non-Fiction', 'Non-Fiction'),
-        ('Science', 'Science'),
-        ('Biography', 'Biography')
-    ])
-    donor_name = models.CharField(max_length=100)
-    contact_details = models.CharField(max_length=200)
-    location = models.CharField(max_length=100)
-    delivery_option = models.CharField(max_length=100, choices=[
-        ('Pickup', 'Pickup'),
-        ('Courier', 'Courier')
-    ])
-    cover_image = models.ImageField(upload_to='book_images/', null=True, blank=True)
-    document = models.FileField(upload_to='book_documents/', null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)  # Automatically set the current date/time when a record is created
-
-    def __str__(self):
-        return self.title
-
-
-from django.db import models
-from django.contrib.auth.models import User
-
-class ExchangedBook(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    book_title = models.CharField(max_length=255)
-    status = models.CharField(max_length=50, choices=[('Pending', 'Pending'), ('Delivered', 'Delivered')])
-    exchange_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.book_title} - {self.status}"
-
-class DownloadedPDF(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    book_title = models.CharField(max_length=255)
-    download_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.book_title} - {self.download_date}"
-
 from django.utils.timezone import now  # Import this at the top
 
 class Blog(models.Model):
@@ -225,37 +162,81 @@ class Blog(models.Model):
         return self.title
 
 
+
+# models.py
 from django.db import models
 
-class FeaturedBook(models.Model):
-    title = models.CharField(max_length=255)
-    author = models.CharField(max_length=255)
-    description = models.TextField()
-    cover_image = models.ImageField(upload_to='book_covers/', blank=True, null=True)
-    contact_email = models.EmailField()  # New field for seller contact
-    added_on = models.DateTimeField(auto_now_add=True)
+class Book(models.Model):
+    GENRES = [
+        ('Fiction', 'Fiction'),
+        ('Non-Fiction', 'Non-Fiction'),
+        ('Mystery', 'Mystery'),
+        ('Fantasy', 'Fantasy'),
+        ('Science', 'Science'),
+    ]
+
+    title = models.CharField(max_length=200)  # Mandatory
+    author = models.CharField(max_length=200)  # Mandatory
+    genre = models.CharField(max_length=50, choices=GENRES)  # Mandatory
+    donor_name = models.CharField(max_length=200)  # Mandatory
+    contact_details = models.CharField(max_length=200)  # Mandatory
+    location = models.CharField(max_length=200)  # Mandatory
+    delivery_option = models.CharField(
+        max_length=50,
+        choices=[('Drop-off', 'Drop-off'), ('Pick-up', 'Pick-up')],  # Mandatory
+    )
+    cover_image = models.ImageField(upload_to='cover_photos/')  # Mandatory
+    document = models.FileField(upload_to='documents/', blank=True, null=True)  # Optional
+
+    def __str__(self):
+        return self.title# models.py
+
+
+from django.db import models
+from django.contrib.auth.models import User
+
+class Book(models.Model):
+    GENRES = [
+        ('Fiction', 'Fiction'),
+        ('Non-Fiction', 'Non-Fiction'),
+        ('Mystery', 'Mystery'),
+        ('Fantasy', 'Fantasy'),
+        ('Science', 'Science'),
+    ]
+
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=200)
+    genre = models.CharField(max_length=50, choices=GENRES)
+    location = models.CharField(max_length=200)
+    cover_image = models.ImageField(upload_to='cover_photos/', blank=True, null=True)
+    document = models.FileField(upload_to='documents/', blank=True, null=True)
+    download_available = models.BooleanField(default=True)
+    exchange_available = models.BooleanField(default=True)
+    donor_name = models.CharField(max_length=100)
+
+    # New fields
+    contact_email = models.EmailField(max_length=100, blank=True, null=True)
+    contact_phone = models.CharField(max_length=15, blank=True, null=True)
+    delivery_options = models.TextField(
+        help_text="Describe the delivery options available (e.g., shipping, pickup)",
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
         return self.title
 
 
-from django.contrib.auth.models import User
-
-class WalletTransaction(models.Model):
-    TRANSACTION_TYPES = [
-        ('exchange', 'Exchange'),
-        ('download', 'Download'),
-    ]
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+class ExchangeRequest(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    transaction_type = models.CharField(max_length=10, choices=TRANSACTION_TYPES)
-    payment_status = models.CharField(max_length=20, choices=[
-        ('pending', 'Pending'),
-        ('paid', 'Paid'),
-    ], default='pending')
-    status = models.CharField(max_length=20, default='Active')
-    created_at = models.DateTimeField(auto_now_add=True)
+    requester = models.ForeignKey(User, on_delete=models.CASCADE, related_name='requests')
+    request_date = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(
+        max_length=20,
+        choices=[('Pending', 'Pending'), ('Approved', 'Approved'), ('Rejected', 'Rejected')],
+        default='Pending'
+    )
+    admin_message = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.user.username} - {self.book.title} ({self.transaction_type})"
+        return f"{self.requester.username} -> {self.book.title}"

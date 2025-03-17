@@ -1,5 +1,6 @@
-<div style="text-align: center; padding: 40px;">
-    <h2>Payment Successful!</h2>
-    <p>You can now download your book.</p>
-    <a href="{{ book.document.url }}" download>Download Book</a>
+<div class="container text-center">
+    <h1>Download {{ book.title }}</h1>
+    <p>Click the button below to download the document:</p>
+    <a href="{{ book.document.url }}" class="btn btn-success">Download PDF</a>
+    <a href="{% url 'book_exchange' %}" class="btn btn-secondary mt-3">Back to Book List</a>
 </div>
