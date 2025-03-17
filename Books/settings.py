@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-162)*a$o%&#zq_jjd=g7o8ysod9bn%z0m)5d4b8rb-)fgwex0a
 # SECURITY WARNING: don't run with debug turned on in production!
 #
 # ALLOWED_HOSTS = []
-DEBUG = True
+DEBUG = False
 
 
 import os
@@ -36,6 +36,10 @@ import os
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'books-for-1.onrender.com,127.0.0.1,localhost').split(',')
 
+import os
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 
@@ -89,11 +93,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Books.wsgi.application'
 
 
-import os
-
-# Media settings
-MEDIA_URL = '/media/'  # URL that handles the media served from MEDIA_ROOT
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Absolute path to the media directory
 
 
 # Database
