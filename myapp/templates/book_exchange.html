@@ -13,12 +13,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
 
     <!-- Icon Font Stylesheet -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
 
     <!-- Libraries Stylesheet -->
     <link rel="stylesheet" href="{% static 'lib/animate/animate.min.css' %}"/>
@@ -31,7 +38,6 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
 </head>
 
-<body>
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -40,108 +46,137 @@
     </div>
     <!-- Spinner End -->
 
-    <!-- Navbar & Hero Start -->
-    <div class="container-fluid header-top">
-        <div class="nav-shaps-2"></div>
-        <div class="container d-flex align-items-center">
-            <div class="d-flex align-items-center h-100">
-                <a href="#" class="navbar-brand" style="height: 125px;">
-                    <h1 class="text-primary mb-0" style="color: #ffffff;">   <i class="fas fa-book-open me-2"></i> Books_for_All</h1>
-                </a>
-            </div>
-            <div class="w-100 h-100">
-                <div class="topbar px-0 py-2 d-none d-lg-block" style="height: 45px;">
-                    <div class="row gx-0 align-items-center">
-                        <div class="col-lg-8 text-center text-lg-center mb-lg-0">
-                            <div class="d-flex flex-wrap">
-                                <div class="pe-4">
-                                    <a href="Bookforall@prc.cx" class="text-muted small"><i class="fas fa-envelope text-primary me-2"></i>Bookforall@prc.cx</a>
-                                </div>
-                                <div class="pe-0">
-                                    <a href="#" class="text-muted small"><i class="fa fa-clock text-primary me-2"></i>Mon - Sat: 8.00 am-7.00 pm</a>
-                                </div>
+    <!-- Navbar & Hero Start --><div class="container-fluid header-top">
+    <div class="nav-shaps-2"></div>
+    <div class="container d-flex align-items-center">
+        <div class="d-flex align-items-center h-100">
+            <a href="#" class="navbar-brand" style="height: 125px;">
+                <h1 class="text-primary mb-0" style="color: #ffffff;">
+                    <i class="fas fa-book-open me-2"></i> Books_for_All
+                </h1>
+            </a>
+        </div>
+        <div class="w-100 h-100">
+            <div class="topbar px-0 py-2 d-none d-lg-block" style="height: 45px;">
+                <div class="row gx-0 align-items-center">
+                    <div class="col-lg-8 text-center text-lg-center mb-lg-0">
+                        <div class="d-flex flex-wrap">
+                            <div class="pe-4">
+                                <a href="Bookforall@prc.cx" class="text-muted small"
+                                    style="color: white; font-weight: bold;">
+                                    <i class="fas fa-envelope text-primary me-2" style="color: white"></i>
+                                    Bookforall@prc.cx
+                                </a>
+                            </div>
+                            <div class="pe-0">
+                                <a href="#" class="text-muted small"
+                                    style="color: white; font-weight: bold;">
+                                    <i class="fa fa-clock text-primary me-2" style="color: white"></i>
+                                    Mon - Sat: 8.00 am - 5.00 pm
+                                </a>
                             </div>
                         </div>
-                        <div class="col-lg-4 text-center text-lg-end">
-                            <div class="d-flex justify-content-end">
-                                <div class="d-flex align-items-center small">
-                                </div>
-                                <div class="d-flex pe-3">
-                                    <a class="btn p-0 text-primary me-3" href="https://facebook.com/bookforall20" target="_blank" rel="noopener noreferrer">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                    <a class="btn p-0 text-primary me-3" href="https://x.com/Bookforall20" target="_blank" rel="noopener noreferrer">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                    <a class="btn p-0 text-primary me-3" href="https://instagram.com/bookforall20" target="_blank" rel="noopener noreferrer">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                    <a class="btn p-0 text-primary me-0" href="https://linkedin.com/bookforall20" target="_blank" rel="noopener noreferrer">
-                                        <i class="fab fa-linkedin-in"></i>
-                                    </a>
+                    </div>
+                    <div class="col-lg-4 text-center text-lg-end">
+                        <div class="d-flex justify-content-end">
+                            <div class="d-flex align-items-center small"></div>
+                            <div class="d-flex align-items-center pe-3">
+                                <!-- Profile Dropdown - Fixed to the Right -->
+                                <div class="position-absolute end-0 me-3" style="padding-top: 100px;">
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-light dropdown-toggle d-flex align-items-center"
+                                            type="button" id="profileDropdown" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <i class="fas fa-user-circle me-1"></i> Profile
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end position-absolute end-0 mt-2"
+                                            aria-labelledby="profileDropdown" style="right: 0;">
+                                            <li><a class="dropdown-item" href="{% url 'profile' %}">My Profile</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="{% url 'home' %}">Logout</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">Admin Panel</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="nav-bar px-0 py-lg-0" style="height: 80px;">
-                    <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-lg-end">
-                        <a href="#" class="navbar-brand-2">
-                            <h1 class="text-primary mb-0"><i class="fas fa-book-open me-2"></i> Books_for_All</h1>
-                        </a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                            <span class="fa fa-bars"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarCollapse">
-                            <div class="navbar-nav mx-0 mx-lg-auto">
-                                <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
-                                <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Exchange</a>
-                                    <div class="dropdown-menu">
-                                        <a href="{% url 'upload_book' %}" class="dropdown-item">Upload Book</a>
-                                        <a href="{% url 'book_exchange' %}" class="dropdown-item">Book Catalogue</a>
-                                        <a href="{% url 'view_donated_books' %}" class="dropdown-item">Donated Books</a>
-                                        <a href="{% url 'view_pledged_books' %}" class="dropdown-item">Pledged Books</a>
-                                    </div>
-                                </div>
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Donate</a>
-                                    <div class="dropdown-menu">
-                                        <a href="{% url 'monetary_donations' %}" class="dropdown-item">Donate Money</a>
-                                        <a href="{% url 'pledge_book' %}" class="dropdown-item">Pledge Book</a>
-                                        <a href="{% url 'donate_book' %}" class="dropdown-item">Donate book</a>
-                                    </div>
-                                </div>
+            </div>
 
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Clubs</a>
-                                    <div class="dropdown-menu">
-                                        <a href="{% url 'create_book_club' %}" class="dropdown-item">Create Book Club</a>
-                                        <a href="{% url 'view_book_clubs' %}" class="dropdown-item">Book Clubs</a>
-                                    </div>
-                                </div>
-                                <a href="{% url 'blogs' %}" class="nav-item nav-link">Blogs</a>
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Explore</a>
-                                    <div class="dropdown-menu">
-                                        <a href="{% url 'features' %}" class="dropdown-item">Our Features</a>
-                                        <a href="{% url 'team' %}" class="dropdown-item">Our Team</a>
-                                        <a href="{% url 'testimonials' %}" class="dropdown-item">Testimonials</a>
-                                        <a href="{% url 'impact' %}" class="dropdown-item">Impact</a>
-                                    </div>
-                                </div>
-                                <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
-                                <div class="nav-btn ps-3">
-                                    </button>
+            <!-- Navigation Bar -->
+            <div class="nav-bar px-0 py-lg-0" style="height: 80px;">
+                <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-lg-end">
+                    <a href="#" class="navbar-brand-2">
+                        <h1 class="text-primary mb-0"><i class="fas fa-book-open me-2"></i> Books_for_All</h1>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav mx-0 mx-lg-auto">
+                            <a href="{% url 'home' %}" class="nav-item nav-link fw-bold text-dark">Home</a>
+                            <a href="{% url 'about' %}" class="nav-item nav-link fw-bold text-dark">About</a>
+
+                            <!-- Exchange Dropdown -->
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle fw-bold text-dark" data-bs-toggle="dropdown">
+                                    Exchange
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="{% url 'upload_book' %}" class="dropdown-item">Upload Book</a>
+                                    <a href="{% url 'book_exchange' %}" class="dropdown-item">Book Catalogue</a>
+                                    <a href="{% url 'view_donated_books' %}" class="dropdown-item">Donated Books</a>
+                                    <a href="{% url 'view_pledged_books' %}" class="dropdown-item">Pledged Books</a>
                                 </div>
                             </div>
+
+                            <!-- Donate Dropdown -->
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle fw-bold text-dark" data-bs-toggle="dropdown">
+                                    Donate
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="{% url 'monetary_donations' %}" class="dropdown-item">Donate Money</a>
+                                    <a href="{% url 'pledge_book' %}" class="dropdown-item">Pledge Book</a>
+                                    <a href="{% url 'donate_book' %}" class="dropdown-item">Donate Book</a>
+                                </div>
+                            </div>
+
+                            <!-- Clubs Dropdown -->
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle fw-bold text-dark" data-bs-toggle="dropdown">
+                                    Clubs
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="{% url 'create_book_club' %}" class="dropdown-item">Create Book Club</a>
+                                    <a href="{% url 'view_book_clubs' %}" class="dropdown-item">Book Clubs</a>
+                                </div>
+                            </div>
+
+                            <!-- Explore Dropdown -->
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle fw-bold text-dark" data-bs-toggle="dropdown">
+                                    Explore
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="{% url 'team' %}" class="dropdown-item">Our Team</a>
+                                    <a href="{% url 'features' %}" class="dropdown-item">Our Features</a>
+                                    <a href="{% url 'testimonials' %}" class="dropdown-item">Testimonials</a>
+                                    <a href="{% url 'impact' %}" class="dropdown-item">Our Impact</a>
+                                </div>
+                            </div>
+
+                            <a href="{% url 'blogs' %}" class="nav-item nav-link fw-bold text-dark">Blogs</a>
+                            <a href="{% url 'contact' %}" class="nav-item nav-link fw-bold text-dark">Contact Us</a>
                         </div>
-                    </nav>
-                </div>
+                    </div>
+                </nav>
             </div>
         </div>
     </div>
+</div>
+
     <!-- Navbar & Hero End -->
 
         <!-- Header Start -->
@@ -157,74 +192,115 @@
         </ol>
     </div>
 </div>
-<div class="container mt-5">
-    <!-- Upload Book Button -->
-    <div class="d-flex justify-content-between mb-4">
-        <h1 style="color: #007bff; font-size: 2rem;">Book Library</h1>
-        <a href="{% url 'upload_book' %}" class="btn btn-primary btn-lg shadow" style="border-radius: 50px; font-weight: bold;">Upload Book</a>
-    </div>
 
-    <!-- Search Bar and Sort By -->
-    <div class="row mb-4">
-        <div class="col-md-8">
-            <form method="GET" action="">
-                <input type="text" name="search" class="form-control form-control-lg shadow"
-                    placeholder="Search for books..."
-                    style="border-radius: 10px; padding: 10px; font-size: 1rem;">
-            </form>
+<div class="container" style="margin-top: 20px;">
+    <!-- Section Heading -->
+    <h2 class="text-center" style="font-weight: bold; color: #333;">Discover & Exchange Books</h2>
+    <p class="text-center" style="color: #555; max-width: 700px; margin: 0 auto;">
+        Explore a collection of books available for exchange or download. Find a book that interests you and take action!
+    </p>
+
+    <!-- Search and Sort Bar -->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <input type="text" id="searchBar" class="form-control" placeholder="Search books..."
+                style="border: 1px solid #ccc; padding: 8px; border-radius: 5px;">
         </div>
-        <div class="col-md-4">
-            <form method="GET" action="">
-                <select name="sort_by" class="form-select form-select-lg shadow" onchange="this.form.submit()"
-                    style="border-radius: 10px; padding: 10px; font-size: 1rem;">
-                    <option value="">Sort by</option>
-                    <option value="title">Title</option>
-                    <option value="author">Author</option>
-                    <option value="genre">Genre</option>
-                </select>
-            </form>
+        <div class="col-md-6 text-md-end text-center">
+            <select id="sortBy" class="form-control"
+                style="border: 1px solid #ccc; padding: 8px; border-radius: 5px;">
+                <option value="">Sort By</option>
+                <option value="title">Title</option>
+                <option value="author">Author</option>
+                <option value="genre">Genre</option>
+            </select>
         </div>
     </div>
+<h2 class="text-center" style="font-weight: bold; color: #333;">Our Book Library</h2>
+<p class="text-center" style="color: #555; max-width: 700px; margin: 0 auto;">
+        Search fot books in our store via the <strong>search</strong> bar or <strong>sort by:</strong>
+</p><br><br>
 
-    <!-- Books as Cards -->
-    <div class="row">
+    <!-- Book List -->
+    <div class="row" id="bookList">
         {% for book in books %}
-        <div class="col-12 col-sm-6 col-md-4">
-            <div class="card mb-4 shadow-lg"
-                style="height: 100%; border-radius: 15px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;">
-                <div class="card-img-container" style="height: 200px; overflow: hidden; border-bottom: 5px solid #f8f9fa;">
-                    {% if book.cover_image %}
-                    <img src="{{ book.cover_image.url }}" class="card-img-top h-100 w-100"
-                        style="object-fit: cover; width: 100%; height: 100%;" alt="{{ book.title }}">
-                    {% endif %}
-                </div>
-                <div class="card-body d-flex flex-column" style="padding: 15px;">
-                    <h5 class="card-title text-center text-dark font-weight-bold" style="font-size: 1.25rem;">{{ book.title }}</h5>
-                    <p class="card-text text-center text-muted" style="font-size: 0.9rem; line-height: 1.4;">
-                        <strong>Author:</strong> {{ book.author }}<br>
-                        <strong>Genre:</strong> {{ book.genre }}<br>
-                        <strong>Location:</strong> {{ book.location }}
-                    </p>
-                    <div class="mt-auto d-flex justify-content-around">
-                        <a href="{% url 'request_exchange' book.id %}" class="btn shadow btn-lg"
-                            style="border-radius: 50px; font-weight: bold; background-color: #FF9800; color: white;">Exchange</a>
-                        {% if book.downloadable %}
-                        <a href="{% url 'download_book' book.id %}" class="btn shadow btn-lg"
-                            style="border-radius: 50px; font-weight: bold; background-color: #4CAF50; color: white;">Download</a>
-                        {% else %}
-                        <a class="btn shadow btn-lg disabled" tabindex="-1" aria-disabled="true"
-                            style="border-radius: 50px; font-weight: bold; background-color: #9E9E9E; color: white;">Download</a>
-                        {% endif %}
-                    </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 book-card">
+            <div class="card mb-4" style="border-radius: 10px; box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);">
+
+                <!-- Book Cover -->
+                {% if book.cover_image %}
+                <img src="{{ book.cover_image.url }}" class="card-img-top" alt="{{ book.title }}"
+                    style="border-top-left-radius: 10px; border-top-right-radius: 10px; height: 250px; object-fit: cover;">
+                {% endif %}
+
+                <div class="card-body text-center">
+                    <h5 class="card-title book-title" style="font-weight: bold; color: #333;">{{ book.title }}</h5>
+                    <p class="card-text book-author"><strong>Author:</strong> {{ book.author }}</p>
+                    <p class="card-text book-genre"><strong>Genre:</strong> {{ book.genre }}</p>
+                    <p class="card-text book-location"><strong>Location:</strong> {{ book.location }}</p>
+
+                    <!-- Exchange Button (Warm Orange) -->
+                    <a href="{% url 'pay_for_book' book_id=book.id action='exchange' %}">
+                        <button style="background-color: #ff7f50; color: white; border: none; padding: 8px 15px;
+                            border-radius: 5px; margin-right: 5px; cursor: pointer;">
+                            Exchange
+                        </button>
+                    </a>
+
+                    <!-- Download Button (Green) -->
+                    <a href="{% url 'pay_for_book' book_id=book.id action='download' %}">
+                        <button style="background-color: #28a745; color: white; border: none; padding: 8px 15px;
+                            border-radius: 5px; cursor: pointer;">
+                            Download
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
-
-    <!-- Space after rows -->
-    <div style="margin-bottom: 30px;"></div>
 </div>
+
+<!-- JavaScript for Search & Sort Functionality -->
+<script>
+    document.getElementById("searchBar").addEventListener("input", function () {
+        let filter = this.value.toLowerCase();
+        let books = document.querySelectorAll(".book-card");
+
+        books.forEach(book => {
+            let title = book.querySelector(".book-title").textContent.toLowerCase();
+            book.style.display = title.includes(filter) ? "block" : "none";
+        });
+    });
+
+    document.getElementById("sortBy").addEventListener("change", function () {
+        let sortBy = this.value;
+        let bookList = document.getElementById("bookList");
+        let books = Array.from(document.querySelectorAll(".book-card"));
+
+        books.sort((a, b) => {
+            let aValue, bValue;
+
+            if (sortBy === "title") {
+                aValue = a.querySelector(".book-title").textContent.toLowerCase();
+                bValue = b.querySelector(".book-title").textContent.toLowerCase();
+            } else if (sortBy === "author") {
+                aValue = a.querySelector(".book-author").textContent.split(": ")[1].toLowerCase();
+                bValue = b.querySelector(".book-author").textContent.split(": ")[1].toLowerCase();
+            } else if (sortBy === "genre") {
+                aValue = a.querySelector(".book-genre").textContent.split(": ")[1].toLowerCase();
+                bValue = b.querySelector(".book-genre").textContent.split(": ")[1].toLowerCase();
+            } else {
+                return;
+            }
+
+            return aValue.localeCompare(bValue);
+        });
+
+        bookList.innerHTML = "";
+        books.forEach(book => bookList.appendChild(book));
+    });
+</script>
 
 <!-- Footer Start -->
 <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" style="background-color: #004080; color: #FFFFFF;">

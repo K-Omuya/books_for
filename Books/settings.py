@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-162)*a$o%&#zq_jjd=g7o8ysod9bn%z0m)5d4b8rb-)fgwex0a
 # SECURITY WARNING: don't run with debug turned on in production!
 #
 # ALLOWED_HOSTS = []
-DEBUG = False
+DEBUG = True
 
 
 import os
@@ -41,6 +41,8 @@ import os
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+LOGIN_REDIRECT_URL = 'profile'
+LOGOUT_REDIRECT_URL = '/'
 
 
 # ALLOWED_HOSTS = ['books-for-1.onrender.com']

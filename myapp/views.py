@@ -5,13 +5,11 @@ def monetary_donations(request):
 
 def index(request):
     return render(request, 'index.html')
+def edit_profile(request):
+    return render(request, 'edit_profile.html')
 def about(request):
     return render(request, 'about.html')
 from django.contrib.auth.decorators import login_required
-
-@login_required
-def profile(request):
-    return render(request, 'profile.html')
 
 @login_required
 def settings(request):
@@ -28,7 +26,7 @@ def testimonial(request):
 
 
 
-from .models import BookClub, BookDonation, ExchangeRequest
+from .models import BookClub, BookDonation
 from .forms import BookClubForm, BookDonationForm
 
 
@@ -234,26 +232,30 @@ def pledge_book(request):
 from django.shortcuts import render, redirect
 from .models import Book
 from .forms import BookUploadForm
+from django.shortcuts import render, redirect
+from .forms import BookUploadForm
+from .models import Book
 
-# Upload Book View
 def upload_book(request):
     if request.method == 'POST':
         form = BookUploadForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('book_exchange')  # Redirect to the Book Exchange page
+            return redirect('book_exchange')  # Redirect to a page displaying the uploaded books
     else:
         form = BookUploadForm()
     return render(request, 'upload_book.html', {'form': form})
 
 
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Book
 from django.db.models import Q
 
+# Display books
 def book_exchange(request):
     books = Book.objects.all()
-
-    # Search functionality
     search_query = request.GET.get('search', '')
+
     if search_query:
         books = books.filter(
             Q(title__icontains=search_query) |
@@ -262,25 +264,183 @@ def book_exchange(request):
             Q(location__icontains=search_query)
         )
 
-    # Sort functionality
-    sort_by = request.GET.get('sort_by', '')
-    if sort_by in ['title', 'author', 'genre', 'location']:
-        books = books.order_by(sort_by)
-
-    return render(request, 'book_exchange.html', {'books': books, 'search_query': search_query, 'sort_by': sort_by})
+    return render(request, 'book_exchange.html', {'books': books, 'search_query': search_query})
 
 
-@login_required
-def download_book(request, book_id):
+def pay_for_book(request, book_id, action):
     book = get_object_or_404(Book, id=book_id)
-    if book.download_available and book.document:
-        return render(request, 'download.html', {'book': book})
-    return render(request, '404.html', {'message': 'This book cannot be downloaded.'})
 
-@login_required
-def request_exchange(request, book_id):
-    book = get_object_or_404(Book, id=book_id)
     if request.method == 'POST':
-        ExchangeRequest.objects.create(book=book, requester=request.user)
-        return redirect('book_list')  # Redirect back to the book list
-    return render(request, 'request_exchange.html', {'book': book})
+        phone = request.POST.get('phone')
+
+        # Redirect to STK push view with book details
+        return redirect('stk', book_id=book.id, action=action, phone=phone)
+
+    return render(request, 'pay.html', {'book_id': book.id, 'action': action, 'book': book})
+
+from django.shortcuts import get_object_or_404, redirect, render
+from django.http import FileResponse, HttpResponse
+from django.db import transaction
+from .models import Book, ExchangeTransaction  # Ensure you have this model
+import os
+
+from django.shortcuts import get_object_or_404, redirect, render
+from django.http import HttpResponse
+from django.db import transaction
+from .models import Book, ExchangeTransaction
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
+from django.db import transaction
+from .models import Book, ExchangeTransaction
+
+
+def stk_push(request, book_id, action):
+    if request.method == "POST":
+        phone = request.POST.get('phone')
+
+        if not phone:
+            return HttpResponse("Phone number is required.", status=400)
+
+        book = get_object_or_404(Book, id=book_id)
+
+        # Simulate M-Pesa STK push
+        payment_successful = True
+
+        if payment_successful:
+            with transaction.atomic():
+                transaction_obj = ExchangeTransaction.objects.create(
+                    user=request.user,
+                    book=book,
+                    action=action,
+                    payment_status="Paid",
+                    status="Completed" if action == "download" else "In Progress"
+                )
+
+                # If action is download, assign file link
+                if action == "download":
+                    transaction_obj.download_link = book.document
+                    transaction_obj.save()
+
+            return redirect('mini_library')  # Redirect after payment
+
+        return HttpResponse("Payment failed. Please try again.", status=400)
+
+    return HttpResponse("Invalid request method.", status=405)
+
+
+from django.shortcuts import get_object_or_404
+from django.http import FileResponse, HttpResponse
+import os
+
+def download(request, book_id, action):
+    book = get_object_or_404(Book, id=book_id)
+
+    if action == "download":
+        if book.document:  # Assuming `document` is a FileField in your model
+            file_path = book.document.path
+            if os.path.exists(file_path):
+                return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=os.path.basename(file_path))
+            else:
+                return HttpResponse("File not found", status=404)
+        else:
+            return HttpResponse("No document available for this book", status=404)
+
+    return HttpResponse("Invalid action", status=400)
+
+
+
+def mini_library(request):
+    transactions = ExchangeTransaction.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'mini_library.html', {'transactions': transactions})
+def pay(request, book_id, action):
+    book = get_object_or_404(Book, id=book_id)
+    return render(request, 'pay.html', {'book_id': book.id, 'action': action})
+
+
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from .forms import ProfileUpdateForm, UserUpdateForm
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib import messages
+from .forms import UserUpdateForm, ProfileUpdateForm
+from .models import ExchangeTransaction
+
+@login_required
+def profile(request):
+    if request.method == "POST":
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        password_form = PasswordChangeForm(request.user, request.POST)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, "Your profile has been updated successfully!")
+            return redirect("profile")
+
+        if password_form.is_valid():
+            user = password_form.save()
+            update_session_auth_hash(request, user)  # Keep the user logged in after password change
+            messages.success(request, "Your password has been updated successfully!")
+            return redirect("profile")
+    else:
+        user_form = UserUpdateForm(instance=request.user)
+        profile_form = ProfileUpdateForm(instance=request.user.profile)
+        password_form = PasswordChangeForm(request.user)
+
+    # Retrieve transactions
+    transactions = ExchangeTransaction.objects.filter(user=request.user).order_by('-created_at')
+
+    return render(request, "profile.html", {
+        "user_form": user_form,
+        "profile_form": profile_form,
+        "password_form": password_form,
+        "transactions": transactions,  # Pass transactions to the template
+    })
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
+def auth(request):
+    if request.method == "POST":
+        if "login" in request.POST:
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect("profile")
+            else:
+                messages.error(request, "Invalid username or password.")
+
+        elif "register" in request.POST:
+            username = request.POST.get("username")
+            email = request.POST.get("email")
+            password1 = request.POST.get("password1")
+            password2 = request.POST.get("password2")
+
+            if password1 != password2:
+                messages.error(request, "Passwords do not match!")
+            elif User.objects.filter(username=username).exists():
+                messages.error(request, "Username already taken!")
+            elif User.objects.filter(email=email).exists():
+                messages.error(request, "Email already registered!")
+            else:
+                user = User.objects.create_user(username=username, email=email, password=password1)
+                user.save()
+                messages.success(request, "Registration successful! You can now log in.")
+
+    return render(request, "auth.html")

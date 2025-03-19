@@ -195,48 +195,90 @@ class Book(models.Model):
 from django.db import models
 from django.contrib.auth.models import User
 
-class Book(models.Model):
-    GENRES = [
-        ('Fiction', 'Fiction'),
-        ('Non-Fiction', 'Non-Fiction'),
-        ('Mystery', 'Mystery'),
-        ('Fantasy', 'Fantasy'),
-        ('Science', 'Science'),
-    ]
+from django.db import models
 
+GENRE_CHOICES = [
+    ('fiction', 'Fiction'),
+    ('nonfiction', 'Non-fiction'),
+    ('mystery', 'Mystery'),
+    ('fantasy', 'Fantasy'),
+    ('biography', 'Biography'),
+    ('science_fiction', 'Science Fiction'),
+    ('romance', 'Romance'),
+    ('self_help', 'Self Help'),
+    ('history', 'History'),
+    ('other', 'Other'),
+]
+
+class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=200)
-    genre = models.CharField(max_length=50, choices=GENRES)
+    genre = models.CharField(max_length=50, choices=GENRE_CHOICES)
     location = models.CharField(max_length=200)
-    cover_image = models.ImageField(upload_to='cover_photos/', blank=True, null=True)
-    document = models.FileField(upload_to='documents/', blank=True, null=True)
-    download_available = models.BooleanField(default=True)
-    exchange_available = models.BooleanField(default=True)
-    donor_name = models.CharField(max_length=100)
+    cover_image = models.ImageField(upload_to='book_covers/')
+    document = models.FileField(upload_to='book_documents/')
+    download_available = models.BooleanField(default=False)
+    exchange_available = models.BooleanField(default=False)
+    donor_name = models.CharField(max_length=200)
+    contact_email = models.EmailField()
+    contact_phone = models.CharField(max_length=15)
+    delivery_options = models.TextField()
 
-    # New fields
-    contact_email = models.EmailField(max_length=100, blank=True, null=True)
-    contact_phone = models.CharField(max_length=15, blank=True, null=True)
-    delivery_options = models.TextField(
-        help_text="Describe the delivery options available (e.g., shipping, pickup)",
-        blank=True,
-        null=True
-    )
+    def __str__(self):
+        return self.title
 
     def __str__(self):
         return self.title
 
 
-class ExchangeRequest(models.Model):
+from django.db import models
+from django.contrib.auth.models import User
+
+class ExchangeTransaction(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    requester = models.ForeignKey(User, on_delete=models.CASCADE, related_name='requests')
-    request_date = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(
-        max_length=20,
-        choices=[('Pending', 'Pending'), ('Approved', 'Approved'), ('Rejected', 'Rejected')],
-        default='Pending'
-    )
-    admin_message = models.TextField(blank=True, null=True)
+    action = models.CharField(max_length=20, choices=[('download', 'Download'), ('exchange', 'Exchange')])
+    payment_status = models.CharField(max_length=10, choices=[('Pending', 'Pending'), ('Paid', 'Paid')])
+    status = models.CharField(max_length=20, choices=[('In Progress', 'In Progress'), ('Completed', 'Completed')])
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.requester.username} -> {self.book.title}"
+        return f"{self.user.username} - {self.book.title} - {self.status}"
+
+
+from django.contrib.auth.models import User
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+class Profile(models.Model):
+    GENRE_CHOICES = [
+        ('Fiction', 'Fiction'),
+        ('Non-Fiction', 'Non-Fiction'),
+        ('Mystery', 'Mystery'),
+        ('Sci-Fi', 'Sci-Fi'),
+        ('Fantasy', 'Fantasy'),
+        ('Biography', 'Biography'),
+        ('Self-Help', 'Self-Help'),
+        ('Other', 'Other'),
+    ]
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(upload_to='profile_pics/', default='default.jpg')
+    phone = models.CharField(max_length=15, blank=True)
+    location = models.CharField(max_length=255, blank=True)
+    favorite_genre = models.CharField(max_length=20, choices=GENRE_CHOICES, default='Other')
+    bio = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.user.username
+
+# Automatically create profile when a new user is created
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()

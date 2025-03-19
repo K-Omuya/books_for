@@ -1,229 +1,408 @@
-<div style="
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 80vh;
-    background-color: #f8f9fa;
-    padding: 20px;
-">
-    <div style="
-        background: #ffffff;
-        border-radius: 12px;
-        padding: 30px;
-        max-width: 700px;
-        width: 100%;
-        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
-        text-align: center;
-        border-top: 6px solid #007bff;
-    ">
-        <!-- Profile Picture with Upload -->
-        <div style="position: relative; margin-bottom: 20px;">
-            <img src="{{ user.profile_picture.url }}" alt="Profile Picture" style="
-                width: 130px;
-                height: 130px;
-                border-radius: 50%;
-                object-fit: cover;
-                border: 5px solid #007bff;
-                display: block;
-                margin: 0 auto;
-            ">
-            <form action="{% url 'settings' %}" method="post" enctype="multipart/form-data" style="margin-top: 10px;">
-                {% csrf_token %}
-                <input type="file" name="profile_picture" style="
-                    display: block;
-                    margin: 5px auto;
-                    padding: 5px;
-                ">
-                <button type="submit" style="
-                    background: #007bff;
-                    color: white;
-                    padding: 8px 12px;
-                    font-size: 14px;
-                    border-radius: 5px;
-                    border: none;
-                    cursor: pointer;
-                    transition: 0.3s;
-                "
-                onmouseover="this.style.background='#0056b3'"
-                onmouseout="this.style.background='#007bff'">
-                    Change Picture
-                </button>
-            </form>
-        </div>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-        <!-- Profile Completion Bar -->
-        <div style="margin-bottom: 20px; text-align: left;">
-            <strong>Profile Completion: {{ profile_completion }}%</strong>
-            <div style="
-                width: 100%;
-                height: 10px;
-                background: #e0e0e0;
-                border-radius: 5px;
-                margin-top: 5px;
-                overflow: hidden;
-            ">
-                <div style="
-                    width: {{ profile_completion }}%;
-                    height: 100%;
-                    background: #007bff;
-                "></div>
+    <meta charset="utf-8">
+    <title>Books for All</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link rel="stylesheet" href="{% static 'lib/animate/animate.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}"/>
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+
+    <!-- Template Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+</head>
+
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar & Hero Start --><div class="container-fluid header-top">
+    <div class="nav-shaps-2"></div>
+    <div class="container d-flex align-items-center">
+        <div class="d-flex align-items-center h-100">
+            <a href="#" class="navbar-brand" style="height: 125px;">
+                <h1 class="text-primary mb-0" style="color: #ffffff;">
+                    <i class="fas fa-book-open me-2"></i> Books_for_All
+                </h1>
+            </a>
+        </div>
+        <div class="w-100 h-100">
+            <div class="topbar px-0 py-2 d-none d-lg-block" style="height: 45px;">
+                <div class="row gx-0 align-items-center">
+                    <div class="col-lg-8 text-center text-lg-center mb-lg-0">
+                        <div class="d-flex flex-wrap">
+                            <div class="pe-4">
+                                <a href="Bookforall@prc.cx" class="text-muted small"
+                                    style="color: white; font-weight: bold;">
+                                    <i class="fas fa-envelope text-primary me-2" style="color: white"></i>
+                                    Bookforall@prc.cx
+                                </a>
+                            </div>
+                            <div class="pe-0">
+                                <a href="#" class="text-muted small"
+                                    style="color: white; font-weight: bold;">
+                                    <i class="fa fa-clock text-primary me-2" style="color: white"></i>
+                                    Mon - Sat: 8.00 am - 5.00 pm
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center text-lg-end">
+                        <div class="d-flex justify-content-end">
+                            <div class="d-flex align-items-center small"></div>
+                            <div class="d-flex align-items-center pe-3">
+                                <!-- Profile Dropdown - Fixed to the Right -->
+                                <div class="position-absolute end-0 me-3" style="padding-top: 100px;">
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-light dropdown-toggle d-flex align-items-center"
+                                            type="button" id="profileDropdown" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <i class="fas fa-user-circle me-1"></i> Profile
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end position-absolute end-0 mt-2"
+                                            aria-labelledby="profileDropdown" style="right: 0;">
+                                            <li><a class="dropdown-item" href="{% url 'profile' %}">My Profile</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="{% url 'home' %}">Logout</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">Admin Panel</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- User Info -->
-        <h2 style="color: #004080; font-weight: bold; margin-bottom: 5px;">{{ user.first_name }} {{ user.last_name }}</h2>
-        <p style="color: #6c757d; font-size: 15px; margin-bottom: 10px;">@{{ user.username }}</p>
+            <!-- Navigation Bar -->
+            <div class="nav-bar px-0 py-lg-0" style="height: 80px;">
+                <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-lg-end">
+                    <a href="#" class="navbar-brand-2">
+                        <h1 class="text-primary mb-0"><i class="fas fa-book-open me-2"></i> Books_for_All</h1>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav mx-0 mx-lg-auto">
+                            <a href="{% url 'home' %}" class="nav-item nav-link fw-bold text-dark">Home</a>
+                            <a href="{% url 'about' %}" class="nav-item nav-link fw-bold text-dark">About</a>
 
-        <!-- Bio -->
-        <p style="color: #555; font-style: italic; font-size: 14px; margin-bottom: 20px;">
-            "{{ user.bio|default:'No bio available. Add a short intro about yourself!' }}"
-        </p>
+                            <!-- Exchange Dropdown -->
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle fw-bold text-dark" data-bs-toggle="dropdown">
+                                    Exchange
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="{% url 'upload_book' %}" class="dropdown-item">Upload Book</a>
+                                    <a href="{% url 'book_exchange' %}" class="dropdown-item">Book Catalogue</a>
+                                    <a href="{% url 'view_donated_books' %}" class="dropdown-item">Donated Books</a>
+                                    <a href="{% url 'view_pledged_books' %}" class="dropdown-item">Pledged Books</a>
+                                </div>
+                            </div>
 
-        <div style="text-align: left; margin-bottom: 20px;">
-            <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Phone:</strong> {{ user.phone_number|default:'Not provided' }}</p>
-            <p><strong>Location:</strong> {{ user.location|default:'Not set' }}</p>
-            <p><strong>Member Since:</strong> {{ user.date_joined|date:"F d, Y" }}</p>
-            <p><strong>Favorite Genres:</strong> {{ user.favorite_genres|default:'Not selected' }}</p>
-        </div>
-<h2>📖 My Book Transactions</h2>
-<table border="1" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-    <tr style="background-color: #004080; color: white; text-align: left;">
-        <th style="padding: 10px;">Book Title</th>
-        <th style="padding: 10px;">Exchange</th>
-        <th style="padding: 10px;">PDF</th>
-        <th style="padding: 10px;">Payment</th>
-        <th style="padding: 10px;">Status</th>
-        <th style="padding: 10px;">Date</th>
-    </tr>
-    {% for transaction in transactions %}
-    <tr>
-        <td style="padding: 10px;">{{ transaction.book.title }}</td>
-        <td style="padding: 10px; text-align: center;">{% if transaction.exchange %}✔️{% else %}❌{% endif %}</td>
-        <td style="padding: 10px; text-align: center;">{% if transaction.pdf %}📄{% else %}❌{% endif %}</td>
-        <td style="padding: 10px; text-align: center;">
-            {% if transaction.payment_status == "Pending" %}
-                <a href="{% url 'payment' transaction.id %}"
-                   style="text-decoration: none; background-color: #FF8200; color: white; padding: 5px 10px; border-radius: 5px;">
-                   Pay
-                </a>
-            {% else %}
-                ✅ Paid
-            {% endif %}
-        </td>
-        <td style="padding: 10px;">{{ transaction.status }}</td>
-        <td style="padding: 10px;">{{ transaction.created_at|date:"Y-m-d H:i" }}</td>
-    </tr>
-    {% empty %}
-    <tr>
-        <td colspan="6" style="text-align: center; padding: 15px;">No transactions yet.</td>
-    </tr>
-    {% endfor %}
-</table>
+                            <!-- Donate Dropdown -->
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle fw-bold text-dark" data-bs-toggle="dropdown">
+                                    Donate
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="{% url 'monetary_donations' %}" class="dropdown-item">Donate Money</a>
+                                    <a href="{% url 'pledge_book' %}" class="dropdown-item">Pledge Book</a>
+                                    <a href="{% url 'donate_book' %}" class="dropdown-item">Donate Book</a>
+                                </div>
+                            </div>
 
+                            <!-- Clubs Dropdown -->
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle fw-bold text-dark" data-bs-toggle="dropdown">
+                                    Clubs
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="{% url 'create_book_club' %}" class="dropdown-item">Create Book Club</a>
+                                    <a href="{% url 'view_book_clubs' %}" class="dropdown-item">Book Clubs</a>
+                                </div>
+                            </div>
 
-        <!-- Achievements -->
-        <h4 style="margin-top: 20px; color: #007bff;">Achievements</h4>
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px;">
-            {% for badge in user.badges.all %}
-                <span style="
-                    background: gold;
-                    padding: 6px 12px;
-                    border-radius: 15px;
-                    font-size: 12px;
-                    font-weight: bold;
-                ">
-                    🏅 {{ badge.name }}
-                </span>
-            {% empty %}
-                <p style="color: #6c757d;">No achievements yet.</p>
-            {% endfor %}
-        </div>
+                            <!-- Explore Dropdown -->
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle fw-bold text-dark" data-bs-toggle="dropdown">
+                                    Explore
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="{% url 'team' %}" class="dropdown-item">Our Team</a>
+                                    <a href="{% url 'features' %}" class="dropdown-item">Our Features</a>
+                                    <a href="{% url 'testimonials' %}" class="dropdown-item">Testimonials</a>
+                                    <a href="{% url 'impact' %}" class="dropdown-item">Our Impact</a>
+                                </div>
+                            </div>
 
-        <!-- Uploaded Books -->
-        <h4 style="color: #007bff;">Uploaded Books</h4>
-        <ul style="list-style-type: none; padding: 0; text-align: left; margin-bottom: 20px;">
-            {% for book in uploaded_books %}
-                <li style="
-                    background: #f1f1f1;
-                    padding: 8px;
-                    margin-bottom: 5px;
-                    border-radius: 5px;
-                ">
-                    📚 {{ book.title }}
-                </li>
-            {% empty %}
-                <li style="color: #6c757d;">No uploaded books.</li>
-            {% endfor %}
-        </ul>
-
-        <!-- Wishlist -->
-        <h4 style="color: #007bff;">Wishlist</h4>
-        <ul style="list-style-type: none; padding: 0; text-align: left; margin-bottom: 20px;">
-            {% for book in wishlist %}
-                <li style="
-                    background: #f1f1f1;
-                    padding: 8px;
-                    margin-bottom: 5px;
-                    border-radius: 5px;
-                ">
-                    🌟 {{ book.title }}
-                </li>
-            {% empty %}
-                <li style="color: #6c757d;">No books in wishlist.</li>
-            {% endfor %}
-        </ul>
-
-        <!-- Social Links -->
-        <h4 style="color: #007bff;">Connect with Me</h4>
-        <p>
-            {% if user.twitter %} <a href="{{ user.twitter }}" target="_blank" style="margin-right: 10px;">🐦 Twitter</a> {% endif %}
-            {% if user.linkedin %} <a href="{{ user.linkedin }}" target="_blank" style="margin-right: 10px;">🔗 LinkedIn</a> {% endif %}
-            {% if user.facebook %} <a href="{{ user.facebook }}" target="_blank">📘 Facebook</a> {% endif %}
-        </p>
-
-        <!-- Dark Mode Toggle -->
-        <button onclick="toggleDarkMode()" style="
-            background: #343a40;
-            color: white;
-            padding: 10px;
-            border-radius: 6px;
-            border: none;
-            margin-top: 15px;
-        ">
-            🌙 Toggle Dark Mode
-        </button>
-
-        <!-- Buttons -->
-        <div style="margin-top: 20px;">
-            <a href="{% url 'settings' %}" style="
-                display: inline-block;
-                background: #007bff;
-                color: white;
-                padding: 10px 20px;
-                text-decoration: none;
-                border-radius: 6px;
-                margin-right: 10px;
-            ">
-               <i class="fas fa-edit"></i> Edit Profile
-            </a>
-
-            <a href="{% url 'logout' %}" style="
-                display: inline-block;
-                background: #dc3545;
-                color: white;
-                padding: 10px 20px;
-                text-decoration: none;
-                border-radius: 6px;
-            ">
-               <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
+                            <a href="{% url 'blogs' %}" class="nav-item nav-link fw-bold text-dark">Blogs</a>
+                            <a href="{% url 'contact' %}" class="nav-item nav-link fw-bold text-dark">Contact Us</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
         </div>
     </div>
 </div>
 
-<script>
-    function toggleDarkMode() {
-        document.body.classList.toggle("dark-mode");
-    }
-</script>
+    <!-- Navbar & Hero End -->
+        <!-- Header Start -->
+        <div class="container-fluid bg-breadcrumb">
+    <div class="container text-center py-5" style="max-width: 900px;">
+        <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">
+            {{ page_title|default:"Profile Details" }}
+        </h4>
+        <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Profile</a></li>
+            <li class="breadcrumb-item active text-primary">Profile details</li>
+        </ol>
+    </div>
+</div>
+
+    <!-- Main Content -->
+    <div class="container" style="background: white; padding: 20px; flex: 1; box-sizing: border-box; max-width: 800px; margin: 20px auto; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+<!-- Profile Header -->
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture"
+                style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #2E7D32;">
+            <div>
+                <h2 style="color: #2E7D32; margin: 0;">{{ user.username }}</h2>
+                <p style="color: #555; margin: 0;"><strong>Email:</strong> {{ user.email }}</p>
+                <p style="color: #555; margin: 0;"><strong>Phone:</strong> {{ user.profile.phone }}</p>
+                <p style="color: #555; margin: 0;"><strong>Location:</strong> {{ user.profile.location }}</p>
+                <p style="color: #555; margin: 0;"><strong>Favorite Genre:</strong> {{ user.profile.favorite_genre }}</p>
+                <p style="color: #777; font-style: italic; margin-top: 5px;">{{ user.profile.bio }}</p>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs" style="display: flex; justify-content: space-around; margin-bottom: 20px;">
+            <button onclick="showTab('history')" style="padding: 10px; border: none; background: #007bff; color: white; cursor: pointer; border-radius: 5px;">📚 Book Activity</button>
+            <button onclick="showTab('transactions')" style="padding: 10px; border: none; background: #007bff; color: white; cursor: pointer; border-radius: 5px;">💰 Transactions</button>
+            <button onclick="showTab('settings')" style="padding: 10px; border: none; background: #007bff; color: white; cursor: pointer; border-radius: 5px;">⚙ Settings</button>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="history" class="tab-content active" style="display: block;">
+            <h3>Book Activity</h3>
+            <p>Here you can see your book donations and exchanges.</p>
+        </div>
+
+        <div id="transactions" class="tab-content" style="display: none;">
+            <h3>Transactions</h3>
+            <div id="transactions" class="tab-content" style="display: block; margin-top: 20px;">
+            <h3 style="color: #004080;">💳 Transaction History</h3>
+            <div style="overflow-x: auto; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <table border="1" style="width: 100%; border-collapse: collapse; text-align: left; background: white;">
+                    <thead>
+                        <tr style="background: #004080; color: white;">
+                            <th style="padding: 12px;">Book Title</th>
+                            <th style="padding: 12px;">Action</th>
+                            <th style="padding: 12px;">Status</th>
+                            <th style="padding: 12px;">Date</th>
+                            <th style="padding: 12px;">Download</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for transaction in transactions %}
+                        <tr style="background: {% cycle '#F5F5F5' '#FFFFFF' %};">
+                            <td style="padding: 10px;">{{ transaction.book.title }}</td>
+                            <td style="padding: 10px;">{{ transaction.action }}</td>
+                            <td style="padding: 10px; color: {% if transaction.status == 'Completed' %} #3CB371 {% else %} red {% endif %}; font-weight: bold;">
+                                {{ transaction.status }}
+                            </td>
+                            <td style="padding: 10px;">{{ transaction.created_at }}</td>
+                            <td style="padding: 10px; text-align: center;">
+                                {% if transaction.action == 'download' and transaction.payment_status == 'Paid' %}
+                                    <a href="{{ transaction.book.file.url }}" download style="
+                                        display: inline-block;
+                                        background: #FF8200;
+                                        color: white;
+                                        padding: 8px 14px;
+                                        font-size: 14px;
+                                        border-radius: 6px;
+                                        text-decoration: none;
+                                        cursor: pointer;
+                                        transition: 0.3s ease;"
+                                    onmouseover="this.style.background='#e76c00'"
+                                    onmouseout="this.style.background='#FF8200'">
+                                        📥 Download
+                                    </a>
+                                {% else %}
+                                    <span style="color: red; font-weight: bold;">N/A</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" style="padding: 15px; text-align: center; color: #6c757d;">No transactions found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        </div>
+
+        <div id="settings" class="tab-content" style="display: none;">
+            <h3>Settings</h3>
+            <p>Manage your account settings and preferences.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #333; color: white; text-align: center; padding: 10px;">
+        <p>&copy; 2025 My Website</p>
+    </footer>
+
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            document.getElementById(tabId).style.display = 'block';
+        }
+    </script>
+
+
+<!-- Footer Start -->
+<div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s" style="background-color: #004080; color: #FFFFFF;">
+    <div class="container py-5">
+        <div class="row g-5">
+            <!-- About Section -->
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #FF8200; font-size: 18px; font-weight: bold; margin-bottom: 15px;">
+                        <i class="fas fa-book text-white me-2"></i> Books for All
+                    </h4>
+                    <p style="margin: 0; font-size: 14px; line-height: 1.7;">SHARE A BOOK, SHARE A DREAM..</p>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #FFFFFF; font-size: 18px; font-weight: bold; margin-bottom: 15px;">Quick Links</h4>
+                    <ul style="list-style-type: none; padding: 0; font-size: 14px; line-height: 1.7;">
+                        <li><a href="{% url 'blogs' %}" style="color: #FF8200; text-decoration: none;">Blogs</a></li>
+                        <li><a href="{% url 'about' %}" style="color: #FF8200; text-decoration: none;">About Us</a></li>
+                        <li><a href="{% url 'book_exchange' %}" style="color: #FF8200; text-decoration: none;">Books Catalogue</a></li>
+                        <li><a href="{% url 'features' %}" style="color: #FF8200; text-decoration: none;">Our Features</a></li>
+                        <li><a href="{% url 'view_book_clubs' %}" style="color: #FF8200; text-decoration: none;">Book Clubs</a></li>
+                        <li><a href="{% url 'testimonial' %}" style="color: #FF8200; text-decoration: none;">Testimonials</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #FFFFFF; font-size: 18px; font-weight: bold; margin-bottom: 15px;">Contact Info</h4>
+                    <div style="font-size: 14px; line-height: 1.7;">
+                        <div style="margin-bottom: 10px;">
+                            <i class="fas fa-map-marker-alt text-white me-2"></i>
+                            <strong style="color: #FFFFFF;">Address:</strong>
+                            <p style="margin: 0; display: inline;">753-10101, Westlands, Nairobi</p>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <i class="fas fa-envelope text-white me-2"></i>
+                            <strong style="color: #FFFFFF;">Mail Us:</strong>
+                            <p style="margin: 0; display: inline;">Bookforall@prc.cx</p>
+                        </div>
+                        <div>
+                            <i class="fa fa-phone-alt text-white me-2"></i>
+                            <strong style="color: #FFFFFF;">Telephone:</strong>
+                            <p style="margin: 0; display: inline;">+254 703 128 764</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media Links -->
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #FFFFFF; font-size: 18px; font-weight: bold; margin-bottom: 15px;">Social Media Links</h4>
+                    <div style="display: flex; gap: 10px; justify-content: start;">
+                        <!-- Facebook -->
+                        <a href="https://facebook.com/bookforall20"
+                           style="width: 50px; height: 50px; background-color: #3B5998; color: #FFFFFF; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: all 0.3s;">
+                            <i class="fab fa-facebook-f" style="font-size: 18px;"></i>
+                        </a>
+                        <!-- Twitter -->
+                        <a href="https://x.com/Bookforall20"
+                           style="width: 50px; height: 50px; background-color: #1DA1F2; color: #FFFFFF; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: all 0.3s;">
+                            <i class="fab fa-twitter" style="font-size: 18px;"></i>
+                        </a>
+                        <!-- Instagram -->
+                        <a href="https://instagram.com/bookforall20"
+                           style="width: 50px; height: 50px; background: radial-gradient(circle at 30% 30%, #F09433, #E6683C, #DC2743, #CC2366, #BC1888); color: #FFFFFF; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: all 0.3s;">
+                            <i class="fab fa-instagram" style="font-size: 18px;"></i>
+                        </a>
+                        <!-- LinkedIn -->
+                        <a href="https://linkedin.com/bookforall20"
+                           style="width: 50px; height: 50px; background-color: #0A66C2; color: #FFFFFF; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: all 0.3s;">
+                            <i class="fab fa-linkedin-in" style="font-size: 18px;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+
+<!-- Back to Top Button -->
+<div class="back-to-top" style="position: fixed; bottom: 20px; right: 20px; z-index: 99;">
+    <a href="#" class="btn" style="width: 45px; height: 45px; font-size: 20px; background-color: #FF8200; color: #FFFFFF; display: flex; justify-content: center; align-items: center; border-radius: 50%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); transition: all 0.3s;">
+        <i class="fa fa-arrow-up"></i>
+    </a>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'lib/wow/wow.min.js' %}"></script>
+<script src="{% static 'lib/easing/easing.min.js' %}"></script>
+<script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+<script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+<!-- Template Javascript -->
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

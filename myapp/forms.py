@@ -132,6 +132,8 @@ class AppointmentForm(forms.ModelForm):
 from django import forms
 from .models import Book
 
+from django.core.exceptions import ValidationError
+
 class BookUploadForm(forms.ModelForm):
     class Meta:
         model = Book
@@ -153,6 +155,17 @@ class BookUploadForm(forms.ModelForm):
             'document': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
 
+    def clean_cover_image(self):
+        image = self.cleaned_data.get('cover_image')
+        if image and image.size > 5 * 1024 * 1024:  # 5 MB limit
+            raise ValidationError("Cover image file size should be under 5MB.")
+        return image
+
+    def clean_document(self):
+        doc = self.cleaned_data.get('document')
+        if doc and doc.size > 10 * 1024 * 1024:  # 10 MB limit
+            raise ValidationError("Document file size should be under 10MB.")
+        return doc
 
 from django import forms
 from .models import Blog
@@ -175,5 +188,28 @@ class PledgedBookForm(forms.ModelForm):
             'donor_email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email'}),
             'book_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter book title'}),
             'book_type': forms.Select(attrs={'class': 'form-control'}),
+        }
+from django import forms
+from django.contrib.auth.models import User
+from .models import Profile
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ["username", "email"]
+        widgets = {
+            "username": forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter your username"}),
+            "email": forms.EmailInput(attrs={"class": "form-control", "placeholder": "Enter your email"}),
+        }
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ["profile_picture", "phone", "location", "favorite_genre", "bio"]
+        widgets = {
+            "phone": forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter your phone number"}),
+            "location": forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter your location"}),
+            "favorite_genre": forms.TextInput(attrs={"class": "form-control", "placeholder": "Your favorite book genre"}),
+            "bio": forms.Textarea(attrs={"class": "form-control", "placeholder": "Tell us about yourself", "rows": 3}),
         }
 

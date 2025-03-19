@@ -1,7 +1,10 @@
 from django.urls import path
+
+from django.urls import path
 from . import views
 
 from django.contrib.auth import views as auth_views
+from django.urls import path, include
 urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
@@ -9,10 +12,19 @@ urlpatterns = [
     path('create/', views.create_blog, name='create_blog'),
     path('blogs/', views.blogs, name='blogs'),
 
+    path('accounts/', include('django.contrib.auth.urls')),
+
+    path('login/', views.login, name='login'),
+
+
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
 
     path('monetary_donations/', views.monetary_donations, name='monetary_donations'),
     path('features/', views.features, name='features'),
     path('team/', views.team, name='team'),
+
+    path('auth/', views.auth, name='auth'),
 
     path('testimonial/', views.testimonial, name='testimonial'),
     path('contact/', views.contact, name='contact'),
@@ -46,18 +58,33 @@ urlpatterns = [
     path('book-appointment/', views.book_appointment, name='book_appointment'),
 
     path('book_exchange/', views.book_exchange, name='book_exchange'),
+    path('edit_profile/', views.edit_profile, name='edit_profile'),
 
     path("upload-book/", views.upload_book, name="upload_book"),
+    path("mini_library/", views.mini_library, name="mini_library"),
+
 
     path('book-exchange/', views.book_exchange, name='book_exchange'),
 
-    path('upload/', views.upload_book, name='upload_book'),
-    path('book-exchange/', views.book_exchange, name='book_exchange'),
 
-    path('request-exchange/<int:book_id>/', views.request_exchange, name='request_exchange'),
+    path('mpesa/stk/', views.stk_push, name='stk'),
 
-    path('download/<int:book_id>/', views.download_book, name='download_book'),
-    path('request-exchange/<int:book_id>/', views.request_exchange, name='request_exchange'),
+    path('stk-push/', views.stk_push, name='stk_push'),
+
+    path('download/<int:book_id>/<str:action>/', views.download, name='download'),
+
+    path('download/<int:book_id>/<str:action>/', views.download, name='download'),
+    path('pay/<int:book_id>/<str:action>/', views.pay_for_book, name='pay_for_book'),
+
+
+    path('pay/<int:book_id>/<str:action>/', views.pay_for_book, name='pay_for_book'),
+    path('stk/<int:book_id>/<str:action>/<str:phone>/', views.stk_push, name='stk'),
+
+    path('mpesa/stk/<int:book_id>/<str:action>/<str:phone>/', views.stk_push, name='stk'),
+
+    path('mpesa/stk/<int:book_id>/<str:action>/', views.stk_push, name='stk'),
+    path('mpesa/stk/<int:book_id>/<str:action>/', views.stk_push, name='stk'),
+
 
 
 

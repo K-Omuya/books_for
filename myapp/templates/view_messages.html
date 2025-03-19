@@ -13,6 +13,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
 
     <!-- Icon Font Stylesheet -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
@@ -29,7 +38,6 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
 </head>
 
-<body>
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -38,107 +46,137 @@
     </div>
     <!-- Spinner End -->
 
-    <!-- Navbar & Hero Start -->
-    <div class="container-fluid header-top">
-        <div class="nav-shaps-2"></div>
-        <div class="container d-flex align-items-center">
-            <div class="d-flex align-items-center h-100">
-                <a href="#" class="navbar-brand" style="height: 125px;">
-                    <h1 class="text-primary mb-0" style="color: #ffffff;">   <i class="fas fa-book-open me-2"></i> Books_for_All</h1>
-                </a>
-            </div>
-            <div class="w-100 h-100">
-                <div class="topbar px-0 py-2 d-none d-lg-block" style="height: 45px;">
-                    <div class="row gx-0 align-items-center">
-                        <div class="col-lg-8 text-center text-lg-center mb-lg-0">
-                            <div class="d-flex flex-wrap">
-                                <div class="pe-4">
-                                    <a href="Bookforall@prc.cx" class="text-muted small"><i class="fas fa-envelope text-primary me-2"></i>Bookforall@prc.cx</a>
-                                </div>
-                                <div class="pe-0">
-                                    <a href="#" class="text-muted small"><i class="fa fa-clock text-primary me-2"></i>Mon - Sat: 8.00 am-7.00 pm</a>
-                                </div>
+    <!-- Navbar & Hero Start --><div class="container-fluid header-top">
+    <div class="nav-shaps-2"></div>
+    <div class="container d-flex align-items-center">
+        <div class="d-flex align-items-center h-100">
+            <a href="#" class="navbar-brand" style="height: 125px;">
+                <h1 class="text-primary mb-0" style="color: #ffffff;">
+                    <i class="fas fa-book-open me-2"></i> Books_for_All
+                </h1>
+            </a>
+        </div>
+        <div class="w-100 h-100">
+            <div class="topbar px-0 py-2 d-none d-lg-block" style="height: 45px;">
+                <div class="row gx-0 align-items-center">
+                    <div class="col-lg-8 text-center text-lg-center mb-lg-0">
+                        <div class="d-flex flex-wrap">
+                            <div class="pe-4">
+                                <a href="Bookforall@prc.cx" class="text-muted small"
+                                    style="color: white; font-weight: bold;">
+                                    <i class="fas fa-envelope text-primary me-2" style="color: white"></i>
+                                    Bookforall@prc.cx
+                                </a>
+                            </div>
+                            <div class="pe-0">
+                                <a href="#" class="text-muted small"
+                                    style="color: white; font-weight: bold;">
+                                    <i class="fa fa-clock text-primary me-2" style="color: white"></i>
+                                    Mon - Sat: 8.00 am - 5.00 pm
+                                </a>
                             </div>
                         </div>
-                        <div class="col-lg-4 text-center text-lg-end">
-                            <div class="d-flex justify-content-end">
-                                <div class="d-flex align-items-center small">
-                                </div>
-                                <div class="d-flex pe-3">
-                                    <a class="btn p-0 text-primary me-3" href="https://facebook.com/bookforall20" target="_blank" rel="noopener noreferrer">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                    <a class="btn p-0 text-primary me-3" href="https://x.com/Bookforall20" target="_blank" rel="noopener noreferrer">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                    <a class="btn p-0 text-primary me-3" href="https://instagram.com/bookforall20" target="_blank" rel="noopener noreferrer">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                    <a class="btn p-0 text-primary me-0" href="https://linkedin.com/bookforall20" target="_blank" rel="noopener noreferrer">
-                                        <i class="fab fa-linkedin-in"></i>
-                                    </a>
+                    </div>
+                    <div class="col-lg-4 text-center text-lg-end">
+                        <div class="d-flex justify-content-end">
+                            <div class="d-flex align-items-center small"></div>
+                            <div class="d-flex align-items-center pe-3">
+                                <!-- Profile Dropdown - Fixed to the Right -->
+                                <div class="position-absolute end-0 me-3" style="padding-top: 100px;">
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-light dropdown-toggle d-flex align-items-center"
+                                            type="button" id="profileDropdown" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <i class="fas fa-user-circle me-1"></i> Profile
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end position-absolute end-0 mt-2"
+                                            aria-labelledby="profileDropdown" style="right: 0;">
+                                            <li><a class="dropdown-item" href="{% url 'profile' %}">My Profile</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="{% url 'home' %}">Logout</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">Admin Panel</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="nav-bar px-0 py-lg-0" style="height: 80px;">
-                    <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-lg-end">
-                        <a href="#" class="navbar-brand-2">
-                            <h1 class="text-primary mb-0"><i class="fas fa-book-open me-2"></i> Books_for_All</h1>
-                        </a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                            <span class="fa fa-bars"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarCollapse">
-                            <div class="navbar-nav mx-0 mx-lg-auto">
-                                <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
-                                <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Exchange</a>
-                                    <div class="dropdown-menu">
-                                        <a href="{% url 'upload_book' %}" class="dropdown-item">Upload Book</a>
-                                        <a href="{% url 'book_exchange' %}" class="dropdown-item">Book Catalogue</a>
-                                        <a href="{% url 'view_donated_books' %}" class="dropdown-item">Donated Books</a>
-                                        <a href="{% url 'view_pledged_books' %}" class="dropdown-item">Pledged Books</a>
-                                    </div>
-                                </div>
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Donate</a>
-                                    <div class="dropdown-menu">
-                                        <a href="{% url 'monetary_donations' %}" class="dropdown-item">Donate Money</a>
-                                        <a href="{% url 'pledge_book' %}" class="dropdown-item">Pledge Book</a>
-                                        <a href="{% url 'donate_book' %}" class="dropdown-item">Donate book</a>
-                                    </div>
-                                </div>
+            </div>
 
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Clubs</a>
-                                    <div class="dropdown-menu">
-                                        <a href="{% url 'create_book_club' %}" class="dropdown-item">Create Book Club</a>
-                                        <a href="{% url 'view_book_clubs' %}" class="dropdown-item">Book Clubs</a>
-                                    </div>
-                                </div>
-                                <a href="{% url 'blogs' %}" class="nav-item nav-link">Blogs</a>
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Explore</a>
-                                    <div class="dropdown-menu">
-                                        <a href="{% url 'features' %}" class="dropdown-item">Our Features</a>
-                                        <a href="{% url 'team' %}" class="dropdown-item">Our Team</a>
-                                        <a href="{% url 'testimonials' %}" class="dropdown-item">Testimonials</a>
-                                    </div>
-                                </div>
-                                <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
-                                <div class="nav-btn ps-3">
-                                    </button>
+            <!-- Navigation Bar -->
+            <div class="nav-bar px-0 py-lg-0" style="height: 80px;">
+                <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-lg-end">
+                    <a href="#" class="navbar-brand-2">
+                        <h1 class="text-primary mb-0"><i class="fas fa-book-open me-2"></i> Books_for_All</h1>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav mx-0 mx-lg-auto">
+                            <a href="{% url 'home' %}" class="nav-item nav-link fw-bold text-dark">Home</a>
+                            <a href="{% url 'about' %}" class="nav-item nav-link fw-bold text-dark">About</a>
+
+                            <!-- Exchange Dropdown -->
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle fw-bold text-dark" data-bs-toggle="dropdown">
+                                    Exchange
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="{% url 'upload_book' %}" class="dropdown-item">Upload Book</a>
+                                    <a href="{% url 'book_exchange' %}" class="dropdown-item">Book Catalogue</a>
+                                    <a href="{% url 'view_donated_books' %}" class="dropdown-item">Donated Books</a>
+                                    <a href="{% url 'view_pledged_books' %}" class="dropdown-item">Pledged Books</a>
                                 </div>
                             </div>
+
+                            <!-- Donate Dropdown -->
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle fw-bold text-dark" data-bs-toggle="dropdown">
+                                    Donate
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="{% url 'monetary_donations' %}" class="dropdown-item">Donate Money</a>
+                                    <a href="{% url 'pledge_book' %}" class="dropdown-item">Pledge Book</a>
+                                    <a href="{% url 'donate_book' %}" class="dropdown-item">Donate Book</a>
+                                </div>
+                            </div>
+
+                            <!-- Clubs Dropdown -->
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle fw-bold text-dark" data-bs-toggle="dropdown">
+                                    Clubs
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="{% url 'create_book_club' %}" class="dropdown-item">Create Book Club</a>
+                                    <a href="{% url 'view_book_clubs' %}" class="dropdown-item">Book Clubs</a>
+                                </div>
+                            </div>
+
+                            <!-- Explore Dropdown -->
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle fw-bold text-dark" data-bs-toggle="dropdown">
+                                    Explore
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="{% url 'team' %}" class="dropdown-item">Our Team</a>
+                                    <a href="{% url 'features' %}" class="dropdown-item">Our Features</a>
+                                    <a href="{% url 'testimonials' %}" class="dropdown-item">Testimonials</a>
+                                    <a href="{% url 'impact' %}" class="dropdown-item">Our Impact</a>
+                                </div>
+                            </div>
+
+                            <a href="{% url 'blogs' %}" class="nav-item nav-link fw-bold text-dark">Blogs</a>
+                            <a href="{% url 'contact' %}" class="nav-item nav-link fw-bold text-dark">Contact Us</a>
                         </div>
-                    </nav>
-                </div>
+                    </div>
+                </nav>
             </div>
         </div>
     </div>
+</div>
+
     <!-- Navbar & Hero End -->
 
 
